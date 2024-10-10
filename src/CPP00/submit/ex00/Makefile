@@ -1,17 +1,5 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: tookuyam <tookuyam@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/10/10 16:29:47 by tookuyam          #+#    #+#              #
-#    Updated: 2024/10/10 16:29:47 by tookuyam         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 # settings
-NAME     = a.out
+NAME     = megaphone
 SRC      = $(shell find . -name "*.cpp")
 CXX      = c++
 CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -std=c++98
@@ -49,8 +37,8 @@ show:
 
 # file rules
 $(NAME): $(OBJS)
-	$(CC) $(LDFLAGS) -o $@ $(filter %.o,$^) $(LDLIBS)
+	$(CXX) $(LDFLAGS) -o $@ $(filter %.o,$^) $(LDLIBS)
 
 $(CACHEDIR)/%.o: %.cpp
 	mkdir -p $(@D)
-	$(CC) $(CXXFLAGS) -MF $(CACHEDIR)/$*.d -o $@ -c $<
+	$(CXX) $(CXXFLAGS) -MF $(CACHEDIR)/$*.d -o $@ -c $<
