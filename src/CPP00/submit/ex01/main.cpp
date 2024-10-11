@@ -73,7 +73,7 @@ void searchContactRoutine(PhoneBook& phoneBook)
         std::istringstream iss(selectedIndex);
 
         iss >> index;
-        if (phoneBook.validateIndex(index))
+        if (!selectedIndex.empty() && phoneBook.validateIndex(index))
         {
             Contact contact(phoneBook.getAt(index));
             contact.show(std::cout);
