@@ -9,6 +9,7 @@
 
 void addContactRoutine(PhoneBook& phoneBook);
 void searchContactRoutine(PhoneBook& phoneBook);
+static bool getInput(const std::string& prompt, std::string& input);
 
 int main(void)
 {
@@ -43,18 +44,15 @@ void addContactRoutine(PhoneBook& phoneBook)
 
     std::cout << "Let's make contact!!!" << std::endl;
     std::cout << "Please Input personal information." << std::endl;
-    std::cout << " First Name\n  > ";
-        std::getline(std::cin, firstName);
-    std::cout << " Last Name\n  > ";
-        std::getline(std::cin, lastName);
-    std::cout << " Nick Name\n  > ";
-        std::getline(std::cin, nickName);
-    std::cout << " Phone Number\n  > ";
-        std::getline(std::cin, phoneNumber);
-    std::cout << " Darkest Secret\n  > ";
-        std::getline(std::cin, darkestSecret);
-    const Contact contact(firstName, lastName, nickName, phoneNumber, darkestSecret);
-    phoneBook.addContact(contact);
+    if (getInput(" First Name\n  > ", firstName)
+        && getInput(" Last Name\n  > ", lastName)
+        && getInput(" Nick Name\n  > ", nickName)
+        && getInput(" Phone Number\n  > ", phoneNumber)
+        && getInput(" Darkest Secret\n  > ", darkestSecret))
+    {
+        const Contact contact(firstName, lastName, nickName, phoneNumber, darkestSecret);
+        phoneBook.addContact(contact);
+    }
     return ;
 }
 
@@ -84,4 +82,15 @@ void searchContactRoutine(PhoneBook& phoneBook)
             std::cout << "Out of range: " << selectedIndex << std::endl;
     }
     return ;
+}
+
+static bool getInput(const std::string& prompt, std::string& input)
+{
+    std::cout << prompt;
+    std::getline(std::cin, input);
+    if (input.empty()) {
+        std::cout << "No input provided. Exiting..." << std::endl;
+        return (false);
+    }
+    return (true);
 }
