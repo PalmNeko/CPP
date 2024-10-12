@@ -1,5 +1,5 @@
 # settings
-NAME     = BraiiiiiiinnnzzzZ.out
+NAME     = horde.out
 SRC      = $(shell find . -name "*.cpp")
 CXX      = c++
 CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -std=c++98

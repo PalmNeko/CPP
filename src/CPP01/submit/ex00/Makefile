@@ -1,5 +1,5 @@
 # settings
-NAME     = unnecessaryViolence.out
+NAME     = BraiiiiiiinnnzzzZ.out
 SRC      = $(shell find . -name "*.cpp")
 CXX      = c++
 CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -std=c++98
