@@ -36,7 +36,7 @@ function make_header() {
 "#ifndef ${UPPER_SNAKE_CASE}_HPP
 # define ${UPPER_SNAKE_CASE}_HPP
 
-class ${PASCAL} final
+class ${PASCAL}
 {
     // variables
     public:
