@@ -47,9 +47,9 @@ class ${PASCAL}
         ${PASCAL}(void); // default constructor
         ${PASCAL}(const ${PASCAL}& ${CAML}); // copy constructor
         ~${PASCAL}(void); // destructor
-        // operators
-        ${PASCAL}& operator=(const ${PASCAL}& ${CAML}); // operator=
         // others
+        // operators
+        ${PASCAL}& operator=(const ${PASCAL}& ${CAML}); // copy assignment operator
     private:
 };
 
