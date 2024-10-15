@@ -87,6 +87,10 @@ ${PASCAL}::~${PASCAL}(void)
 {}
 
 /*
+ * others: public
+ */
+
+/*
  * operators
  */
 ${PASCAL}& ${PASCAL}::operator=(const ${PASCAL}& ${CAML})
@@ -96,10 +100,6 @@ ${PASCAL}& ${PASCAL}::operator=(const ${PASCAL}& ${CAML})
     }
     return *this;
 }
-
-/*
- * others: public
- */
 
 /*
  * others: private
