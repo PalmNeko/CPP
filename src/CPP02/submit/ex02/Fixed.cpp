@@ -58,23 +58,6 @@ int Fixed::toInt( void ) const
     return (this->value >> Fixed::fractionalBitNum);
 }
 
-void Fixed::output(std::ostream& o) const
-{
-    int integerPart = this->toInt();
-    int fractionalPart = this->getRawBits() ^ (integerPart << Fixed::fractionalBitNum);
-    float fractional = (float)fractionalPart / (1 << Fixed::fractionalBitNum);
-    std::string fractionalNum("");
-    while (fractional != 0)
-    {
-        fractional *= 10;
-        fractionalNum += ('0' + (int)fractional);
-        fractional -= (int)fractional;
-    }
-    o << integerPart;
-    if (!fractionalNum.empty())
-        o << "." << fractionalNum;
-}
-
 Fixed& Fixed::min(Fixed& a, Fixed& b)
 {
     return (a < b ? a : b);
@@ -220,6 +203,6 @@ Fixed Fixed::operator--(int)
  */
 std::ostream& operator<<(std::ostream& o, const Fixed& rhs)
 {
-    rhs.output(o);
+    o << rhs.toFloat();
     return o;
 }
