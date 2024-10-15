@@ -20,8 +20,16 @@ function main()
     SNAKE_CASE="${NAME/ /_}"
     LOWER_SNAKE_CASE="${SNAKE_CASE,,}"
     PASCAL="$(snakeToPascal "$LOWER_SNAKE_CASE")"
-    make_header "$NAME" > "${PASCAL}.hpp"
-    make_source "$NAME" > "${PASCAL}.cpp"
+    if ! test -f "${PASCAL}.hpp"; then
+        make_header "$NAME" > "${PASCAL}.hpp"
+    else
+        echo "${PASCAL}.hpp exists"
+    fi
+    if ! test -f "${PASCAL}.cpp"; then
+        make_source "$NAME" > "${PASCAL}.cpp"
+    else
+        echo "${PASCAL}.cpp exists"
+    fi
     echo "done!"
 }
 
