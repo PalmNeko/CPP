@@ -1,0 +1,7 @@
+String constructor called
+ClapTrap Frost attacks Hinge, causing 0 points of damage!
+ClapTrap Frost attacks Healer, causing 0 points of damage!
+String constructor called
+Destructor called
+ClapTrap Return of Frost attacks ENERGY, causing 0 points of damage!
+Destructor called
