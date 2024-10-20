@@ -1,0 +1,22 @@
+ClapTrap string constructor called
+FragTrap string constructor called
+ScavTrap string constructor called.
+ScavTrap Frost_clap_name attacks Hinge, causing 30 points of damage!
+ScavTrap Frost_clap_name attacks Healer, causing 30 points of damage!
+frost is dead.
+ClapTrap string constructor called
+FragTrap string constructor called
+ScavTrap string constructor called.
+DiamondTrap destructor called
+ScavTrap destructor called.
+FragTrap destructor called
+ClapTrap destructor called
+frost is revived.
+ScavTrap Return of Frost_clap_name attacks ENERGY, causing 30 points of damage!
+energy is empty.
+Put your hands up! ...Yay! It's high five!
+ScavTrap changed to Gate keeper mode.
+DiamondTrap destructor called
+ScavTrap destructor called.
+FragTrap destructor called
+ClapTrap destructor called
