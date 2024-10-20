@@ -1,0 +1,16 @@
+ClapTrap string constructor called
+FragTrap constructor called
+FragTrap Frost attacks Hinge, causing 30 points of damage!
+FragTrap Frost attacks Healer, causing 30 points of damage!
+frost is dead.
+ClapTrap string constructor called
+FragTrap constructor called
+FragTrap destructor called
+ClapTrap destructor called
+frost is revived.
+frost is revived.
+FragTrap Return of Frost attacks ENERGY, causing 30 points of damage!
+energy is empty.
+Put your hands up! ...Yay! It's high five!
+FragTrap destructor called
+ClapTrap destructor called
