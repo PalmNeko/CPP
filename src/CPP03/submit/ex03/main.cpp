@@ -48,4 +48,5 @@ void testDiamondTrap(unsigned int hitPoints, unsigned int energyPoints)
     }
     frost.highFivesGuys();
     frost.guardGate();
+    frost.whoAmI();
 }

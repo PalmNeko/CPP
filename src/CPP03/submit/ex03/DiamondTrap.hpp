@@ -20,6 +20,7 @@ class DiamondTrap: public FragTrap, public ScavTrap
         ~DiamondTrap(void); // destructor
         // others
         void attack(const std::string& target);
+        void whoAmI(void) const;
         // operators
         DiamondTrap& operator=(const DiamondTrap& diamondTrap); // copy assignment operator
     private:

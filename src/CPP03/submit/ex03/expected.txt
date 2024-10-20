@@ -16,6 +16,7 @@ ScavTrap Return of Frost_clap_name attacks ENERGY, causing 30 points of damage!
 energy is empty.
 Put your hands up! ...Yay! It's high five!
 ScavTrap changed to Gate keeper mode.
+DiamondTrap name:Return of Frost, ClapTrap: Return of Frost_clap_name
 DiamondTrap destructor called
 ScavTrap destructor called.
 FragTrap destructor called
