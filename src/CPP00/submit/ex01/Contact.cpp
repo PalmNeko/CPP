@@ -33,9 +33,9 @@ Contact::Contact(const Contact &contact)
 
 void Contact::show(std::ostream& os) const
 {
-    os << "    first name : " << this->firstName << std::endl;
-    os << "     last name : " << this->lastName << std::endl;
-    os << "     nick name : " << this->nickName << std::endl;
-    os << "  phone number : " << this->phoneNumber << std::endl;
+    os << "first name     : " << this->firstName << std::endl;
+    os << "last name      : " << this->lastName << std::endl;
+    os << "nick name      : " << this->nickName << std::endl;
+    os << "phone number   : " << this->phoneNumber << std::endl;
     os << "darkest secret : " << this->darkestSecret << std::endl;
 }

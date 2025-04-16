@@ -18,8 +18,8 @@ int main(void)
 
     while (true)
     {
-        std::cout << "command ADD / SEARCH / EXIT > ";
-        if (!std::getline(std::cin, command))
+        // std::cout << "command ADD / SEARCH / EXIT > ";
+        if (!getInput("command ADD / SEARCH / EXIT > ", command))
         {
             std::cout << std::endl;
             break ;
@@ -53,6 +53,8 @@ void addContactRoutine(PhoneBook& phoneBook)
         const Contact contact(firstName, lastName, nickName, phoneNumber, darkestSecret);
         phoneBook.addContact(contact);
     }
+    else
+        std::cout << "No input provided. Exiting..." << std::endl;
     return ;
 }
 
@@ -88,9 +90,7 @@ static bool getInput(const std::string& prompt, std::string& input)
 {
     std::cout << prompt;
     std::getline(std::cin, input);
-    if (input.empty()) {
-        std::cout << "No input provided. Exiting..." << std::endl;
+    if (input.empty())
         return (false);
-    }
     return (true);
 }
