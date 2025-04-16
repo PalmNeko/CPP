@@ -127,7 +127,7 @@ void	Account::_displayTimestamp( void )
     std::time_t timestamp = std::time(NULL);
     std::tm * now = std::localtime ( &timestamp );
     std::locale loc;
-    const std::time_put<char>& tmput = std::use_facet<std::time_put<char>>(loc);
+    const std::time_put<char>& tmput = std::use_facet<std::time_put<char> >(loc);
     std::string pattern("[%G%m%d_%H%M%S] ");
     tmput.put(std::cout, std::cout, ' ',
         now, pattern.data(), pattern.data() + pattern.length());
