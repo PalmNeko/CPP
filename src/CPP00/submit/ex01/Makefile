@@ -2,7 +2,7 @@
 NAME     = phonebook
 SRC      = $(shell find . -name "*.cpp")
 CXX      = c++
-CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -I includes -std=c++98
 CACHEDIR = cache
 
 # generate from above variable
