@@ -1,6 +1,7 @@
 # settings
 NAME     = megaphone
-SRC      = $(shell find . -name "*.cpp")
+SRC      = \
+	./megaphone.cpp
 CXX      = c++
 CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -std=c++98
 CACHEDIR = cache
