@@ -1,6 +1,17 @@
 # settings
 NAME     = phonebook
-SRC      = $(shell find . -name "*.cpp")
+SRC      = \
+	./main.cpp \
+	./modules/searchContactRoutine.cpp \
+	./modules/getInput.cpp \
+	./modules/addContactRoutine.cpp \
+	./modules/validatePhoneNumberFormat.cpp \
+	./modules/validateStrictNumberFormat.cpp \
+	./class/PhoneBook.cpp \
+	./class/TableViewer.cpp \
+	./class/Contact.cpp \
+	./class/PhoneBookError.cpp
+
 CXX      = c++
 CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -I includes -std=c++98
 CACHEDIR = cache
