@@ -1,6 +1,8 @@
 # settings
 NAME     = account_test.out
-SRC      = $(shell find . -name "*.cpp")
+SRC      = \
+	./tests.cpp \
+	./Account.cpp
 CXX      = c++
 CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -std=c++98
 CACHEDIR = cache
