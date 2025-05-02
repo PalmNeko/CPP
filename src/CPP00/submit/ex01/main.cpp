@@ -1,7 +1,8 @@
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
 #include "TableViewer.hpp"
-#include "phonebook.hpp"
+#include "pb.hpp"
+#include "PhoneBookError.hpp"
 
 #include <iostream>
 #include <iomanip>
@@ -30,8 +31,13 @@ int main(void)
             else if (command == "EXIT")
                 break ;
         }
-        catch (const std::runtime_error& e)
+        catch (const PhoneBookError& e)
         {
+            std::cerr << e.what() << std::endl;
+        }
+        catch (const std::exception& e)
+        {
+            std::cerr << "unhandling error" << std::endl;
             std::cerr << e.what() << std::endl;
         }
     }

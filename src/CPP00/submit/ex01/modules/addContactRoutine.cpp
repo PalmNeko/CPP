@@ -1,6 +1,7 @@
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
-#include "phonebook.hpp"
+#include "pb.hpp"
+#include "PhoneBookError.hpp"
 
 #include <iostream>
 
@@ -28,17 +29,17 @@ Contact getContactFromStdin(void)
     std::string errorMessage = "Error: No input provided. Exiting...";
 
     if (!getInput(" First Name\n  > ", firstName))
-        throw std::runtime_error(errorMessage);
+        throw PhoneBookError(errorMessage);
     if (!getInput(" Last Name\n  > ", lastName))
-        throw std::runtime_error(errorMessage);
+        throw PhoneBookError(errorMessage);
     if (!getInput(" Nick Name\n  > ", nickName))
-        throw std::runtime_error(errorMessage);
+        throw PhoneBookError(errorMessage);
     if (!getInput(" Phone Number\n  > ", phoneNumber))
-        throw std::runtime_error(errorMessage);
+        throw PhoneBookError(errorMessage);
     if (!validatePhoneNumberFormat(phoneNumber))
-        throw std::runtime_error("Error: Invalid Format: " + phoneNumber);
+        throw PhoneBookError("Error: Invalid Format: " + phoneNumber);
     if (!getInput(" Darkest Secret\n  > ", darkestSecret))
-        throw std::runtime_error(errorMessage);
+        throw PhoneBookError(errorMessage);
 
     Contact contact(firstName, lastName, nickName, phoneNumber, darkestSecret);
 

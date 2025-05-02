@@ -1,6 +1,7 @@
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
-#include "phonebook.hpp"
+#include "PhoneBookError.hpp"
+#include "pb.hpp"
 
 #include <string>
 #include <sstream>
@@ -9,7 +10,7 @@
 void searchContactRoutine(PhoneBook& phoneBook)
 {
     if (phoneBook.size() == 0)
-        throw std::runtime_error("Error: It has no contacts.");
+        throw PhoneBookError("Error: It has no contacts.");
     std::cout << "Search and Show" << std::endl;
     phoneBook.show();
 
@@ -17,7 +18,7 @@ void searchContactRoutine(PhoneBook& phoneBook)
     if (getInput("Please select index > ", selectedIndex) == false)
         return ;
     if (validateStrictNumberFormat(selectedIndex) == false)
-        throw std::runtime_error("Error: Invalid number format");
+        throw PhoneBookError("Error: Invalid number format");
     int index;
     std::istringstream iss(selectedIndex);
     iss >> index;
@@ -27,6 +28,6 @@ void searchContactRoutine(PhoneBook& phoneBook)
         contact.show(std::cout);
     }
     else
-        throw std::runtime_error("Error: Out of range: " + selectedIndex);
+        throw PhoneBookError("Error: Out of range: " + selectedIndex);
     return ;
 }
