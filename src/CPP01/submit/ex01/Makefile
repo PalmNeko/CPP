@@ -1,6 +1,10 @@
 # settings
 NAME     = horde.out
-SRC      = $(shell find . -name "*.cpp")
+SRC      = \
+	./main.cpp \
+	./Zombie.cpp \
+	./zombieHorde.cpp \
+
 CXX      = c++
 CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -std=c++98
 CACHEDIR = cache
