@@ -2,8 +2,8 @@
 #include <iostream>
 #include <string>
 
-void randomChump(const std::string& name);
-Zombie* newZombie(const std::string& name);
+void randomChump(std::string name);
+Zombie* newZombie(std::string name);
 
 int main(void)
 {
