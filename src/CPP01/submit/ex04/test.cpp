@@ -1,4 +1,4 @@
-#include "Replace.hpp"
+#include "ft.hpp"
 #include <string>
 #include <iostream>
 
@@ -11,7 +11,7 @@ void testReplace_replace_string(
 int main(void)
 {
     try{
-        std::cout << "test std::string Replace::replace(const std::string& src, const std::string& find, const std::string& replace)" << std::endl;
+        std::cout << "test std::string replace(const std::string& src, const std::string& find, const std::string& replace)" << std::endl;
         testReplace_replace_string("", "abc", "ABC", ""); // null src
         testReplace_replace_string("abc", "abc", "ABC", "ABC"); // full same
         testReplace_replace_string("abc  ", "abc", "ABC", "ABC  "); // head same
@@ -41,7 +41,7 @@ void testReplace_replace_string(
 {
     static int testNo;
     std::cout << "[" << testNo << "]";
-    std::string result = Replace::replace(src, find, replace);
+    std::string result = ft::replace(src, find, replace);
     if (result != toBe)
     {
         std::cerr << "Error: replacement: " << testNo << std::endl;

@@ -1,4 +1,4 @@
-#include "Replace.hpp"
+#include "ft.hpp"
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -14,23 +14,22 @@ int main(int argc, char *argv[])
     std::string inFileName(argv[1]);
     std::string outFileName(std::string(argv[1]) + ".replace");
 
-    infile.open(inFileName.c_str());
-    if (!infile.good())
+    try
     {
-        std::cout << "can't open: " << inFileName << std::endl;
-        return (1);
+        infile.open(inFileName.c_str());
+        if (!infile.good())
+            throw std::runtime_error("can't open: " + inFileName);
+        outfile.open(outFileName.c_str());
+        if (!outfile.good())
+            throw std::runtime_error("can't open: " + outFileName);
     }
-    outfile.open(outFileName.c_str());
-    if (!outfile.good())
+    catch (const std::exception& e)
     {
-        std::cout << "can't open: " << outFileName << std::endl;
-        infile.close();
+        std::cout << e.what() << std::endl;
         return (1);
     }
     std::ostringstream oss;
     oss << infile.rdbuf();
-    outfile << Replace::replace(oss.str(), argv[2], argv[3]);
-    infile.close();
-    outfile.close();
+    outfile << ft::replace(oss.str(), argv[2], argv[3]);
     return (0);
 }
