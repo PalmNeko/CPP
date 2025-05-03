@@ -6,7 +6,7 @@ Zombie::Zombie(void)
     :name("")
 {}
 
-Zombie::Zombie(std::string name)
+Zombie::Zombie(const std::string& name)
     :name(name)
 {}
 
@@ -15,7 +15,7 @@ Zombie::~Zombie(void)
     std::cout << this->name << ": Freeeze!!" << std::endl;
 }
 
-void Zombie::announce(void)
+void Zombie::announce(void) const
 {
     std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
