@@ -21,7 +21,7 @@ Weapon& Weapon::operator=(const Weapon& weapon)
     return *this;
 }
 
-const std::string& Weapon::getType(void)
+const std::string& Weapon::getType(void) const
 {
     return this->type;
 }
