@@ -1,92 +1,59 @@
-#include "Harl.hpp"
 
+#include "Harl.hpp"
 #include <iostream>
 
-/*
- * special member functions
- */
-Harl::Harl(void)
-{}
-
-Harl::Harl(const Harl& harl)
+void Harl::complain(std::string level) const
 {
-    (void)harl;
+	struct LevelMap {
+		std::string level;
+		void (Harl::*claim)(void) const;
+	};
+	// claim2 = &Harl::debug;
+	LevelMap map[] = {
+		{"DEBUG", &Harl::debug},
+		{"INFO", &Harl::info},
+		{"WARNING", &Harl::warning},
+		{"ERROR", &Harl::error},
+	};
+	int mapSize = sizeof(map) / sizeof(map[0]);
+	for (int i = 0; i < mapSize; i++)
+	{
+		if (map[i].level == level)
+		{
+			(this->*(map[i].claim))();
+			break ;
+		}
+	}
+	return ;
 }
 
-Harl::~Harl(void)
-{}
-
-/*
- * operators
- */
-Harl& Harl::operator=(const Harl& harl)
+void Harl::warning(void) const
 {
-    if (this != &harl)
-    {
-    }
-    return *this;
+	std::cout <<
+		"I think I deserve to have some extra bacon for free."
+		" I’ve been coming for years whereas you started working here"
+		" since last month." << std::endl;
 }
 
-/*
- * others: public
- */
-
-void Harl::debug(void)
+void Harl::info(void) const
 {
-    std::cout <<
-        "I love having extra bacon for my"
-        " 7XL-double-cheese-triple-pickle-special ketchup burger. "
-        "I really do!" << std::endl;
+	std::cout <<
+		"I cannot believe adding extra bacon costs more money."
+		" You didn’t put enough bacon in my burger!"
+		" If you did, I wouldn’t be asking for more!" << std::endl;
 }
 
-void Harl::info(void)
+void Harl::error(void) const
 {
-    std::cout <<
-        "I cannot believe adding extra bacon costs more money."
-        " You didn’t put enough bacon in my burger!"
-        " If you did, I wouldn’t be asking for more!" << std::endl;
+	std::cout <<
+		"This is unacceptable!"
+		" I want to speak to the manager now." << std::endl;
 }
 
-void Harl::warning(void)
+void Harl::debug(void) const
 {
-    std::cout <<
-        "I think I deserve to have some extra bacon for free."
-        " I’ve been coming for years whereas you started working here"
-        " since last month." << std::endl;
+	std::cout <<
+		"I love having extra bacon for my"
+		" 7XL-double-cheese-triple-pickle-special ketchup burger. "
+		"I really do!" << std::endl;
 }
-
-void Harl::error(void)
-{
-    std::cout <<
-    "This is unacceptable!"
-    " I want to speak to the manager now." << std::endl;
-}
-
-void Harl::complain(std::string level)
-{
-    struct LevelMap {
-        std::string level;
-        void (Harl::*claim)(void);
-    };
-    // claim2 = &Harl::debug;
-    LevelMap map[] = {
-        {"DEBUG", &Harl::debug},
-        {"INFO", &Harl::info},
-        {"WARNING", &Harl::warning},
-        {"ERROR", &Harl::error},
-    };
-    int mapSize = sizeof(map) / sizeof(map[0]);
-    for (int i = 0; i < mapSize; i++)
-    {
-        if (map[i].level == level)
-        {
-            (this->*(map[i].claim))();
-            break ;
-        }
-    }
-    return ;
-}
-
-/*
- * others: private
- */
