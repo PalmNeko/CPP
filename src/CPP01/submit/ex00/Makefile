@@ -1,6 +1,11 @@
 # settings
 NAME     = BraiiiiiiinnnzzzZ.out
-SRC      = $(shell find . -name "*.cpp")
+SRC      = \
+	./main.cpp \
+	./newZombie.cpp \
+	./randomChump.cpp \
+	./Zombie.cpp \
+
 CXX      = c++
 CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -std=c++98
 CACHEDIR = cache
