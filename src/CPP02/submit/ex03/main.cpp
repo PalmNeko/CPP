@@ -19,7 +19,6 @@ void irregularTest(void);
 
 int main(void)
 {
-    Fixed::setDebugStream(std::cerr);
     std::cout <<
         std::endl <<
         "+-------------+\n"
