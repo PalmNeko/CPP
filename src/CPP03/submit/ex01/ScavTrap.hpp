@@ -5,9 +5,6 @@
 
 class ScavTrap : public ClapTrap
 {
-    // variables
-    public:
-    private:
     // functions
     public:
         // special member functions

@@ -7,8 +7,11 @@
  * special member functions
  */
 ClapTrap::ClapTrap(void)
+    : hitPoints(10),
+    energyPoints(10),
+    attackDamage(0)
 {
-    std::clog << "ClapTrap default constructor called" << std::endl;
+    std::clog << "Default constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& clapTrap)
@@ -17,21 +20,21 @@ ClapTrap::ClapTrap(const ClapTrap& clapTrap)
     energyPoints(clapTrap.energyPoints),
     attackDamage(clapTrap.attackDamage)
 {
-    std::clog << "ClapTrap copy constructor called" << std::endl;
+    std::clog << "Copy constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name)
     : name(name),
-    hitPoints(100),
-    energyPoints(50),
-    attackDamage(20)
+    hitPoints(10),
+    energyPoints(10),
+    attackDamage(0)
 {
-    std::clog << "ClapTrap string constructor called" << std::endl;
+    std::clog << "Constructor called: " << name << std::endl;
 }
 
 ClapTrap::~ClapTrap(void)
 {
-    std::clog << "ClapTrap destructor called" << std::endl;
+    std::clog << "Destructor called: " << this->name << std::endl;
 }
 
 /*
@@ -69,6 +72,46 @@ void ClapTrap::beRepaired(unsigned int amount)
         this->hitPoints = uintMax;
     else
         this->hitPoints += amount;
+}
+
+const std::string& ClapTrap::getName(void) const
+{
+    return (this->name);
+}
+
+unsigned int ClapTrap::getHitPoints(void) const
+{
+    return (this->hitPoints);
+}
+
+unsigned int ClapTrap::getEnergyPoints(void) const
+{
+    return (this->energyPoints);
+}
+
+unsigned int ClapTrap::getAttackDamage(void) const
+{
+    return (this->attackDamage);
+}
+
+void ClapTrap::setName(const std::string name)
+{
+    this->name = name;
+}
+
+void ClapTrap::setHitPoints(unsigned int hitPoints)
+{
+    this->hitPoints = hitPoints;
+}
+
+void ClapTrap::setEnergyPoints(unsigned int energyPoints)
+{
+    this->energyPoints = energyPoints;
+}
+
+void ClapTrap::setAttackDamage(unsigned int attackDamage)
+{
+    this->attackDamage = attackDamage;
 }
 
 /*
