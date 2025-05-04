@@ -1,6 +1,9 @@
 # settings
 NAME     = a.out
-SRC      = $(shell find . -type f -name "*.cpp" -not -iname "*test*")
+SRC      = \
+	./Fixed.cpp \
+	./FixedTest.cpp \
+	./main.cpp
 CXX      = c++
 CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -std=c++98
 CACHEDIR = cache

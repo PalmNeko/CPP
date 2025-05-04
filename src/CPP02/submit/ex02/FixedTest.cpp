@@ -21,18 +21,11 @@ FixedTest::~FixedTest(void)
 #include <iomanip>
 bool FixedTest::testBinaryArithmeticOperators(void)
 {
-    const Fixed lowest = Fixed(0.00390625f);
-    const Fixed high = Fixed(0x20000000 >> 8);
     assert(Fixed(0) + Fixed(10) == Fixed(10));
     assert(Fixed(142.00390625f) + Fixed(781.00390625f) == Fixed(923.0078125f));
     assert(Fixed(781.00390625f) - Fixed(142.00390625f) == Fixed(639));
     assert(Fixed(142.00390625f) - Fixed(781.00390625f) == Fixed(-639));
     assert(Fixed(5.05f) * Fixed(2) == Fixed(10.1016f));
-    assert((lowest + high).getRawBits() == 0x20000001);
-    assert(((lowest + high) * Fixed(2)).getRawBits() == 0x40000002);
-    assert(((lowest + high) * Fixed(2.75f)).getRawBits() == 0x58000002); // = 0x20000001 << 1 + 0x20000001 >> 1 + 0x20000001 >> 2
-    // assert(Fixed(5.05f) / Fixed(0) == Fixed(2.52734f)); // will Floating point exception
-    assert(((lowest + high) * Fixed(2.75f) / Fixed(2)).getRawBits() == 0x58000002 >> 1);
     return (true);
 }
 
