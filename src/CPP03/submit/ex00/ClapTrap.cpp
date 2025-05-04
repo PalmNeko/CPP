@@ -7,6 +7,9 @@
  * special member functions
  */
 ClapTrap::ClapTrap(void)
+    : hitPoints(10),
+    energyPoints(10),
+    attackDamage(0)
 {
     std::clog << "Default constructor called" << std::endl;
 }
@@ -45,7 +48,6 @@ void ClapTrap::attack(const std::string& target)
         return ;
     this->energyPoints -= useEnergy;
     std::cout << "ClapTrap " << this->name << " attacks " << target << ", causing " << this->attackDamage << " points of damage!" << std::endl;
-
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
@@ -70,6 +72,46 @@ void ClapTrap::beRepaired(unsigned int amount)
         this->hitPoints = uintMax;
     else
         this->hitPoints += amount;
+}
+
+const std::string& ClapTrap::getName(void) const
+{
+    return (this->name);
+}
+
+unsigned int ClapTrap::getHitPoints(void) const
+{
+    return (this->hitPoints);
+}
+
+unsigned int ClapTrap::getEnergyPoints(void) const
+{
+    return (this->energyPoints);
+}
+
+unsigned int ClapTrap::getAttackDamage(void) const
+{
+    return (this->attackDamage);
+}
+
+void ClapTrap::setName(const std::string name)
+{
+    this->name = name;
+}
+
+void ClapTrap::setHitPoints(unsigned int hitPoints)
+{
+    this->hitPoints = hitPoints;
+}
+
+void ClapTrap::setEnergyPoints(unsigned int energyPoints)
+{
+    this->energyPoints = energyPoints;
+}
+
+void ClapTrap::setAttackDamage(unsigned int attackDamage)
+{
+    this->attackDamage = attackDamage;
 }
 
 /*
