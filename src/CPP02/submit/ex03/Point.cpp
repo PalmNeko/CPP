@@ -37,20 +37,39 @@ const Fixed& Point::getY(void) const
     return (this->y);
 }
 
-bool Point::isBelowLine(const Point& a, const Point& b) const
+int Point::isBelowLine(const Point& a, const Point& b) const
 {
     Fixed deltaX = b.x - a.x;
     Fixed deltaY = b.y - a.y;
 
      // 線上の点を調べるときは他の点との位置によって線の上側か下側かが変わり曖昧になるが、含めることとする。
     if (deltaX == 0)
-        return (this->x >= a.x);
+    {
+        if (this->x > a.x)
+            return (1);
+        else if (this->x == a.x)
+            return (0);
+        else
+            return (-1);
+    }
     if (deltaY == 0)
-        return (this->y >= a.y);
+    {
+        if (this->y > a.y)
+            return (1);
+        else if (this->y == a.y)
+            return (0);
+        else if (this->y < a.y)
+            return (-1);
+    }
     Fixed inclination = deltaY / deltaX;
-    if (this->y >= (inclination) * (this->x - a.x) + a.y)
-        return (true);
-    return (false);
+    Fixed rvalue = (inclination) * (this->x - a.x) + a.y;
+    if (this->y > rvalue)
+        return (1);
+    else if (this->y == rvalue)
+        return (0);
+    else if (this->y < rvalue)
+        return (-1);
+    return (0);
 }
 
 void Point::output(std::ostream& o) const

@@ -22,7 +22,7 @@ class Point
         // others
         const Fixed& getX(void) const;
         const Fixed& getY(void) const;
-        bool isBelowLine(const Point& a, const Point& b) const;
+        int isBelowLine(const Point& a, const Point& b) const;
         void output(std::ostream& o = std::cout) const;
         static bool isTriangle(const Point& a, const Point& b, const Point& c);
         // operators

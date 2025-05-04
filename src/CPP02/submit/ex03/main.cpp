@@ -13,6 +13,7 @@ void insideTest(void);
 void outsideTest(void);
 void boundaryTest(void);
 void irregularTest(void);
+void boundaryTest(void);
 
 #include <bitset>
 #include <climits>
@@ -90,6 +91,9 @@ void boundaryTest(void)
     useBspAndLogging(Point(10 + 30, 10), Point(20 + 30, 20), Point(20 + 30, 10), Point(20 + 30, 10 + FIXED_BIT), oss, false);
     useBspAndLogging(Point(10, 40), Point(10 + 10, 40), Point(10, 40 + 10), Point(10 + 5 - FIXED_BIT, 40 + 5 - FIXED_BIT), oss, true); // 線の真上だが、
     useBspAndLogging(Point(10 + 20, 40), Point(10 + 10 + 20, 40), Point(10 + 20, 40 + 10), Point(10 + 5  + 20, 40 + 5), oss, false);
+    useBspAndLogging(Point(100, 100), Point(200, 100), Point(150, 150), Point(150, 100), oss, false);
+    useBspAndLogging(Point(100, 100), Point(200, 100), Point(150, 150), Point(150, 100.1), oss, true);
+
     std::cout << Fixed(-1) * Fixed(14.99609375f) + Fixed(60) << std::endl;
     std::string pointList = oss.str();
 
@@ -107,7 +111,7 @@ void irregularTest(void)
     useBspAndLogging(Point(100, 200), Point(200, 200), Point(300, 200), Point(150, 200), oss, false);
     useBspAndLogging(Point(100, 250), Point(200, 250), Point(300, 250), Point(350, 250), oss, false);
     // 100倍しないと、傾きを出すときにアンダーフローして計算が狂う FIXED_BIT / 100
-    useBspAndLogging(Point(100, 300), Point(200, 300 + 100 * FIXED_BIT), Point(300, 300), Point(150, 300), oss, true);
+    useBspAndLogging(Point(100, 300), Point(200, 300 + 100 * FIXED_BIT), Point(300, 300), Point(150, 300), oss, false);
     useBspAndLogging(Point(100, 350), Point(200, 350 + 100 * FIXED_BIT), Point(300, 350), Point(350, 350), oss, false);
 
     std::string pointList = oss.str();

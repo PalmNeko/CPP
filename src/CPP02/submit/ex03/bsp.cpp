@@ -11,7 +11,9 @@ bool bsp(Point const a, Point const b, Point const c, Point const point)
     {
         const Point &point1 = triangle[(i + 1) % 3];
         const Point &point2 = triangle[(i + 2) % 3];
-        if (triangle[i].isBelowLine(point1, point2) != point.isBelowLine(point1, point2))
+        const Fixed lvalue = triangle[i].isBelowLine(point1, point2);
+        const Fixed rvalue = point.isBelowLine(point1, point2);
+        if (rvalue == 0 || lvalue != rvalue)
             return (false);
     }
     return (true);
