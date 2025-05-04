@@ -2,9 +2,9 @@
 NAME     = unnecessaryViolence.out
 SRC      = \
 	./main.cpp \
-	./classes/HumanA.cpp \
-	./classes/HumanB.cpp \
-	./classes/Weapon.cpp
+	./HumanA.cpp \
+	./HumanB.cpp \
+	./Weapon.cpp
 
 CXX      = c++
 CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -I includes -std=c++98
