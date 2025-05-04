@@ -6,7 +6,6 @@
 class ClapTrap
 {
     // variables
-    public:
     private:
         std::string name;
         unsigned int hitPoints;

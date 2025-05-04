@@ -26,12 +26,12 @@ ClapTrap::ClapTrap(std::string name)
     energyPoints(10),
     attackDamage(0)
 {
-    std::clog << "String constructor called" << std::endl;
+    std::clog << "Constructor called: " << name << std::endl;
 }
 
 ClapTrap::~ClapTrap(void)
 {
-    std::clog << "Destructor called" << std::endl;
+    std::clog << "Destructor called: " << this->name << std::endl;
 }
 
 /*
