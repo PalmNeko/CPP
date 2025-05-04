@@ -1,6 +1,11 @@
 # settings
 NAME     = unnecessaryViolence.out
-SRC      = $(shell find . -name "*.cpp")
+SRC      = \
+	./main.cpp \
+	./classes/HumanA.cpp \
+	./classes/HumanB.cpp \
+	./classes/Weapon.cpp
+
 CXX      = c++
 CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -I includes -std=c++98
 CACHEDIR = cache
