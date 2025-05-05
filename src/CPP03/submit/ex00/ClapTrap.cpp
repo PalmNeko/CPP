@@ -53,7 +53,7 @@ void ClapTrap::attack(const std::string& className, const std::string& target)
     }
 
     oss << " attacks " + target;
-    oss << ", causing " << this->getAttackDamage() << " points of damage!" << std::endl;
+    oss << ", causing \e[34m" << this->getAttackDamage() << "\e[0m points of damage!" << std::endl;
     std::cout << oss.str();
     return ;
 }
@@ -74,7 +74,7 @@ void ClapTrap::takeDamage(const std::string& className, unsigned int amount)
         this->setHitPoints(0);
     else
         this->setHitPoints(this->getHitPoints() - amount);
-    oss << " takes " << amount << " points of damage!";
+    oss << " takes \e[31m" << amount << "\e[0m points of damage!";
     oss << " HP: " << this->getHitPoints();
     oss << std::endl;
     std::cout << oss.str();
@@ -90,11 +90,13 @@ void ClapTrap::beRepaired(const std::string& className, unsigned int amount)
     if (this->isAlive() == false)
     {
         oss << "'s HP is zero. can't be repaired." << std::endl;
+        std::cout << oss.str();
         return ;
     }
     else if (this->useEnergy() == false)
     {
         oss << " there is not enough energy." << std::endl;
+        std::cout << oss.str();
         return ;
     }
     const unsigned int uintMax = std::numeric_limits<unsigned int>::max();
@@ -102,9 +104,10 @@ void ClapTrap::beRepaired(const std::string& className, unsigned int amount)
         this->setHitPoints(uintMax);
     else
         this->setHitPoints(this->getHitPoints() + amount);
-    std::cout << fullName << " gain "
-        << amount << " points of health."
+    oss << " gain \e[32m" << amount << "\e[0m points of health."
         << " HP: " << this->getHitPoints() << std::endl;
+    std::cout << oss.str();
+    return ;
 }
 
 bool ClapTrap::useEnergy(void)
