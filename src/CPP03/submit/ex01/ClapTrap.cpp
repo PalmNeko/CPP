@@ -19,6 +19,7 @@ ClapTrap::ClapTrap(const ClapTrap& clapTrap)
 ClapTrap::ClapTrap(std::string name)
     : name(name)
 {
+    this->setInitialAttributes(this);
     std::cout << " + ClapTrap(" << name << ")" << std::endl;
 }
 

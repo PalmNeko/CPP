@@ -18,8 +18,8 @@ DiamondTrap::DiamondTrap(const DiamondTrap& diamondTrap)
 DiamondTrap::DiamondTrap(const std::string& name)
     : ClapTrap(name + "_clap_name"), name(name)
 {
-    std::cout << " + DiamondTrap(" << name << ")" << std::endl;
     this->setInitialAttributes(this);
+    std::cout << " + DiamondTrap(" << name << ")" << std::endl;
 }
 
 DiamondTrap::~DiamondTrap(void)

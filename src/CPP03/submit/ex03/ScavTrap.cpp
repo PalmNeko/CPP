@@ -16,8 +16,8 @@ ScavTrap::ScavTrap(const ScavTrap& scavTrap)
 ScavTrap::ScavTrap(const std::string& name)
     : ClapTrap(name)
 {
-    std::cout << " + ScavTrap(" << name << ")" << std::endl;
     this->setInitialAttributes(this);
+    std::cout << " + ScavTrap(" << name << ")" << std::endl;
 }
 
 ScavTrap::~ScavTrap(void)
