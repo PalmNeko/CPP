@@ -8,30 +8,25 @@
  */
 ClapTrap::ClapTrap(void)
 {
-    std::clog << "ClapTrap default constructor called" << std::endl;
+    this->setInitialAttributes(this);
+    std::clog << " + ClapTrap" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& clapTrap)
-    : name(clapTrap.name),
-    hitPoints(clapTrap.hitPoints),
-    energyPoints(clapTrap.energyPoints),
-    attackDamage(clapTrap.attackDamage)
 {
-    std::clog << "ClapTrap copy constructor called" << std::endl;
+    *this = clapTrap;
+    std::clog << " @ Copy(ClapTrap)" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name)
-    : name(name),
-    hitPoints(10),
-    energyPoints(10),
-    attackDamage(0)
+    : name(name)
 {
-    std::clog << "ClapTrap string constructor called" << std::endl;
+    std::clog << " + ClapTrap(" << name << ")" << std::endl;
 }
 
 ClapTrap::~ClapTrap(void)
 {
-    std::clog << "ClapTrap destructor called" << std::endl;
+    std::clog << " - ClapTrap(" << this->getName() << ")" << std::endl;
 }
 
 /*
@@ -69,6 +64,68 @@ void ClapTrap::beRepaired(unsigned int amount)
         this->hitPoints = uintMax;
     else
         this->hitPoints += amount;
+}
+
+const std::string& ClapTrap::getName(void) const
+{
+    return (this->name);
+}
+
+unsigned int ClapTrap::getHitPoints(void) const
+{
+    return (this->hitPoints);
+}
+
+unsigned int ClapTrap::getEnergyPoints(void) const
+{
+    return (this->energyPoints);
+}
+
+unsigned int ClapTrap::getAttackDamage(void) const
+{
+    return (this->attackDamage);
+}
+
+void ClapTrap::setName(const std::string name)
+{
+    this->name = name;
+}
+
+void ClapTrap::setHitPoints(unsigned int hitPoints)
+{
+    this->hitPoints = hitPoints;
+}
+
+void ClapTrap::setEnergyPoints(unsigned int energyPoints)
+{
+    this->energyPoints = energyPoints;
+}
+
+void ClapTrap::setAttackDamage(unsigned int attackDamage)
+{
+    this->attackDamage = attackDamage;
+}
+
+void ClapTrap::setInitialAttributes(const ClapTrap *clapTrap)
+{
+    this->setHitPoints(clapTrap->getInitialHitPoints());
+    this->setEnergyPoints(clapTrap->getInitialEnergyPpoints());
+    this->setAttackDamage(clapTrap->getInitialAttackDamage());
+}
+
+unsigned int ClapTrap::getInitialHitPoints(void) const
+{
+    return (10);
+}
+
+unsigned int ClapTrap::getInitialEnergyPpoints(void) const
+{
+    return (10);
+}
+
+unsigned int ClapTrap::getInitialAttackDamage(void) const
+{
+    return (0);
 }
 
 /*

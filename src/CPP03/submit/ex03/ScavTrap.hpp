@@ -3,7 +3,7 @@
 
 # include "ClapTrap.hpp"
 
-class ScavTrap : virtual public ClapTrap
+class ScavTrap : public virtual ClapTrap
 {
     // functions
     public:
@@ -15,6 +15,9 @@ class ScavTrap : virtual public ClapTrap
         // others
         void attack(const std::string& target);
         void guardGate(void);
+        virtual unsigned int getInitialHitPoints(void) const;
+        unsigned int getInitialEnergyPpoints(void) const;
+        unsigned int getInitialAttackDamage(void) const;
         // operators
         ScavTrap& operator=(const ScavTrap& scavTrap); // copy assignment operator
     private:

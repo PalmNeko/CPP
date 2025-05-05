@@ -8,7 +8,6 @@
 class DiamondTrap: public FragTrap, public ScavTrap
 {
     // variables
-    public:
     private:
         std::string name;
     // functions
@@ -23,7 +22,9 @@ class DiamondTrap: public FragTrap, public ScavTrap
         void whoAmI(void) const;
         // operators
         DiamondTrap& operator=(const DiamondTrap& diamondTrap); // copy assignment operator
-    private:
+        unsigned int getInitialHitPoints(void) const;
+        unsigned int getInitialEnergyPpoints(void) const;
+        unsigned int getInitialAttackDamage(void) const;
 };
 
 #endif

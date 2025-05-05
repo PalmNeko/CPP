@@ -8,40 +8,53 @@
  */
 FragTrap::FragTrap(void)
 {
-    std::cout << "FragTrap default constructor called" << std::endl;
+    this->setInitialAttributes(this);
+    std::clog << " + FragTrap" << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap& fragTrap)
-    : ClapTrap(fragTrap)
 {
-    std::cout << "FragTrap copy constructor called" << std::endl;
+    *this = fragTrap;
+    std::clog << " @ Copy(FragTrap)" << std::endl;
 }
 
 FragTrap::FragTrap(const std::string& name)
-    : ClapTrap(name)
 {
-    std::cout << "FragTrap string constructor called" << std::endl;
-    this->hitPoints = 100;
-    this->energyPoints = 100;
-    this->attackDamage = 30;
+    std::clog << " + FragTrap(" << name << ")" << std::endl;
+    this->setInitialAttributes(this);
 }
 
 FragTrap::~FragTrap(void)
 {
-    std::cout << "FragTrap destructor called" << std::endl;
+    std::clog << " - FragTrap(" << this->getName() << ")" << std::endl;
 }
 
 /*
  * others: public
  */
+unsigned int FragTrap::getInitialHitPoints(void) const
+{
+    return (100);
+}
+
+unsigned int FragTrap::getInitialEnergyPpoints(void) const
+{
+    return (100);
+}
+
+unsigned int FragTrap::getInitialAttackDamage(void) const
+{
+    return (30);
+}
+
 void FragTrap::attack(const std::string& target)
 {
     const int useEnergy = 1;
 
-    if (this->energyPoints < useEnergy || this->hitPoints <= 0)
+    if (this->getEnergyPoints() < useEnergy || this->getHitPoints() <= 0)
         return ;
-    this->energyPoints -= useEnergy;
-    std::cout << "FragTrap " << this->name << " attacks " << target << ", causing " << this->attackDamage << " points of damage!" << std::endl;
+    this->setEnergyPoints(this->getEnergyPoints() - useEnergy);
+    std::cout << "FragTrap " << this->getName() << " attacks " << target << ", causing " << this->getAttackDamage() << " points of damage!" << std::endl;
 }
 
 void FragTrap::highFivesGuys(void)

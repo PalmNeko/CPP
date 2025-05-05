@@ -3,7 +3,7 @@
 
 # include "ClapTrap.hpp"
 
-class FragTrap: virtual public ClapTrap
+class FragTrap: public virtual ClapTrap
 {
     // variables
     public:
@@ -18,6 +18,9 @@ class FragTrap: virtual public ClapTrap
         // others
         void attack(const std::string& target);
         void highFivesGuys(void);
+        unsigned int getInitialHitPoints(void) const;
+        unsigned int getInitialEnergyPpoints(void) const;
+        unsigned int getInitialAttackDamage(void) const;
         // operators
         FragTrap& operator=(const FragTrap& fragTrap); // copy assignment operator
     private:

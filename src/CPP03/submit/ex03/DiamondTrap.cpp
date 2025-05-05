@@ -8,32 +8,27 @@
  */
 DiamondTrap::DiamondTrap(void)
 {
-    std::cout << "DiamondTrap default constructor called" << std::endl;
+    this->setInitialAttributes(this);
+    std::clog << " + DiamondTrap" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap& diamondTrap)
-    : ClapTrap(diamondTrap),
-    FragTrap(diamondTrap),
-    ScavTrap(diamondTrap),
-    name(diamondTrap.name)
 {
-    std::cout << "DiamondTrap copy constructor called" << std::endl;
+    *this = diamondTrap;
+    std::clog << " @ Copy(DiamondTrap)" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const std::string& name)
-    : ClapTrap(name + "_clap_name"),
-    FragTrap(name + "_clap_name"),
-    ScavTrap(name + "_clap_name"),
-    name(name)
+    : ClapTrap(name + "_clap_name"), name(name)
 {
-    this->hitPoints = 100;
-    this->energyPoints = 50;
-    this->attackDamage = 30;
+    std::clog << " + DiamondTrap(" << name << ")" << std::endl;
+    this->setInitialAttributes(this);
+    std::cout << this->getHitPoints() << " " << this->getEnergyPoints() << " " << this->getAttackDamage() << std::endl;
 }
 
 DiamondTrap::~DiamondTrap(void)
 {
-    std::cout << "DiamondTrap destructor called" << std::endl;
+    std::clog << " - DiamondTrap(" << this->name << ")" << std::endl;
 }
 
 /*
@@ -46,7 +41,23 @@ void DiamondTrap::attack(const std::string& target)
 
 void DiamondTrap::whoAmI(void) const
 {
-    std::cout << "DiamondTrap name:" << this->name << ", ClapTrap: " << this->FragTrap::ClapTrap::name << std::endl;
+    std::cout << "DiamondTrap name:" << this->name << ", ClapTrap: " << this->getName() << std::endl;
+}
+
+
+unsigned int DiamondTrap::getInitialHitPoints(void) const
+{
+    return (this->FragTrap::getInitialHitPoints());
+}
+
+unsigned int DiamondTrap::getInitialEnergyPpoints(void) const
+{
+    return (this->ScavTrap::getInitialEnergyPpoints());
+}
+
+unsigned int DiamondTrap::getInitialAttackDamage(void) const
+{
+    return (this->FragTrap::getInitialAttackDamage());
 }
 
 /*
