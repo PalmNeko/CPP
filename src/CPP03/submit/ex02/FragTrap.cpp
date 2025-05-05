@@ -3,48 +3,49 @@
 #include <string>
 #include <iostream>
 
-/*
- * special member functions
- */
 FragTrap::FragTrap(void)
 {
-    this->setHitPoints(100);
-    this->setEnergyPoints(100);
-    this->setAttackDamage(30);
-    std::cout << "FragTrap default constructor called" << std::endl;
+    this->setInitialAttributes(this);
+    std::cout << " + FragTrap" << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap& fragTrap)
-    : ClapTrap(fragTrap)
 {
-    std::cout << "FragTrap copy constructor called" << std::endl;
+    *this = fragTrap;
+    std::cout << " @ Copy(FragTrap)" << std::endl;
 }
 
 FragTrap::FragTrap(const std::string& name)
-    : ClapTrap(name)
 {
-    this->setHitPoints(100);
-    this->setEnergyPoints(100);
-    this->setAttackDamage(30);
-    std::cout << "FragTrap constructor called" << std::endl;
+    std::cout << " + FragTrap(" << name << ")" << std::endl;
+    this->setInitialAttributes(this);
 }
 
 FragTrap::~FragTrap(void)
 {
-    std::cout << "FragTrap destructor called" << std::endl;
+    std::cout << " - FragTrap(" << this->getName() << ")" << std::endl;
 }
 
-/*
- * others: public
- */
+unsigned int FragTrap::getInitialHitPoints(void) const
+{
+    return (100);
+}
+
+unsigned int FragTrap::getInitialEnergyPpoints(void) const
+{
+    return (100);
+}
+
+unsigned int FragTrap::getInitialAttackDamage(void) const
+{
+    return (30);
+}
+
 void FragTrap::attack(const std::string& target)
 {
-    const int useEnergy = 1;
-
-    if (this->getEnergyPoints() < useEnergy || this->getHitPoints() <= 0)
+    if (this->doAttack() == false)
         return ;
-    this->setEnergyPoints(this->getEnergyPoints() - useEnergy);
-    std::cout << "FragTrap " << this->getName() << " attacks " << target << ", causing " << this->getAttackDamage() << " points of damage!" << std::endl;
+    std::cout << this->makeAttackText("FragTrap", target) << std::endl;
 }
 
 void FragTrap::highFivesGuys(void)
@@ -52,9 +53,6 @@ void FragTrap::highFivesGuys(void)
     std::cout << "Put your hands up! ...Yay! It's high five!" << std::endl;
 }
 
-/*
- * operators
- */
 FragTrap& FragTrap::operator=(const FragTrap& fragTrap)
 {
     if (this != &fragTrap)
@@ -63,7 +61,3 @@ FragTrap& FragTrap::operator=(const FragTrap& fragTrap)
     }
     return *this;
 }
-
-/*
- * others: private
- */

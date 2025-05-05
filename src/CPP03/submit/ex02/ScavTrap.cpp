@@ -1,49 +1,48 @@
 #include "ScavTrap.hpp"
-
 #include <iostream>
 
-/*
- * special member functions
- */
 ScavTrap::ScavTrap(void)
 {
-    this->setHitPoints(100);
-    this->setEnergyPoints(50);
-    this->setAttackDamage(20);
-    std::clog << "ScavTrap default constructor called." << std::endl;
+    this->setInitialAttributes(this);
+    std::cout << " + ScavTrap" << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap& scavTrap)
-    : ClapTrap(scavTrap)
 {
-    std::clog << "ScavTrap copy constructor called." << std::endl;
+    *this = scavTrap;
+    std::cout << " @ Copy(ScavTrap)" << std::endl;
 }
 
 ScavTrap::ScavTrap(const std::string& name)
     : ClapTrap(name)
 {
-    this->setHitPoints(100);
-    this->setEnergyPoints(50);
-    this->setAttackDamage(20);
-    std::clog << "ScavTrap string constructor called." << std::endl;
+    std::cout << " + ScavTrap(" << name << ")" << std::endl;
+    this->setInitialAttributes(this);
 }
 
 ScavTrap::~ScavTrap(void)
 {
-    std::clog << "ScavTrap destructor called." << std::endl;
+    std::cout << " - ScavTrap(" << this->getName() << ")" << std::endl;
 }
 
-/*
- * others: public
- */
+unsigned int ScavTrap::getInitialHitPoints(void) const
+{
+    return (100);
+}
+unsigned int ScavTrap::getInitialEnergyPpoints(void) const
+{
+    return (50);
+}
+unsigned int ScavTrap::getInitialAttackDamage(void) const
+{
+    return (20);
+}
+
 void ScavTrap::attack(const std::string& target)
 {
-    const int useEnergy = 1;
-
-    if (this->getEnergyPoints() < useEnergy || this->getHitPoints() <= 0)
+    if (this->doAttack() == false)
         return ;
-    this->setEnergyPoints(this->getEnergyPoints() - useEnergy);
-    std::cout << "ScavTrap " << this->getName() << " attacks " << target << ", causing " << this->getAttackDamage() << " points of damage!" << std::endl;
+    std::cout << this->makeAttackText("ScavTrap", target) << std::endl;
 }
 
 void ScavTrap::guardGate(void)
@@ -51,9 +50,6 @@ void ScavTrap::guardGate(void)
     std::cout << "ScavTrap changed to Gate keeper mode." << std::endl;
 }
 
-/*
- * operators
- */
 ScavTrap& ScavTrap::operator=(const ScavTrap& scavTrap)
 {
     if (this != &scavTrap)
@@ -62,7 +58,3 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& scavTrap)
     }
     return *this;
 }
-
-/*
- * others: private
- */

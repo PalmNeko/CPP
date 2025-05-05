@@ -3,24 +3,22 @@
 
 # include "ClapTrap.hpp"
 
-class FragTrap: public ClapTrap
+class FragTrap: public virtual ClapTrap
 {
-    // variables
     public:
-    private:
-    // functions
-    public:
-        // special member functions
-        FragTrap(void); // default constructor
-        FragTrap(const FragTrap& fragTrap); // copy constructor
+        FragTrap(void);
+        FragTrap(const FragTrap& fragTrap);
         FragTrap(const std::string& name);
-        ~FragTrap(void); // destructor
-        // others
+        ~FragTrap(void);
+       
         void attack(const std::string& target);
         void highFivesGuys(void);
-        // operators
-        FragTrap& operator=(const FragTrap& fragTrap); // copy assignment operator
-    private:
+
+        unsigned int getInitialHitPoints(void) const;
+        unsigned int getInitialEnergyPpoints(void) const;
+        unsigned int getInitialAttackDamage(void) const;
+        
+        FragTrap& operator=(const FragTrap& fragTrap);
 };
 
 #endif

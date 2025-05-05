@@ -2,52 +2,56 @@
 
 #include <iostream>
 #include <limits>
+#include <sstream>
 
-/*
- * special member functions
- */
 ClapTrap::ClapTrap(void)
-    : hitPoints(10),
-    energyPoints(10),
-    attackDamage(0)
 {
-    std::clog << "Default constructor called" << std::endl;
+    this->setInitialAttributes(this);
+    std::cout << " + ClapTrap" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& clapTrap)
-    : name(clapTrap.name),
-    hitPoints(clapTrap.hitPoints),
-    energyPoints(clapTrap.energyPoints),
-    attackDamage(clapTrap.attackDamage)
 {
-    std::clog << "Copy constructor called" << std::endl;
+    *this = clapTrap;
+    std::cout << " @ Copy(ClapTrap)" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name)
-    : name(name),
-    hitPoints(10),
-    energyPoints(10),
-    attackDamage(0)
+    : name(name)
 {
-    std::clog << "Constructor called: " << name << std::endl;
+    std::cout << " + ClapTrap(" << name << ")" << std::endl;
 }
 
 ClapTrap::~ClapTrap(void)
 {
-    std::clog << "Destructor called: " << this->name << std::endl;
+    std::cout << " - ClapTrap(" << this->getName() << ")" << std::endl;
 }
 
-/*
- * others: public
- */
-void ClapTrap::attack(const std::string& target)
+bool ClapTrap::doAttack(void)
 {
     const int useEnergy = 1;
 
     if (this->energyPoints < useEnergy || this->hitPoints <= 0)
-        return ;
+        return (false);
     this->energyPoints -= useEnergy;
-    std::cout << "ClapTrap " << this->name << " attacks " << target << ", causing " << this->attackDamage << " points of damage!" << std::endl;
+    return (true);
+}
+
+std::string ClapTrap::makeAttackText(const std::string& className, const std::string& target) const
+{
+    std::ostringstream oss;
+
+    oss << className + " ";
+    oss << this->getName() + " attacks " + target;
+    oss << ", causing " << this->getAttackDamage() << " points of damage!";
+    return oss.str();
+}
+
+void ClapTrap::attack(const std::string& target)
+{
+    if (this->doAttack() == false)
+        return ;
+    std::cout << this->makeAttackText("ClapTrap", target) << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
@@ -114,9 +118,28 @@ void ClapTrap::setAttackDamage(unsigned int attackDamage)
     this->attackDamage = attackDamage;
 }
 
-/*
- * operators
- */
+void ClapTrap::setInitialAttributes(const ClapTrap *clapTrap)
+{
+    this->setHitPoints(clapTrap->getInitialHitPoints());
+    this->setEnergyPoints(clapTrap->getInitialEnergyPpoints());
+    this->setAttackDamage(clapTrap->getInitialAttackDamage());
+}
+
+unsigned int ClapTrap::getInitialHitPoints(void) const
+{
+    return (10);
+}
+
+unsigned int ClapTrap::getInitialEnergyPpoints(void) const
+{
+    return (10);
+}
+
+unsigned int ClapTrap::getInitialAttackDamage(void) const
+{
+    return (0);
+}
+
 ClapTrap& ClapTrap::operator=(const ClapTrap& clapTrap)
 {
     if (this != &clapTrap)
@@ -128,7 +151,3 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& clapTrap)
     }
     return *this;
 }
-
-/*
- * others: private
- */
