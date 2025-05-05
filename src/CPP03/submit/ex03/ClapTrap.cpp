@@ -4,9 +4,6 @@
 #include <limits>
 #include <sstream>
 
-/*
- * special member functions
- */
 ClapTrap::ClapTrap(void)
 {
     this->setInitialAttributes(this);
@@ -143,9 +140,6 @@ unsigned int ClapTrap::getInitialAttackDamage(void) const
     return (0);
 }
 
-/*
- * operators
- */
 ClapTrap& ClapTrap::operator=(const ClapTrap& clapTrap)
 {
     if (this != &clapTrap)
@@ -157,7 +151,3 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& clapTrap)
     }
     return *this;
 }
-
-/*
- * others: private
- */

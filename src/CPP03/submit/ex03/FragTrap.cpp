@@ -3,9 +3,6 @@
 #include <string>
 #include <iostream>
 
-/*
- * special member functions
- */
 FragTrap::FragTrap(void)
 {
     this->setInitialAttributes(this);
@@ -29,9 +26,6 @@ FragTrap::~FragTrap(void)
     std::cout << " - FragTrap(" << this->getName() << ")" << std::endl;
 }
 
-/*
- * others: public
- */
 unsigned int FragTrap::getInitialHitPoints(void) const
 {
     return (100);
@@ -59,9 +53,6 @@ void FragTrap::highFivesGuys(void)
     std::cout << "Put your hands up! ...Yay! It's high five!" << std::endl;
 }
 
-/*
- * operators
- */
 FragTrap& FragTrap::operator=(const FragTrap& fragTrap)
 {
     if (this != &fragTrap)
@@ -70,7 +61,3 @@ FragTrap& FragTrap::operator=(const FragTrap& fragTrap)
     }
     return *this;
 }
-
-/*
- * others: private
- */

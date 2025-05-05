@@ -5,7 +5,6 @@
 
 class ClapTrap
 {
-    // variables
     private:
         std::string name;
         unsigned int hitPoints;
@@ -15,15 +14,14 @@ class ClapTrap
     protected:
         bool doAttack(void);
         std::string makeAttackText(const std::string& className, const std::string& target) const;
+        void setInitialAttributes(const ClapTrap *clapTrap);
     
-    // functions
     public:
-        // special member functions
-        ClapTrap(void); // default constructor
-        ClapTrap(const ClapTrap& clapTrap); // copy constructor
+        ClapTrap(void);
+        ClapTrap(const ClapTrap& clapTrap);
         ClapTrap(std::string name);
-        ~ClapTrap(void); // destructor
-        // others
+        ~ClapTrap(void);
+        
         void attack(const std::string& target);
         void takeDamage(unsigned int amount);
         void beRepaired(unsigned int amount);
@@ -42,10 +40,7 @@ class ClapTrap
         virtual unsigned int getInitialEnergyPpoints(void) const;
         virtual unsigned int getInitialAttackDamage(void) const;
 
-        void setInitialAttributes(const ClapTrap *clapTrap);
-        // operators
-        ClapTrap& operator=(const ClapTrap& clapTrap); // copy assignment operator
-    private:
+        ClapTrap& operator=(const ClapTrap& clapTrap);
 };
 
 #endif

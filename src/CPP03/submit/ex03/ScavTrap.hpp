@@ -5,21 +5,20 @@
 
 class ScavTrap : public virtual ClapTrap
 {
-    // functions
-    public:
-        // special member functions
-        ScavTrap(void); // default constructor
-        ScavTrap(const ScavTrap& scavTrap); // copy constructor
+    public:    
+        ScavTrap(void); 
+        ScavTrap(const ScavTrap& scavTrap); 
         ScavTrap(const std::string& name);
-        ~ScavTrap(void); // destructor
-        // others
+        ~ScavTrap(void); 
+        
         void attack(const std::string& target);
         void guardGate(void);
-        virtual unsigned int getInitialHitPoints(void) const;
+
+        unsigned int getInitialHitPoints(void) const;
         unsigned int getInitialEnergyPpoints(void) const;
         unsigned int getInitialAttackDamage(void) const;
-        // operators
-        ScavTrap& operator=(const ScavTrap& scavTrap); // copy assignment operator
+        
+        ScavTrap& operator=(const ScavTrap& scavTrap); 
     private:
 };
 

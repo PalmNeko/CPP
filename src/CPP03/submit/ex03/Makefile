@@ -1,8 +1,14 @@
 # settings
 NAME     = a.out
-SRC      = $(shell find . -type f -name "*.cpp" -not -name "*test*")
+SRC      = \
+	./DiamondTrap.cpp \
+	./main.cpp \
+	./ClapTrap.cpp \
+	./FragTrap.cpp \
+	./ScavTrap.cpp
+
 CXX      = c++
-CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -Wshadow -MMD -MP -std=c++98
 CACHEDIR = cache
 
 # generate from above variable

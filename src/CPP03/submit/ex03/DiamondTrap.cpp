@@ -3,9 +3,6 @@
 #include "ScavTrap.hpp"
 #include <iostream>
 
-/*
- * special member functions
- */
 DiamondTrap::DiamondTrap(void)
 {
     this->setInitialAttributes(this);
@@ -30,9 +27,6 @@ DiamondTrap::~DiamondTrap(void)
     std::cout << " - DiamondTrap(" << this->name << ")" << std::endl;
 }
 
-/*
- * others: public
- */
 void DiamondTrap::attack(const std::string& target)
 {
     this->ScavTrap::attack(target);
@@ -59,9 +53,6 @@ unsigned int DiamondTrap::getInitialAttackDamage(void) const
     return (this->FragTrap::getInitialAttackDamage());
 }
 
-/*
- * operators
- */
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap& diamondTrap)
 {
     if (this != &diamondTrap)
@@ -71,7 +62,3 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& diamondTrap)
     }
     return *this;
 }
-
-/*
- * others: private
- */

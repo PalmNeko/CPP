@@ -1,10 +1,6 @@
 #include "ScavTrap.hpp"
-
 #include <iostream>
 
-/*
- * special member functions
- */
 ScavTrap::ScavTrap(void)
 {
     this->setInitialAttributes(this);
@@ -29,9 +25,6 @@ ScavTrap::~ScavTrap(void)
     std::cout << " - ScavTrap(" << this->getName() << ")" << std::endl;
 }
 
-/*
- * others: public
- */
 unsigned int ScavTrap::getInitialHitPoints(void) const
 {
     return (100);
@@ -57,9 +50,6 @@ void ScavTrap::guardGate(void)
     std::cout << "ScavTrap changed to Gate keeper mode." << std::endl;
 }
 
-/*
- * operators
- */
 ScavTrap& ScavTrap::operator=(const ScavTrap& scavTrap)
 {
     if (this != &scavTrap)
@@ -68,7 +58,3 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& scavTrap)
     }
     return *this;
 }
-
-/*
- * others: private
- */

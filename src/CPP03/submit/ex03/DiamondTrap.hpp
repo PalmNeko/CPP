@@ -7,24 +7,24 @@
 
 class DiamondTrap: public FragTrap, public ScavTrap
 {
-    // variables
+
     private:
         std::string name;
-    // functions
+
     public:
-        // special member functions
-        DiamondTrap(void); // default constructor
-        DiamondTrap(const DiamondTrap& diamondTrap); // copy constructor
+        DiamondTrap(void);
+        DiamondTrap(const DiamondTrap& diamondTrap);
         DiamondTrap(const std::string& name);
-        ~DiamondTrap(void); // destructor
-        // others
+        ~DiamondTrap(void);
+    
         void attack(const std::string& target);
         void whoAmI(void) const;
-        // operators
-        DiamondTrap& operator=(const DiamondTrap& diamondTrap); // copy assignment operator
+        
         unsigned int getInitialHitPoints(void) const;
         unsigned int getInitialEnergyPpoints(void) const;
         unsigned int getInitialAttackDamage(void) const;
+        
+        DiamondTrap& operator=(const DiamondTrap& diamondTrap);
 };
 
 #endif
