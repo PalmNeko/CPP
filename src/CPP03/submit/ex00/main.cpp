@@ -13,7 +13,7 @@ int main(void)
 {
     std::cout << "0) auto test mode: Select class and auto test it.\n";
     std::cout << "1) self test mode: Select class and self test it by your select value.\n";
-    std::cout << "please select mode > ";
+    std::cout << "mode > ";
     int mode;
     std::cin >> mode;
     if (mode == 0)
@@ -97,11 +97,11 @@ ClapTrap *selectClapTrap(void)
 {
     std::string name;
 
-    std::cout << "please input your Name > ";
+    std::cout << "trap name > ";
     std::cin >> name;
 
     std::cout << "0) ClapTrap\n";
-    std::cout << "please select class > ";
+    std::cout << "class > ";
     int classNo;
     std::cin >> classNo;
     if (classNo == 0)
