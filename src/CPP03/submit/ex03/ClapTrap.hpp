@@ -12,6 +12,10 @@ class ClapTrap
         unsigned int energyPoints;
         unsigned int attackDamage;
     
+    protected:
+        bool doAttack(void);
+        std::string makeAttackText(const std::string& className, const std::string& target) const;
+    
     // functions
     public:
         // special member functions

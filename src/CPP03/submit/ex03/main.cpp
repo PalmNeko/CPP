@@ -16,4 +16,5 @@ void testDiamondTrap(unsigned int hitPoints, unsigned int energyPoints)
     (void)hitPoints;
     (void)energyPoints;
     DiamondTrap frost("Frost");
+    frost.attack("hogehoge");
 }

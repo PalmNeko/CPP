@@ -9,26 +9,25 @@
 DiamondTrap::DiamondTrap(void)
 {
     this->setInitialAttributes(this);
-    std::clog << " + DiamondTrap" << std::endl;
+    std::cout << " + DiamondTrap" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap& diamondTrap)
 {
     *this = diamondTrap;
-    std::clog << " @ Copy(DiamondTrap)" << std::endl;
+    std::cout << " @ Copy(DiamondTrap)" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const std::string& name)
     : ClapTrap(name + "_clap_name"), name(name)
 {
-    std::clog << " + DiamondTrap(" << name << ")" << std::endl;
+    std::cout << " + DiamondTrap(" << name << ")" << std::endl;
     this->setInitialAttributes(this);
-    std::cout << this->getHitPoints() << " " << this->getEnergyPoints() << " " << this->getAttackDamage() << std::endl;
 }
 
 DiamondTrap::~DiamondTrap(void)
 {
-    std::clog << " - DiamondTrap(" << this->name << ")" << std::endl;
+    std::cout << " - DiamondTrap(" << this->name << ")" << std::endl;
 }
 
 /*

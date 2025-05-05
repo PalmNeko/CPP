@@ -8,25 +8,25 @@
 ScavTrap::ScavTrap(void)
 {
     this->setInitialAttributes(this);
-    std::clog << " + ScavTrap" << std::endl;
+    std::cout << " + ScavTrap" << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap& scavTrap)
 {
     *this = scavTrap;
-    std::clog << " @ Copy(ScavTrap)" << std::endl;
+    std::cout << " @ Copy(ScavTrap)" << std::endl;
 }
 
 ScavTrap::ScavTrap(const std::string& name)
     : ClapTrap(name)
 {
-    std::clog << " + ScavTrap(" << name << ")" << std::endl;
+    std::cout << " + ScavTrap(" << name << ")" << std::endl;
     this->setInitialAttributes(this);
 }
 
 ScavTrap::~ScavTrap(void)
 {
-    std::clog << " - ScavTrap(" << this->getName() << ")" << std::endl;
+    std::cout << " - ScavTrap(" << this->getName() << ")" << std::endl;
 }
 
 /*
@@ -47,12 +47,9 @@ unsigned int ScavTrap::getInitialAttackDamage(void) const
 
 void ScavTrap::attack(const std::string& target)
 {
-    const int useEnergy = 1;
-
-    if (this->getEnergyPoints() < useEnergy || this->getHitPoints() <= 0)
+    if (this->doAttack() == false)
         return ;
-    this->setEnergyPoints(this->getEnergyPoints() - useEnergy);
-    std::cout << "ScavTrap " << this->getName() << " attacks " << target << ", causing " << this->getAttackDamage() << " points of damage!" << std::endl;
+    std::cout << this->makeAttackText("ScavTrap", target) << std::endl;
 }
 
 void ScavTrap::guardGate(void)

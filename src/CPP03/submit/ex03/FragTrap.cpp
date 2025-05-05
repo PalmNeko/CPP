@@ -9,24 +9,24 @@
 FragTrap::FragTrap(void)
 {
     this->setInitialAttributes(this);
-    std::clog << " + FragTrap" << std::endl;
+    std::cout << " + FragTrap" << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap& fragTrap)
 {
     *this = fragTrap;
-    std::clog << " @ Copy(FragTrap)" << std::endl;
+    std::cout << " @ Copy(FragTrap)" << std::endl;
 }
 
 FragTrap::FragTrap(const std::string& name)
 {
-    std::clog << " + FragTrap(" << name << ")" << std::endl;
+    std::cout << " + FragTrap(" << name << ")" << std::endl;
     this->setInitialAttributes(this);
 }
 
 FragTrap::~FragTrap(void)
 {
-    std::clog << " - FragTrap(" << this->getName() << ")" << std::endl;
+    std::cout << " - FragTrap(" << this->getName() << ")" << std::endl;
 }
 
 /*
@@ -49,12 +49,9 @@ unsigned int FragTrap::getInitialAttackDamage(void) const
 
 void FragTrap::attack(const std::string& target)
 {
-    const int useEnergy = 1;
-
-    if (this->getEnergyPoints() < useEnergy || this->getHitPoints() <= 0)
+    if (this->doAttack() == false)
         return ;
-    this->setEnergyPoints(this->getEnergyPoints() - useEnergy);
-    std::cout << "FragTrap " << this->getName() << " attacks " << target << ", causing " << this->getAttackDamage() << " points of damage!" << std::endl;
+    std::cout << this->makeAttackText("FragTrap", target) << std::endl;
 }
 
 void FragTrap::highFivesGuys(void)

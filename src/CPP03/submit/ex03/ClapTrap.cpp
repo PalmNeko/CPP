@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <limits>
+#include <sstream>
 
 /*
  * special member functions
@@ -9,37 +10,51 @@
 ClapTrap::ClapTrap(void)
 {
     this->setInitialAttributes(this);
-    std::clog << " + ClapTrap" << std::endl;
+    std::cout << " + ClapTrap" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& clapTrap)
 {
     *this = clapTrap;
-    std::clog << " @ Copy(ClapTrap)" << std::endl;
+    std::cout << " @ Copy(ClapTrap)" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name)
     : name(name)
 {
-    std::clog << " + ClapTrap(" << name << ")" << std::endl;
+    std::cout << " + ClapTrap(" << name << ")" << std::endl;
 }
 
 ClapTrap::~ClapTrap(void)
 {
-    std::clog << " - ClapTrap(" << this->getName() << ")" << std::endl;
+    std::cout << " - ClapTrap(" << this->getName() << ")" << std::endl;
 }
 
-/*
- * others: public
- */
-void ClapTrap::attack(const std::string& target)
+bool ClapTrap::doAttack(void)
 {
     const int useEnergy = 1;
 
     if (this->energyPoints < useEnergy || this->hitPoints <= 0)
-        return ;
+        return (false);
     this->energyPoints -= useEnergy;
-    std::cout << "ClapTrap " << this->name << " attacks " << target << ", causing " << this->attackDamage << " points of damage!" << std::endl;
+    return (true);
+}
+
+std::string ClapTrap::makeAttackText(const std::string& className, const std::string& target) const
+{
+    std::ostringstream oss;
+
+    oss << className + " ";
+    oss << this->getName() + " attacks " + target;
+    oss << ", causing " << this->getAttackDamage() << " points of damage!";
+    return oss.str();
+}
+
+void ClapTrap::attack(const std::string& target)
+{
+    if (this->doAttack() == false)
+        return ;
+    std::cout << this->makeAttackText("ClapTrap", target) << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
