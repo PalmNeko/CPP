@@ -28,55 +28,104 @@ ClapTrap::~ClapTrap(void)
     std::cout << " - ClapTrap(" << this->getName() << ")" << std::endl;
 }
 
-bool ClapTrap::doAttack(void)
+bool ClapTrap::isAlive(void) const
 {
-    const int useEnergy = 1;
-
-    if (this->energyPoints < useEnergy || this->hitPoints <= 0)
-        return (false);
-    this->energyPoints -= useEnergy;
-    return (true);
+    return (this->getHitPoints() > 0);
 }
 
-std::string ClapTrap::makeAttackText(const std::string& className, const std::string& target) const
+void ClapTrap::attack(const std::string& className, const std::string& target)
 {
     std::ostringstream oss;
+    const std::string fullName = className + " " + this->getName();
 
-    oss << className + " ";
-    oss << this->getName() + " attacks " + target;
-    oss << ", causing " << this->getAttackDamage() << " points of damage!";
-    return oss.str();
+    oss << fullName;
+    if (this->isAlive() == false)
+    {
+        oss << "'s life is zero. can't attack." << std::endl;
+        std::cout << oss.str();
+        return ;
+    }
+    else if (this->useEnergy() == false)
+    {
+        oss << " can't attack because there is not enough energy." << std::endl;
+        std::cout << oss.str();
+        return ;
+    }
+
+    oss << " attacks " + target;
+    oss << ", causing " << this->getAttackDamage() << " points of damage!" << std::endl;
+    std::cout << oss.str();
+    return ;
+}
+
+void ClapTrap::takeDamage(const std::string& className, unsigned int amount)
+{
+    std::ostringstream oss;
+    const std::string fullName = className + " " + this->getName();
+
+    if (this->isAlive() == false)
+    {
+        oss << "Stop it already!";
+        oss << " " << fullName << "'s life is already at zero!" << std::endl;
+        std::cout << oss.str();
+        return ;
+    }
+    if (this->getHitPoints() < amount)
+        this->setHitPoints(0);
+    else
+        this->setHitPoints(this->getHitPoints() - amount);
+    oss << fullName << " takes " << amount << " points of damage!";
+    if (this->isAlive() == false)
+        oss << " life is zero.";
+    oss << std::endl;
+    std::cout << oss.str();
+    return ;
+}
+
+void ClapTrap::beRepaired(const std::string& className, unsigned int amount)
+{
+    const unsigned int uintMax = std::numeric_limits<unsigned int>::max();
+    const std::string fullName = className + " " + this->getName();
+
+    if (this->isAlive() == false)
+    {
+        std::cout << fullName << "'s broken. can't be repaired." << std::endl;
+        return ;
+    }
+    else if (this->useEnergy() == false)
+    {
+        std::cout << fullName << " has no energy for repair." << std::endl;
+        return ;
+    }
+    if (this->getHitPoints() >= uintMax - amount)
+        this->setHitPoints(uintMax);
+    else
+        this->setHitPoints(this->getHitPoints() + amount);
+    std::cout << fullName << " be repaired. HP: " << this->getHitPoints() << std::endl;
+}
+
+bool ClapTrap::useEnergy(void)
+{
+    const unsigned int amount = 1;
+    if (this->getEnergyPoints() < amount)
+        return (false);
+    this->setEnergyPoints(this->getEnergyPoints() - amount);
+    return (true);
 }
 
 void ClapTrap::attack(const std::string& target)
 {
-    if (this->doAttack() == false)
-        return ;
-    std::cout << this->makeAttackText("ClapTrap", target) << std::endl;
+    this->attack("ClapTrap", target);
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-    if (this->hitPoints <= 0)
-        return ;
-    if (this->hitPoints < amount)
-        this->hitPoints = 0;
-    else
-        this->hitPoints -= amount;
+    this->takeDamage("ClapTrap", amount);
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-    const int useEnergy = 1;
-    const unsigned int uintMax = std::numeric_limits<unsigned int>::max();
-
-    if (this->energyPoints < useEnergy || this->hitPoints <= 0)
-        return ;
-    this->energyPoints -= useEnergy;
-    if (this->hitPoints >= uintMax - amount)
-        this->hitPoints = uintMax;
-    else
-        this->hitPoints += amount;
+    this->beRepaired("ClapTrap", amount);
 }
 
 const std::string& ClapTrap::getName(void) const
