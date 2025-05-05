@@ -36,18 +36,18 @@ bool ClapTrap::isAlive(void) const
 void ClapTrap::attack(const std::string& className, const std::string& target)
 {
     std::ostringstream oss;
-    const std::string fullName = className + " " + this->getName();
+    const std::string fullName = " [ " + className + " " + this->getName() + " ]";
 
-    oss << fullName;
+    oss << " =   attack   =" << fullName;
     if (this->isAlive() == false)
     {
-        oss << "'s life is zero. can't attack." << std::endl;
+        oss << "'s HP is zero. can't attack." << std::endl;
         std::cout << oss.str();
         return ;
     }
     else if (this->useEnergy() == false)
     {
-        oss << " can't attack because there is not enough energy." << std::endl;
+        oss << " there is not enough energy." << std::endl;
         std::cout << oss.str();
         return ;
     }
@@ -61,12 +61,12 @@ void ClapTrap::attack(const std::string& className, const std::string& target)
 void ClapTrap::takeDamage(const std::string& className, unsigned int amount)
 {
     std::ostringstream oss;
-    const std::string fullName = className + " " + this->getName();
+    const std::string fullName = " [ " + className + " " + this->getName() + " ]";
 
+    oss << " = takeDamage =" << fullName;
     if (this->isAlive() == false)
     {
-        oss << "Stop it already!";
-        oss << " " << fullName << "'s life is already at zero!" << std::endl;
+        oss << " Stop! life is already zero!" << std::endl;
         std::cout << oss.str();
         return ;
     }
@@ -74,9 +74,8 @@ void ClapTrap::takeDamage(const std::string& className, unsigned int amount)
         this->setHitPoints(0);
     else
         this->setHitPoints(this->getHitPoints() - amount);
-    oss << fullName << " takes " << amount << " points of damage!";
-    if (this->isAlive() == false)
-        oss << " life is zero.";
+    oss << " takes " << amount << " points of damage!";
+    oss << " HP: " << this->getHitPoints();
     oss << std::endl;
     std::cout << oss.str();
     return ;
@@ -84,24 +83,28 @@ void ClapTrap::takeDamage(const std::string& className, unsigned int amount)
 
 void ClapTrap::beRepaired(const std::string& className, unsigned int amount)
 {
-    const unsigned int uintMax = std::numeric_limits<unsigned int>::max();
-    const std::string fullName = className + " " + this->getName();
+    std::ostringstream oss;
+    const std::string fullName = " [ " + className + " " + this->getName() + " ]";
 
+    oss << " = beRepaired =" << fullName;
     if (this->isAlive() == false)
     {
-        std::cout << fullName << "'s broken. can't be repaired." << std::endl;
+        oss << "'s HP is zero. can't be repaired." << std::endl;
         return ;
     }
     else if (this->useEnergy() == false)
     {
-        std::cout << fullName << " has no energy for repair." << std::endl;
+        oss << " there is not enough energy." << std::endl;
         return ;
     }
+    const unsigned int uintMax = std::numeric_limits<unsigned int>::max();
     if (this->getHitPoints() >= uintMax - amount)
         this->setHitPoints(uintMax);
     else
         this->setHitPoints(this->getHitPoints() + amount);
-    std::cout << fullName << " be repaired. HP: " << this->getHitPoints() << std::endl;
+    std::cout << fullName << " gain "
+        << amount << " points of health."
+        << " HP: " << this->getHitPoints() << std::endl;
 }
 
 bool ClapTrap::useEnergy(void)
