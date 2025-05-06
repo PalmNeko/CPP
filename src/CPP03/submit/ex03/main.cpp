@@ -105,8 +105,12 @@ void selfTestMode(const std::string& className, const std::string &name)
         }
         else if (command == "help")
             printHelpCommand();
-        else
-            trapP->callSubMethod(command);
+        else if (command == "guard")
+            trapP->callSubMethod("guardGate");
+        else if (command == "who")
+            trapP->callSubMethod("whoAmI");
+        else if (command == "guys")
+            trapP->callSubMethod("highFiveGuys");
     }
     delete trapP;
 }

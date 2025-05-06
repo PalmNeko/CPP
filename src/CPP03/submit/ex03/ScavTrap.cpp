@@ -1,5 +1,6 @@
 #include "ScavTrap.hpp"
 #include <iostream>
+#include <sstream>
 
 ScavTrap::ScavTrap(void)
 {
@@ -55,7 +56,14 @@ void ScavTrap::beRepaired(unsigned int amount)
 
 void ScavTrap::guardGate(void)
 {
-    std::cout << this->makeHeader("guardGate", "ScavTrap") << " change to Gate keeper mode." << std::endl;
+    std::ostringstream oss;
+
+    oss << this->makeHeader("guardGate", "ScavTrap");
+    if (!this->isAlive())
+    {
+        std::cout << this->failMessage << oss.str() << " can't move." << std::endl;
+    }
+    std::cout << oss.str() << " change to Gate keeper mode." << std::endl;
 }
 
 void ScavTrap::callSubMethod(const std::string& method, bool* hasMethod)

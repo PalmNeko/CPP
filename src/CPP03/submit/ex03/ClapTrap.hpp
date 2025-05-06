@@ -12,7 +12,7 @@ class ClapTrap
         unsigned int attackDamage;
 
     protected:
-
+        static const std::string failMessage;
         void attack(const std::string& className, const std::string& target);
         void takeDamage(const std::string& className, unsigned int amount);
         void beRepaired(const std::string& className, unsigned int amount);

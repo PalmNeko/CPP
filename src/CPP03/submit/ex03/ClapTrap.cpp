@@ -4,6 +4,8 @@
 #include <limits>
 #include <sstream>
 
+const std::string ClapTrap::failMessage = "\033[31mFail:\033[0m";
+
 ClapTrap::ClapTrap(void)
 {
     this->setInitialAttributes(this);
@@ -41,13 +43,13 @@ void ClapTrap::attack(const std::string& className, const std::string& target)
     if (this->isAlive() == false)
     {
         oss << "'s HP is zero. can't attack." << std::endl;
-        std::cout << "\e[31mFail:\e[0m" << oss.str();
+        std::cout << this->failMessage << oss.str();
         return ;
     }
     else if (this->useEnergy() == false)
     {
         oss << " there is not enough energy." << std::endl;
-        std::cout << "\e[31mFail:\e[0m" << oss.str();
+        std::cout << this->failMessage << oss.str();
         return ;
     }
 
@@ -65,7 +67,7 @@ void ClapTrap::takeDamage(const std::string& className, unsigned int amount)
     if (this->isAlive() == false)
     {
         oss << " Stop! life is already zero!" << std::endl;
-        std::cout << "\e[31mFail:\e[0m" << oss.str();
+        std::cout << this->failMessage << oss.str();
         return ;
     }
     if (this->getHitPoints() < amount)
@@ -87,13 +89,13 @@ void ClapTrap::beRepaired(const std::string& className, unsigned int amount)
     if (this->isAlive() == false)
     {
         oss << "'s HP is zero. can't be repaired." << std::endl;
-        std::cout << "\e[31mFail:\e[0m" << oss.str();
+        std::cout << this->failMessage << oss.str();
         return ;
     }
     else if (this->useEnergy() == false)
     {
         oss << " there is not enough energy." << std::endl;
-        std::cout << "\e[31mFail:\e[0m" << oss.str();
+        std::cout << this->failMessage << oss.str();
         return ;
     }
     const unsigned int uintMax = std::numeric_limits<unsigned int>::max();
