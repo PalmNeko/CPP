@@ -6,23 +6,23 @@
  */
 WrongAnimal::WrongAnimal(void)
 {
-    std::clog << "WrongAnimal default constructor called" << std::endl;
+    std::clog << " + WrongAnimal" << std::endl;
 }
 
 WrongAnimal::WrongAnimal(const WrongAnimal& WrongAnimal)
     : type(WrongAnimal.type)
 {
-    std::clog << "WrongAnimal copy constructor called" << std::endl;
+    std::clog << " @ Copy(WrongAnimal)" << std::endl;
 }
 WrongAnimal::WrongAnimal(const std::string& type)
     : type(type)
 {
-    std::clog << "WrongAnimal string constructor called" << std::endl;
+    std::clog << " + WrongAnimal(" + type + ")" << std::endl;
 }
 
 WrongAnimal::~WrongAnimal(void)
 {
-    std::clog << "WrongAnimal destructor called" << std::endl;
+    std::clog << " - WrongAnimal(" + this->type + ")" << std::endl;
 }
 
 /*
@@ -33,6 +33,11 @@ void WrongAnimal::makeSound(void) const
     std::cout << "WrongAnimal makeSound." << std::endl;
 }
 
+const std::string& WrongAnimal::getType(void) const
+{
+    return (this->type);
+}
+
 /*
  * operators
  */
@@ -40,6 +45,7 @@ WrongAnimal& WrongAnimal::operator=(const WrongAnimal& WrongAnimal)
 {
     if (this != &WrongAnimal)
     {
+        this->type = WrongAnimal.type;
     }
     return *this;
 }

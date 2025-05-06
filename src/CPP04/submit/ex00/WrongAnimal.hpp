@@ -5,20 +5,19 @@
 
 class WrongAnimal
 {
-    // variables
     protected:
         std::string type;
-    // functions
+
     public:
-        // special member functions
-        WrongAnimal(void); // default constructor
-        WrongAnimal(const WrongAnimal& WrongAnimal); // copy constructor
-        WrongAnimal(const std::string& type); // copy constructor
-        ~WrongAnimal(void); // destructor
-        // others
+        WrongAnimal(void);
+        WrongAnimal(const WrongAnimal& WrongAnimal);
+        WrongAnimal(const std::string& type);
+        ~WrongAnimal(void);
+
         void makeSound(void) const;
-        // operators
-        WrongAnimal& operator=(const WrongAnimal& WrongAnimal); // copy assignment operator
+        const std::string& getType(void) const;
+
+        WrongAnimal& operator=(const WrongAnimal& WrongAnimal);
     private:
 };
 
