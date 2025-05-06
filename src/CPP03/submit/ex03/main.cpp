@@ -38,6 +38,11 @@ void autoTestMode(void)
         return ;
     ClapTrap &frost = *forestP;
 
+    std::cout << "===== unique method =====" << std::endl;
+    frost.callSubMethod("whoAmI");
+    frost.callSubMethod("highFivesGuys");
+    frost.callSubMethod("guardGate");
+    std::cout << "==========  unique method" << std::endl;
     printClapTrapStatus(&frost);
     frost.attack("Enemy");
     frost.takeDamage(9);

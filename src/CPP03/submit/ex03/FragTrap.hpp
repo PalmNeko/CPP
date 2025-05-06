@@ -20,7 +20,7 @@ class FragTrap: public virtual ClapTrap
         unsigned int getInitialEnergyPpoints(void) const;
         unsigned int getInitialAttackDamage(void) const;
 
-        void callSubMethod(const std::string& method, bool* hasMethod = NULL);
+        virtual void callSubMethod(const std::string& method, bool* hasMethod = NULL);
 
         FragTrap& operator=(const FragTrap& fragTrap);
 };

@@ -20,7 +20,7 @@ class ScavTrap : public virtual ClapTrap
         unsigned int getInitialEnergyPpoints(void) const;
         unsigned int getInitialAttackDamage(void) const;
 
-        void callSubMethod(const std::string& method, bool* hasMethod = NULL);
+        virtual void callSubMethod(const std::string& method, bool* hasMethod = NULL);
 
         ScavTrap& operator=(const ScavTrap& scavTrap);
     private:

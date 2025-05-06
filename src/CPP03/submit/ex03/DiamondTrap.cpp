@@ -45,7 +45,8 @@ void DiamondTrap::beRepaired(unsigned int amount)
 
 void DiamondTrap::whoAmI(void) const
 {
-    std::cout << "DiamondTrap name:" << this->name << ", ClapTrap: " << this->getName() << std::endl;
+    std::cout << this->makeHeader("  whoAmI  ", "DiamondTrap") << " I'm " << this->name << ".";
+    std::cout << " ClapTrap's name is " << this->getName() << std::endl;
 }
 
 
@@ -76,19 +77,18 @@ void DiamondTrap::callSubMethod(const std::string& method, bool* hasMethod)
     }
     else
     {
-        typedef void (DiamondTrap::*MethodPtr)(const std::string&, bool*);
-        MethodPtr methods[] = {
-            static_cast<MethodPtr>(&DiamondTrap::ScavTrap::callSubMethod),
-            static_cast<MethodPtr>(&DiamondTrap::FragTrap::callSubMethod)
-        };
-        bool _hasMethod = false;
-        for (size_t i = 0; i < sizeof(methods)/sizeof(methods[0]); ++i) {
-            (this->*methods[i])(method, &_hasMethod);
-            if (_hasMethod) {
-                if (hasMethod) *hasMethod = true;
-                return;
-            }
-        }
+        bool _hasMethod;
+        _hasMethod = false;
+        this->ScavTrap::callSubMethod(method, &_hasMethod);
+        if (hasMethod)
+            *hasMethod = _hasMethod;
+        if (_hasMethod)
+            return ;
+        this->FragTrap::callSubMethod(method, &_hasMethod);
+        if (hasMethod)
+            *hasMethod = _hasMethod;
+        if (_hasMethod)
+            return ;
     }
     return ;
 }
