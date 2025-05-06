@@ -58,7 +58,7 @@ void ScavTrap::guardGate(void)
 {
     std::ostringstream oss;
 
-    oss << this->makeHeader("guardGate", "ScavTrap");
+    oss << this->makeHeader(" guardGate", "ScavTrap");
     if (!this->isAlive())
     {
         std::cout << this->failMessage << oss.str() << " can't move." << std::endl;

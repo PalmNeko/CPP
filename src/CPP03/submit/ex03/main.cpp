@@ -12,6 +12,7 @@ void selfTestMode(const std::string& className, const std::string &name);
 void printUsage(void);
 void printHelpCommand(void);
 void printClapTrapStatus(const ClapTrap* trap);
+void runLine(const std::string& line, ClapTrap& trap);
 ClapTrap *genClapTrap(const std::string& className, const std::string &name);
 
 int main(int argc, char *argv[])
@@ -53,9 +54,7 @@ void autoTestMode(const std::string& className, const std::string &name)
     frost.beRepaired(9);
     printClapTrapStatus(&frost);
     while (frost.getEnergyPoints() > 0)
-    {
         frost.attack("Enemy");
-    }
     printClapTrapStatus(&frost);
     frost.beRepaired(2);
     frost.attack("Enemy");
@@ -82,36 +81,41 @@ void selfTestMode(const std::string& className, const std::string &name)
         std::cout << " > ";
         if (!std::getline(std::cin, line))
             break ;
-        unsigned int amount;
-        std::string target;
-        std::string command;
-        std::istringstream iss(line);
-        iss >> command;
-        if (command == "attack")
-        {
-            iss >> target;
-            trapP->attack(target);
-        }
-        else if (command == "repair")
-        {
-            iss >> amount;
-            trapP->beRepaired(amount);
-        }
-        else if (command == "damage")
-        {
-            iss >> amount;
-            trapP->takeDamage(amount);
-        }
-        else if (command == "help")
-            printHelpCommand();
-        else if (command == "guard")
-            trapP->callSubMethod("guardGate");
-        else if (command == "who")
-            trapP->callSubMethod("whoAmI");
-        else if (command == "guys")
-            trapP->callSubMethod("highFiveGuys");
+        runLine(line, *trapP);
     }
     delete trapP;
+}
+
+void runLine(const std::string& line, ClapTrap& trap)
+{
+    unsigned int amount;
+    std::string target;
+    std::string command;
+    std::istringstream iss(line);
+    iss >> command;
+    if (command == "attack")
+    {
+        iss >> target;
+        trap.attack(target);
+    }
+    else if (command == "repair")
+    {
+        iss >> amount;
+        trap.beRepaired(amount);
+    }
+    else if (command == "damage")
+    {
+        iss >> amount;
+        trap.takeDamage(amount);
+    }
+    else if (command == "help")
+        printHelpCommand();
+    else if (command == "guard")
+        trap.callSubMethod("guardGate");
+    else if (command == "who")
+        trap.callSubMethod("whoAmI");
+    else if (command == "guys")
+        trap.callSubMethod("highFiveGuys");
 }
 
 ClapTrap *genClapTrap(const std::string& className, const std::string &name)
