@@ -4,6 +4,8 @@
 #include <limits>
 #include <sstream>
 
+const std::string ClapTrap::failMessage = "\033[31mFail:\033[0m";
+
 ClapTrap::ClapTrap(void)
 {
     this->setInitialAttributes(this);
@@ -36,19 +38,18 @@ bool ClapTrap::isAlive(void) const
 void ClapTrap::attack(const std::string& className, const std::string& target)
 {
     std::ostringstream oss;
-    const std::string fullName = " [ " + className + " " + this->getName() + " ]";
 
-    oss << " =   attack   =" << fullName;
+    oss << this->makeHeader("  attack  ", className);
     if (this->isAlive() == false)
     {
         oss << "'s HP is zero. can't attack." << std::endl;
-        std::cout << "\e[31mFail:\e[0m" << oss.str();
+        std::cout << this->failMessage << oss.str();
         return ;
     }
     else if (this->useEnergy() == false)
     {
         oss << " there is not enough energy." << std::endl;
-        std::cout << "\e[31mFail:\e[0m" << oss.str();
+        std::cout << this->failMessage << oss.str();
         return ;
     }
 
@@ -61,13 +62,12 @@ void ClapTrap::attack(const std::string& className, const std::string& target)
 void ClapTrap::takeDamage(const std::string& className, unsigned int amount)
 {
     std::ostringstream oss;
-    const std::string fullName = " [ " + className + " " + this->getName() + " ]";
 
-    oss << " = takeDamage =" << fullName;
+    oss << this->makeHeader("takeDamage", className);
     if (this->isAlive() == false)
     {
         oss << " Stop! life is already zero!" << std::endl;
-        std::cout << "\e[31mFail:\e[0m" << oss.str();
+        std::cout << this->failMessage << oss.str();
         return ;
     }
     if (this->getHitPoints() < amount)
@@ -84,19 +84,18 @@ void ClapTrap::takeDamage(const std::string& className, unsigned int amount)
 void ClapTrap::beRepaired(const std::string& className, unsigned int amount)
 {
     std::ostringstream oss;
-    const std::string fullName = " [ " + className + " " + this->getName() + " ]";
 
-    oss << " = beRepaired =" << fullName;
+    oss << this->makeHeader("beRepaired", className);
     if (this->isAlive() == false)
     {
         oss << "'s HP is zero. can't be repaired." << std::endl;
-        std::cout << "\e[31mFail:\e[0m" << oss.str();
+        std::cout << this->failMessage << oss.str();
         return ;
     }
     else if (this->useEnergy() == false)
     {
         oss << " there is not enough energy." << std::endl;
-        std::cout << "\e[31mFail:\e[0m" << oss.str();
+        std::cout << this->failMessage << oss.str();
         return ;
     }
     const unsigned int uintMax = std::numeric_limits<unsigned int>::max();
@@ -181,6 +180,17 @@ void ClapTrap::setInitialAttributes(const ClapTrap *clapTrap)
     this->setAttackDamage(clapTrap->getInitialAttackDamage());
 }
 
+std::string ClapTrap::makeHeader(const std::string& action, const std::string& className) const
+{
+    std::ostringstream oss;
+
+    oss << " = " << action << " = " << "[ " + className;
+    if (this->getName() != "")
+        oss << " " + this->getName();
+    oss << " ]";
+    return oss.str();
+}
+
 unsigned int ClapTrap::getInitialHitPoints(void) const
 {
     return (10);
@@ -194,6 +204,13 @@ unsigned int ClapTrap::getInitialEnergyPpoints(void) const
 unsigned int ClapTrap::getInitialAttackDamage(void) const
 {
     return (0);
+}
+
+void ClapTrap::callSubMethod(const std::string&, bool* hasMethod)
+{
+    if (hasMethod)
+        *hasMethod = false;
+    return ;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& clapTrap)

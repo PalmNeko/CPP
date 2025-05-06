@@ -1,5 +1,6 @@
 #include "ScavTrap.hpp"
 #include <iostream>
+#include <sstream>
 
 ScavTrap::ScavTrap(void)
 {
@@ -8,6 +9,7 @@ ScavTrap::ScavTrap(void)
 }
 
 ScavTrap::ScavTrap(const ScavTrap& scavTrap)
+    : ClapTrap(scavTrap)
 {
     *this = scavTrap;
     std::cout << " @ Copy(ScavTrap)" << std::endl;
@@ -40,14 +42,41 @@ unsigned int ScavTrap::getInitialAttackDamage(void) const
 
 void ScavTrap::attack(const std::string& target)
 {
-    if (this->doAttack() == false)
-        return ;
-    std::cout << this->makeAttackText("ScavTrap", target) << std::endl;
+    this->ClapTrap::attack("ScavTrap", target);
+}
+
+void ScavTrap::takeDamage(unsigned int amount)
+{
+    this->ClapTrap::takeDamage("ScavTrap", amount);
+}
+void ScavTrap::beRepaired(unsigned int amount)
+{
+    this->ClapTrap::beRepaired("ScavTrap", amount);
 }
 
 void ScavTrap::guardGate(void)
 {
-    std::cout << "ScavTrap changed to Gate keeper mode." << std::endl;
+    std::ostringstream oss;
+
+    oss << this->makeHeader(" guardGate", "ScavTrap");
+    if (!this->isAlive())
+    {
+        std::cout << this->failMessage << oss.str() << " can't move." << std::endl;
+    }
+    std::cout << oss.str() << " change to Gate keeper mode." << std::endl;
+}
+
+void ScavTrap::callSubMethod(const std::string& method, bool* hasMethod)
+{
+    if (hasMethod)
+        *hasMethod = false;
+    if (method == "guardGate")
+    {
+        this->guardGate();
+        if (hasMethod)
+            *hasMethod = true;
+    }
+    return ;
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& scavTrap)

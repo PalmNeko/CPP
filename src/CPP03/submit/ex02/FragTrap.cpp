@@ -10,6 +10,7 @@ FragTrap::FragTrap(void)
 }
 
 FragTrap::FragTrap(const FragTrap& fragTrap)
+    : ClapTrap(fragTrap)
 {
     *this = fragTrap;
     std::cout << " @ Copy(FragTrap)" << std::endl;
@@ -43,14 +44,36 @@ unsigned int FragTrap::getInitialAttackDamage(void) const
 
 void FragTrap::attack(const std::string& target)
 {
-    if (this->doAttack() == false)
-        return ;
-    std::cout << this->makeAttackText("FragTrap", target) << std::endl;
+    this->ClapTrap::attack("FragTrap", target);
+}
+
+void FragTrap::takeDamage(unsigned int amount)
+{
+    this->ClapTrap::takeDamage("FragTrap", amount);
+}
+
+void FragTrap::beRepaired(unsigned int amount)
+{
+    this->ClapTrap::beRepaired("FragTrap", amount);
 }
 
 void FragTrap::highFivesGuys(void)
 {
-    std::cout << "Put your hands up! ...Yay! It's high five!" << std::endl;
+    std::cout << this->makeHeader("highFivesGuyds", "FragTrap")
+        << " Put your hands up! ...Yay! It's high five!" << std::endl;
+}
+
+void FragTrap::callSubMethod(const std::string& method, bool* hasMethod)
+{
+    if (hasMethod)
+        *hasMethod = false;
+    if (method == "highFivesGuys")
+    {
+        this->highFivesGuys();
+        if (hasMethod)
+            *hasMethod = true;
+    }
+    return ;
 }
 
 FragTrap& FragTrap::operator=(const FragTrap& fragTrap)

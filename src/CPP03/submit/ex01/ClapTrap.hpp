@@ -10,22 +10,27 @@ class ClapTrap
         unsigned int hitPoints;
         unsigned int energyPoints;
         unsigned int attackDamage;
-    
+
     protected:
-        bool doAttack(void);
-        std::string makeAttackText(const std::string& className, const std::string& target) const;
+        static const std::string failMessage;
+        void attack(const std::string& className, const std::string& target);
+        void takeDamage(const std::string& className, unsigned int amount);
+        void beRepaired(const std::string& className, unsigned int amount);
+        bool useEnergy(void);
+        bool isAlive(void) const;
         void setInitialAttributes(const ClapTrap *clapTrap);
-    
+        std::string makeHeader(const std::string& action, const std::string& className) const;
+
     public:
         ClapTrap(void);
         ClapTrap(const ClapTrap& clapTrap);
         ClapTrap(std::string name);
-        ~ClapTrap(void);
-        
-        void attack(const std::string& target);
-        void takeDamage(unsigned int amount);
-        void beRepaired(unsigned int amount);
-        
+        virtual ~ClapTrap(void);
+
+        virtual void attack(const std::string& target);
+        virtual void takeDamage(unsigned int amount);
+        virtual void beRepaired(unsigned int amount);
+
         const std::string& getName(void) const;
         unsigned int getHitPoints(void) const;
         unsigned int getEnergyPoints(void) const;
@@ -39,6 +44,8 @@ class ClapTrap
         virtual unsigned int getInitialHitPoints(void) const;
         virtual unsigned int getInitialEnergyPpoints(void) const;
         virtual unsigned int getInitialAttackDamage(void) const;
+
+        virtual void callSubMethod(const std::string& method, bool* hasMethod = NULL);
 
         ClapTrap& operator=(const ClapTrap& clapTrap);
 };
