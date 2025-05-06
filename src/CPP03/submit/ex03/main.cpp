@@ -75,7 +75,6 @@ void selfTestMode(const std::string& className, const std::string &name)
     trapP = genClapTrap(className, name);
     if (trapP == NULL)
         return ;
-    // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     while (1)
     {
         std::string line;
