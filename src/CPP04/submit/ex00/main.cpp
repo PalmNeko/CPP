@@ -26,8 +26,10 @@ int main(void)
     delete j;
     delete i;
 
+    testAnimal<Animal, Animal>();
     testAnimal<Animal, Cat>();
     testAnimal<Animal, Dog>();
+    testAnimal<WrongAnimal, WrongAnimal>();
     testAnimal<WrongAnimal, WrongCat>();
     return 0;
 }
