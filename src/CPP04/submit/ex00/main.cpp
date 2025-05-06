@@ -62,7 +62,8 @@ template <class Meta, class Real>
         printSound("copy_constructor", &copy_constructor);
     }
     {
-        Meta copy_assignment = *instance;
+        Meta copy_assignment;
+        copy_assignment = *instance;
         printSound("copy_assignment", &copy_assignment);
     }
     {
@@ -71,7 +72,8 @@ template <class Meta, class Real>
         delete downCast_copy_constructor;
     }
     {
-        Real downCast_copy_assignment = *dynamic_cast<Real *>(instance);
+        Real downCast_copy_assignment;
+        downCast_copy_assignment = *dynamic_cast<Real *>(instance);
         printSound("downCast_copy_assignment", &downCast_copy_assignment);
     }
 }

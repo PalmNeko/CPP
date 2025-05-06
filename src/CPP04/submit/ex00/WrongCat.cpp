@@ -29,6 +29,7 @@ WrongCat& WrongCat::operator=(const WrongCat& WrongCat)
     if (this != &WrongCat)
     {
         this->WrongAnimal::operator=(WrongCat);
+        std::cout << " = WrongCat" << std::endl;
     }
     return *this;
 }

@@ -29,6 +29,16 @@ void Dog::makeSound(void) const
     std::cout << "Bark" << std::endl;
 }
 
+Dog& Dog::operator=(const Dog& cat)
+{
+    if (this != &cat)
+    {
+        this->Animal::operator=(cat);
+        std::cout << " = Dog" << std::endl;
+    }
+    return *this;
+}
+
 /*
  * operators
  */

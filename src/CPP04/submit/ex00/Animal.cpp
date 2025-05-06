@@ -46,6 +46,7 @@ Animal& Animal::operator=(const Animal& animal)
     if (this != &animal)
     {
         this->type = animal.type;
+        std::cout << " = Animal" << std::endl;
     }
     return *this;
 }

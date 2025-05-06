@@ -23,3 +23,13 @@ void Cat::makeSound(void) const
 {
     std::cout << "Miaow" << std::endl;
 }
+
+Cat& Cat::operator=(const Cat& cat)
+{
+    if (this != &cat)
+    {
+        this->Animal::operator=(cat);
+        std::cout << " = Cat" << std::endl;
+    }
+    return *this;
+}

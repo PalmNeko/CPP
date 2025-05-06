@@ -13,6 +13,7 @@ class Dog: public Animal
         ~Dog(void); // destructor
         // others
         void makeSound(void) const;
+        Dog& operator=(const Dog& cat);
         // operators
     private:
 };
