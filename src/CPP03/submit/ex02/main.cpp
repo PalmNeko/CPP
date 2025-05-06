@@ -1,7 +1,6 @@
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
-#include "DiamondTrap.hpp"
 #include <limits>
 #include <iostream>
 #include <sstream>
@@ -44,7 +43,6 @@ void autoTestMode(const std::string& className, const std::string &name)
     ClapTrap &frost = *forestP;
 
     std::cout << "===== unique method =====" << std::endl;
-    frost.callSubMethod("whoAmI");
     frost.callSubMethod("highFivesGuys");
     frost.callSubMethod("guardGate");
     std::cout << "==========  unique method" << std::endl;
@@ -112,8 +110,6 @@ void runLine(const std::string& line, ClapTrap& trap)
         printHelpCommand();
     else if (command == "guard")
         trap.callSubMethod("guardGate");
-    else if (command == "who")
-        trap.callSubMethod("whoAmI");
     else if (command == "guys")
         trap.callSubMethod("highFiveGuys");
 }
@@ -126,8 +122,6 @@ ClapTrap *genClapTrap(const std::string& className, const std::string &name)
         return new(std::nothrow) ScavTrap(name);
     else if (className == "FragTrap")
         return new(std::nothrow) FragTrap(name);
-    else if (className == "DiamondTrap")
-        return new(std::nothrow) DiamondTrap(name);
     return (NULL);
 }
 
@@ -156,8 +150,7 @@ void printHelpCommand(void)
     std::cout << "   attack target  attack and print message" << std::endl;
     std::cout << "   repair amouont repair yourself and gain amount HP" << std::endl;
     std::cout << "   damage amouont take yourself damage and lose amount HP" << std::endl;
-    std::cout << "   guard          print guardGate message. only ScavTrap and DiamondTrap" << std::endl;
-    std::cout << "   guys           print highFivesGuys message. only FragTrap and DiamondTrap" << std::endl;
-    std::cout << "   who            print whoAmI message. only DiamondTrap" << std::endl;
+    std::cout << "   guard          print guardGate message. only ScavTrap." << std::endl;
+    std::cout << "   guys           print highFivesGuys message. only FragTrap." << std::endl;
     std::cout << "   help           print this message." << std::endl;
 }
