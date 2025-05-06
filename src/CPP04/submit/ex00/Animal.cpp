@@ -1,9 +1,6 @@
 #include "Animal.hpp"
 #include <iostream>
 
-/*
- * special member functions
- */
 Animal::Animal(void)
 {
     std::cout << " + Animal" << std::endl;
@@ -14,6 +11,7 @@ Animal::Animal(const Animal& animal)
 {
     std::cout << " @ Copy(Animal)" << std::endl;
 }
+
 Animal::Animal(const std::string& type)
     : type(type)
 {
@@ -25,9 +23,6 @@ Animal::~Animal(void)
     std::cout << " - Animal(" + this->type + ")" << std::endl;
 }
 
-/*
- * others: public
- */
 void Animal::makeSound(void) const
 {
     std::cout << "Animal makeSound" << std::endl;
@@ -38,9 +33,6 @@ const std::string& Animal::getType(void) const
     return this->type;
 }
 
-/*
- * operators
- */
 Animal& Animal::operator=(const Animal& animal)
 {
     if (this != &animal)
@@ -50,7 +42,3 @@ Animal& Animal::operator=(const Animal& animal)
     }
     return *this;
 }
-
-/*
- * others: private
- */

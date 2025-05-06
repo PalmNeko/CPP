@@ -1,9 +1,6 @@
 #include "Dog.hpp"
 #include <iostream>
 
-/*
- * special member functions
- */
 Dog::Dog(void)
     : Animal("Dog")
 {
@@ -21,9 +18,6 @@ Dog::~Dog(void)
     std::cout << " - Dog(" + this->getType() + ")" << std::endl;
 }
 
-/*
- * others: public
- */
 void Dog::makeSound(void) const
 {
     std::cout << "Bark" << std::endl;
@@ -38,11 +32,3 @@ Dog& Dog::operator=(const Dog& cat)
     }
     return *this;
 }
-
-/*
- * operators
- */
-
-/*
- * others: private
- */

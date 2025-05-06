@@ -1,9 +1,7 @@
 #include "WrongAnimal.hpp"
 #include <iostream>
 
-/*
- * special member functions
- */
+
 WrongAnimal::WrongAnimal(void)
 {
     std::cout << " + WrongAnimal" << std::endl;
@@ -25,9 +23,6 @@ WrongAnimal::~WrongAnimal(void)
     std::cout << " - WrongAnimal(" + this->type + ")" << std::endl;
 }
 
-/*
- * others: public
- */
 void WrongAnimal::makeSound(void) const
 {
     std::cout << "WrongAnimal makeSound." << std::endl;
@@ -38,9 +33,6 @@ const std::string& WrongAnimal::getType(void) const
     return (this->type);
 }
 
-/*
- * operators
- */
 WrongAnimal& WrongAnimal::operator=(const WrongAnimal& WrongAnimal)
 {
     if (this != &WrongAnimal)
@@ -49,7 +41,3 @@ WrongAnimal& WrongAnimal::operator=(const WrongAnimal& WrongAnimal)
     }
     return *this;
 }
-
-/*
- * others: private
- */

@@ -5,21 +5,19 @@
 
 class Animal
 {
-    // variables
     protected:
         std::string type;
-    // functions
+
     public:
-        // special member functions
-        Animal(void); // default constructor
-        Animal(const Animal& animal); // copy constructor
-        Animal(const std::string& type); // copy constructor
-        virtual ~Animal(void); // destructor
-        // others
+        Animal(void);
+        Animal(const Animal& animal);
+        Animal(const std::string& type);
+        virtual ~Animal(void);
+
         virtual void makeSound(void) const;
         const std::string& getType(void) const;
-        // operators
-        Animal& operator=(const Animal& animal); // copy assignment operator
+
+        Animal& operator=(const Animal& animal);
     private:
 };
 
