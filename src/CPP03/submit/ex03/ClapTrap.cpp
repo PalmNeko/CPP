@@ -36,9 +36,8 @@ bool ClapTrap::isAlive(void) const
 void ClapTrap::attack(const std::string& className, const std::string& target)
 {
     std::ostringstream oss;
-    const std::string fullName = " [ " + className + " " + this->getName() + " ]";
 
-    oss << " =   attack   =" << fullName;
+    oss << this->makeHeader("  attack  ", className);
     if (this->isAlive() == false)
     {
         oss << "'s HP is zero. can't attack." << std::endl;
@@ -61,9 +60,8 @@ void ClapTrap::attack(const std::string& className, const std::string& target)
 void ClapTrap::takeDamage(const std::string& className, unsigned int amount)
 {
     std::ostringstream oss;
-    const std::string fullName = " [ " + className + " " + this->getName() + " ]";
 
-    oss << " = takeDamage =" << fullName;
+    oss << this->makeHeader("takeDamage", className);
     if (this->isAlive() == false)
     {
         oss << " Stop! life is already zero!" << std::endl;
@@ -84,9 +82,8 @@ void ClapTrap::takeDamage(const std::string& className, unsigned int amount)
 void ClapTrap::beRepaired(const std::string& className, unsigned int amount)
 {
     std::ostringstream oss;
-    const std::string fullName = " [ " + className + " " + this->getName() + " ]";
 
-    oss << " = beRepaired =" << fullName;
+    oss << this->makeHeader("beRepaired", className);
     if (this->isAlive() == false)
     {
         oss << "'s HP is zero. can't be repaired." << std::endl;
@@ -179,6 +176,17 @@ void ClapTrap::setInitialAttributes(const ClapTrap *clapTrap)
     this->setHitPoints(clapTrap->getInitialHitPoints());
     this->setEnergyPoints(clapTrap->getInitialEnergyPpoints());
     this->setAttackDamage(clapTrap->getInitialAttackDamage());
+}
+
+std::string ClapTrap::makeHeader(const char action[10], const std::string& className) const
+{
+    std::ostringstream oss;
+
+    oss << " = " << action << " = " << "[ " + className;
+    if (this->getName() != "")
+        oss << " " + this->getName();
+    oss << " ]";
+    return oss.str();
 }
 
 unsigned int ClapTrap::getInitialHitPoints(void) const

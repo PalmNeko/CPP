@@ -19,6 +19,7 @@ class ClapTrap
         bool useEnergy(void);
         bool isAlive(void) const;
         void setInitialAttributes(const ClapTrap *clapTrap);
+        std::string makeHeader(const char action[10], const std::string& className) const;
 
     public:
         ClapTrap(void);
