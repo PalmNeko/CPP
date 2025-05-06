@@ -22,11 +22,14 @@ int main(void)
     i->makeSound(); //will output the cat sound!
     j->makeSound();
     meta->makeSound();
+    delete meta;
+    delete j;
+    delete i;
 
     testAnimal<Animal, Cat>();
     testAnimal<Animal, Dog>();
     testAnimal<WrongAnimal, WrongCat>();
-    return (0);
+    return 0;
 }
 
 template <class Animal>

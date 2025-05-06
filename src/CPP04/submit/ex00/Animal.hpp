@@ -19,7 +19,7 @@ class Animal
         virtual void makeSound(void) const;
         const std::string& getType(void) const;
         // operators
-        virtual Animal& operator=(const Animal& animal); // copy assignment operator
+        Animal& operator=(const Animal& animal); // copy assignment operator
     private:
 };
 
