@@ -35,12 +35,12 @@ void DiamondTrap::attack(const std::string& target)
 
 void DiamondTrap::takeDamage(unsigned int amount)
 {
-    this->ClapTrap::takeDamage(amount);
+    this->ClapTrap::takeDamage("DiamondTrap", amount);
 }
 
 void DiamondTrap::beRepaired(unsigned int amount)
 {
-    this->ClapTrap::beRepaired(amount);
+    this->ClapTrap::beRepaired("DiamondTrap", amount);
 }
 
 void DiamondTrap::whoAmI(void) const
@@ -62,6 +62,35 @@ unsigned int DiamondTrap::getInitialEnergyPpoints(void) const
 unsigned int DiamondTrap::getInitialAttackDamage(void) const
 {
     return (this->FragTrap::getInitialAttackDamage());
+}
+
+void DiamondTrap::callSubMethod(const std::string& method, bool* hasMethod)
+{
+    if (hasMethod)
+        *hasMethod = false;
+    if (method == "whoAmI")
+    {
+        this->whoAmI();
+        if (hasMethod)
+            *hasMethod = true;
+    }
+    else
+    {
+        typedef void (DiamondTrap::*MethodPtr)(const std::string&, bool*);
+        MethodPtr methods[] = {
+            static_cast<MethodPtr>(&DiamondTrap::ScavTrap::callSubMethod),
+            static_cast<MethodPtr>(&DiamondTrap::FragTrap::callSubMethod)
+        };
+        bool _hasMethod = false;
+        for (size_t i = 0; i < sizeof(methods)/sizeof(methods[0]); ++i) {
+            (this->*methods[i])(method, &_hasMethod);
+            if (_hasMethod) {
+                if (hasMethod) *hasMethod = true;
+                return;
+            }
+        }
+    }
+    return ;
 }
 
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap& diamondTrap)

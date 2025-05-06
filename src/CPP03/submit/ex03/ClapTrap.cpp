@@ -196,6 +196,13 @@ unsigned int ClapTrap::getInitialAttackDamage(void) const
     return (0);
 }
 
+void ClapTrap::callSubMethod(const std::string&, bool* hasMethod)
+{
+    if (hasMethod)
+        *hasMethod = false;
+    return ;
+}
+
 ClapTrap& ClapTrap::operator=(const ClapTrap& clapTrap)
 {
     if (this != &clapTrap)

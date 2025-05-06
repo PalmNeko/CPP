@@ -49,17 +49,30 @@ void FragTrap::attack(const std::string& target)
 
 void FragTrap::takeDamage(unsigned int amount)
 {
-    this->ClapTrap::takeDamage(amount);
+    this->ClapTrap::takeDamage("FragTrap", amount);
 }
 
 void FragTrap::beRepaired(unsigned int amount)
 {
-    this->ClapTrap::beRepaired(amount);
+    this->ClapTrap::beRepaired("FragTrap", amount);
 }
 
 void FragTrap::highFivesGuys(void)
 {
     std::cout << "Put your hands up! ...Yay! It's high five!" << std::endl;
+}
+
+void FragTrap::callSubMethod(const std::string& method, bool* hasMethod)
+{
+    if (hasMethod)
+        *hasMethod = false;
+    if (method == "highFivesGuys")
+    {
+        this->highFivesGuys();
+        if (hasMethod)
+            *hasMethod = true;
+    }
+    return ;
 }
 
 FragTrap& FragTrap::operator=(const FragTrap& fragTrap)

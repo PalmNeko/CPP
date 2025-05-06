@@ -26,6 +26,8 @@ class DiamondTrap: public FragTrap, public ScavTrap
         unsigned int getInitialEnergyPpoints(void) const;
         unsigned int getInitialAttackDamage(void) const;
 
+        void callSubMethod(const std::string& method, bool* hasMethod = NULL);
+
         DiamondTrap& operator=(const DiamondTrap& diamondTrap);
 };
 

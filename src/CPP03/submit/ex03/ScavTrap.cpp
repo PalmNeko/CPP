@@ -46,16 +46,29 @@ void ScavTrap::attack(const std::string& target)
 
 void ScavTrap::takeDamage(unsigned int amount)
 {
-    this->ClapTrap::takeDamage(amount);
+    this->ClapTrap::takeDamage("ScavTrap", amount);
 }
 void ScavTrap::beRepaired(unsigned int amount)
 {
-    this->ClapTrap::beRepaired(amount);
+    this->ClapTrap::beRepaired("ScavTrap", amount);
 }
 
 void ScavTrap::guardGate(void)
 {
     std::cout << "ScavTrap changed to Gate keeper mode." << std::endl;
+}
+
+void ScavTrap::callSubMethod(const std::string& method, bool* hasMethod)
+{
+    if (hasMethod)
+        *hasMethod = false;
+    if (method == "guardGate")
+    {
+        this->guardGate();
+        if (hasMethod)
+            *hasMethod = true;
+    }
+    return ;
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& scavTrap)

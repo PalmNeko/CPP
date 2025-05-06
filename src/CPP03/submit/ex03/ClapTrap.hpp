@@ -26,9 +26,9 @@ class ClapTrap
         ClapTrap(std::string name);
         virtual ~ClapTrap(void);
 
-        void attack(const std::string& target);
-        void takeDamage(unsigned int amount);
-        void beRepaired(unsigned int amount);
+        virtual void attack(const std::string& target);
+        virtual void takeDamage(unsigned int amount);
+        virtual void beRepaired(unsigned int amount);
 
         const std::string& getName(void) const;
         unsigned int getHitPoints(void) const;
@@ -43,6 +43,8 @@ class ClapTrap
         virtual unsigned int getInitialHitPoints(void) const;
         virtual unsigned int getInitialEnergyPpoints(void) const;
         virtual unsigned int getInitialAttackDamage(void) const;
+
+        virtual void callSubMethod(const std::string& method, bool* hasMethod = NULL);
 
         ClapTrap& operator=(const ClapTrap& clapTrap);
 };
