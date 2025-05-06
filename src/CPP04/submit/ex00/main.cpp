@@ -50,7 +50,7 @@ template <class Meta, class Real>
         printSound("instance", &instance);
         testCopy<Meta, Real>(&instance);
     }
-    std::cout << "=============" << std::endl;
+    std::cout << "==============" << std::endl;
 }
 
 template <class Meta, class Real>
