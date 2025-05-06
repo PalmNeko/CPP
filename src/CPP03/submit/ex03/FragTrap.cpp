@@ -10,6 +10,7 @@ FragTrap::FragTrap(void)
 }
 
 FragTrap::FragTrap(const FragTrap& fragTrap)
+    : ClapTrap(fragTrap)
 {
     *this = fragTrap;
     std::cout << " @ Copy(FragTrap)" << std::endl;
@@ -43,9 +44,17 @@ unsigned int FragTrap::getInitialAttackDamage(void) const
 
 void FragTrap::attack(const std::string& target)
 {
-    if (this->doAttack() == false)
-        return ;
-    std::cout << this->makeAttackText("FragTrap", target) << std::endl;
+    this->ClapTrap::attack("FragTrap", target);
+}
+
+void FragTrap::takeDamage(unsigned int amount)
+{
+    this->ClapTrap::takeDamage(amount);
+}
+
+void FragTrap::beRepaired(unsigned int amount)
+{
+    this->ClapTrap::beRepaired(amount);
 }
 
 void FragTrap::highFivesGuys(void)

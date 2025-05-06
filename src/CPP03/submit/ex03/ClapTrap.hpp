@@ -10,22 +10,26 @@ class ClapTrap
         unsigned int hitPoints;
         unsigned int energyPoints;
         unsigned int attackDamage;
-    
+
     protected:
-        bool doAttack(void);
-        std::string makeAttackText(const std::string& className, const std::string& target) const;
+
+        void attack(const std::string& className, const std::string& target);
+        void takeDamage(const std::string& className, unsigned int amount);
+        void beRepaired(const std::string& className, unsigned int amount);
+        bool useEnergy(void);
+        bool isAlive(void) const;
         void setInitialAttributes(const ClapTrap *clapTrap);
-    
+
     public:
         ClapTrap(void);
         ClapTrap(const ClapTrap& clapTrap);
         ClapTrap(std::string name);
-        ~ClapTrap(void);
-        
+        virtual ~ClapTrap(void);
+
         void attack(const std::string& target);
         void takeDamage(unsigned int amount);
         void beRepaired(unsigned int amount);
-        
+
         const std::string& getName(void) const;
         unsigned int getHitPoints(void) const;
         unsigned int getEnergyPoints(void) const;

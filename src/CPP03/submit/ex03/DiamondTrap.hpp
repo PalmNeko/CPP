@@ -16,14 +16,16 @@ class DiamondTrap: public FragTrap, public ScavTrap
         DiamondTrap(const DiamondTrap& diamondTrap);
         DiamondTrap(const std::string& name);
         ~DiamondTrap(void);
-    
+
         void attack(const std::string& target);
+        void takeDamage(unsigned int amount);
+        void beRepaired(unsigned int amount);
         void whoAmI(void) const;
-        
+
         unsigned int getInitialHitPoints(void) const;
         unsigned int getInitialEnergyPpoints(void) const;
         unsigned int getInitialAttackDamage(void) const;
-        
+
         DiamondTrap& operator=(const DiamondTrap& diamondTrap);
 };
 

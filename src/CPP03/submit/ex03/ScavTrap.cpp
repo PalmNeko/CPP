@@ -8,6 +8,7 @@ ScavTrap::ScavTrap(void)
 }
 
 ScavTrap::ScavTrap(const ScavTrap& scavTrap)
+    : ClapTrap(scavTrap)
 {
     *this = scavTrap;
     std::cout << " @ Copy(ScavTrap)" << std::endl;
@@ -40,9 +41,16 @@ unsigned int ScavTrap::getInitialAttackDamage(void) const
 
 void ScavTrap::attack(const std::string& target)
 {
-    if (this->doAttack() == false)
-        return ;
-    std::cout << this->makeAttackText("ScavTrap", target) << std::endl;
+    this->ClapTrap::attack("ScavTrap", target);
+}
+
+void ScavTrap::takeDamage(unsigned int amount)
+{
+    this->ClapTrap::takeDamage(amount);
+}
+void ScavTrap::beRepaired(unsigned int amount)
+{
+    this->ClapTrap::beRepaired(amount);
 }
 
 void ScavTrap::guardGate(void)

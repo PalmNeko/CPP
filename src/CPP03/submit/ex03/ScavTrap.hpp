@@ -5,20 +5,22 @@
 
 class ScavTrap : public virtual ClapTrap
 {
-    public:    
-        ScavTrap(void); 
-        ScavTrap(const ScavTrap& scavTrap); 
+    public:
+        ScavTrap(void);
+        ScavTrap(const ScavTrap& scavTrap);
         ScavTrap(const std::string& name);
-        ~ScavTrap(void); 
-        
+        ~ScavTrap(void);
+
         void attack(const std::string& target);
+        void takeDamage(unsigned int amount);
+        void beRepaired(unsigned int amount);
         void guardGate(void);
 
         unsigned int getInitialHitPoints(void) const;
         unsigned int getInitialEnergyPpoints(void) const;
         unsigned int getInitialAttackDamage(void) const;
-        
-        ScavTrap& operator=(const ScavTrap& scavTrap); 
+
+        ScavTrap& operator=(const ScavTrap& scavTrap);
     private:
 };
 

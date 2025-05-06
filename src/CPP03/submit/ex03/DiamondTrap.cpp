@@ -10,6 +10,7 @@ DiamondTrap::DiamondTrap(void)
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap& diamondTrap)
+    : ClapTrap(diamondTrap), FragTrap(diamondTrap), ScavTrap(diamondTrap)
 {
     *this = diamondTrap;
     std::cout << " @ Copy(DiamondTrap)" << std::endl;
@@ -30,6 +31,16 @@ DiamondTrap::~DiamondTrap(void)
 void DiamondTrap::attack(const std::string& target)
 {
     this->ScavTrap::attack(target);
+}
+
+void DiamondTrap::takeDamage(unsigned int amount)
+{
+    this->ClapTrap::takeDamage(amount);
+}
+
+void DiamondTrap::beRepaired(unsigned int amount)
+{
+    this->ClapTrap::beRepaired(amount);
 }
 
 void DiamondTrap::whoAmI(void) const
