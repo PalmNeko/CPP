@@ -6,23 +6,23 @@
  */
 WrongAnimal::WrongAnimal(void)
 {
-    std::clog << " + WrongAnimal" << std::endl;
+    std::cout << " + WrongAnimal" << std::endl;
 }
 
 WrongAnimal::WrongAnimal(const WrongAnimal& WrongAnimal)
     : type(WrongAnimal.type)
 {
-    std::clog << " @ Copy(WrongAnimal)" << std::endl;
+    std::cout << " @ Copy(WrongAnimal)" << std::endl;
 }
 WrongAnimal::WrongAnimal(const std::string& type)
     : type(type)
 {
-    std::clog << " + WrongAnimal(" + type + ")" << std::endl;
+    std::cout << " + WrongAnimal(" + type + ")" << std::endl;
 }
 
 WrongAnimal::~WrongAnimal(void)
 {
-    std::clog << " - WrongAnimal(" + this->type + ")" << std::endl;
+    std::cout << " - WrongAnimal(" + this->type + ")" << std::endl;
 }
 
 /*

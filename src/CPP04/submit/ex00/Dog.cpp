@@ -7,18 +7,18 @@
 Dog::Dog(void)
     : Animal("Dog")
 {
-    std::clog << "Dog default constructor called" << std::endl;
+    std::cout << "Dog default constructor called" << std::endl;
 }
 
 Dog::Dog(const Dog& dog)
     : Animal(dog.type)
 {
-    std::clog << "Dog copy constructor called" << std::endl;
+    std::cout << "Dog copy constructor called" << std::endl;
 }
 
 Dog::~Dog(void)
 {
-    std::clog << "Dog destructor called" << std::endl;
+    std::cout << "Dog destructor called" << std::endl;
 }
 
 /*

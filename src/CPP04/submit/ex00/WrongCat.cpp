@@ -5,18 +5,18 @@
 WrongCat::WrongCat(void)
     : WrongAnimal("WrongCat")
 {
-    std::clog << " + WrongCat" << std::endl;
+    std::cout << " + WrongCat" << std::endl;
 }
 
 WrongCat::WrongCat(const WrongCat& WrongCat)
     : WrongAnimal(WrongCat.type)
 {
-    std::clog << " @ Copy(WrongCat)" << std::endl;
+    std::cout << " @ Copy(WrongCat)" << std::endl;
 }
 
 WrongCat::~WrongCat(void)
 {
-    std::clog << " - WrongCat(" + this->getType() + ")" << std::endl;
+    std::cout << " - WrongCat(" + this->getType() + ")" << std::endl;
 }
 
 void WrongCat::makeSound(void) const
