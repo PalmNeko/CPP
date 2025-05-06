@@ -55,7 +55,7 @@ void ScavTrap::beRepaired(unsigned int amount)
 
 void ScavTrap::guardGate(void)
 {
-    std::cout << "ScavTrap changed to Gate keeper mode." << std::endl;
+    std::cout << this->makeHeader("guardGate", "ScavTrap") << " change to Gate keeper mode." << std::endl;
 }
 
 void ScavTrap::callSubMethod(const std::string& method, bool* hasMethod)

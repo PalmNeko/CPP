@@ -59,7 +59,8 @@ void FragTrap::beRepaired(unsigned int amount)
 
 void FragTrap::highFivesGuys(void)
 {
-    std::cout << "Put your hands up! ...Yay! It's high five!" << std::endl;
+    std::cout << this->makeHeader("highFivesGuyds", "FragTrap")
+        << " Put your hands up! ...Yay! It's high five!" << std::endl;
 }
 
 void FragTrap::callSubMethod(const std::string& method, bool* hasMethod)

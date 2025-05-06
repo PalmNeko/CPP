@@ -178,7 +178,7 @@ void ClapTrap::setInitialAttributes(const ClapTrap *clapTrap)
     this->setAttackDamage(clapTrap->getInitialAttackDamage());
 }
 
-std::string ClapTrap::makeHeader(const char action[10], const std::string& className) const
+std::string ClapTrap::makeHeader(const std::string& action, const std::string& className) const
 {
     std::ostringstream oss;
 
