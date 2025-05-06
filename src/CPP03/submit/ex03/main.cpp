@@ -7,33 +7,37 @@
 #include <sstream>
 #include <iomanip>
 
-void autoTestMode(void);
-void selfTestMode(void);
+void autoTestMode(const std::string& className, const std::string &name);
+void selfTestMode(const std::string& className, const std::string &name);
+void printUsage(void);
+void printHelpCommand(void);
 void printClapTrapStatus(const ClapTrap* trap);
-ClapTrap *selectClapTrap(void);
-template <class T>
-    ClapTrap* newInstance(const std::string& name);
+ClapTrap *genClapTrap(const std::string& className, const std::string &name);
 
-int main(void)
+int main(int argc, char *argv[])
 {
-    std::cout << "0) auto test mode: Select class and auto test it.\n";
-    std::cout << "1) self test mode: Select class and self test it by your select value.\n";
-    std::cout << "mode > ";
-    int mode;
-    std::cin >> mode;
-    if (mode == 0)
-        autoTestMode();
-    else if (mode == 1)
-        selfTestMode();
+    std::string name;
+
+    if (argc < 3)
+    {
+        printUsage();
+        return (1);
+    }
+    if (argc == 4)
+        name = argv[3];
+    if (std::string(argv[1]) == "auto")
+        autoTestMode(std::string(argv[2]), name);
+    else if (std::string(argv[1]) == "self")
+        selfTestMode(std::string(argv[2]), name);
     std::cout << "exit" << std::endl;
     return 0;
 }
 
-void autoTestMode(void)
+void autoTestMode(const std::string& className, const std::string &name)
 {
     ClapTrap *forestP;
 
-    forestP = selectClapTrap();
+    forestP = genClapTrap(className, name);
     if (forestP == NULL)
         return ;
     ClapTrap &frost = *forestP;
@@ -64,19 +68,19 @@ void autoTestMode(void)
     delete forestP;
 }
 
-void selfTestMode(void)
+void selfTestMode(const std::string& className, const std::string &name)
 {
     ClapTrap *trapP;
 
-    trapP = selectClapTrap();
+    trapP = genClapTrap(className, name);
     if (trapP == NULL)
         return ;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     while (1)
     {
         std::string line;
         printClapTrapStatus(trapP);
-        std::cout << "(attack | repair | damage) (string | unsigned int) > ";
+        std::cout << " > ";
         if (!std::getline(std::cin, line))
             break ;
         unsigned int amount;
@@ -99,33 +103,24 @@ void selfTestMode(void)
             iss >> amount;
             trapP->takeDamage(amount);
         }
+        else if (command == "help")
+            printHelpCommand();
+        else
+            trapP->callSubMethod(command);
     }
     delete trapP;
 }
 
-ClapTrap *selectClapTrap(void)
+ClapTrap *genClapTrap(const std::string& className, const std::string &name)
 {
-    std::string name;
-
-    std::cout << "trap name > ";
-    std::cin >> name;
-
-    std::cout << "0) ClapTrap\n";
-    std::cout << "1) ScavTrap\n";
-    std::cout << "2) FragTrap\n";
-    std::cout << "3) DiamondTrap\n";
-    std::cout << "class > ";
-    int classNo;
-    std::cin >> classNo;
-
-    ClapTrap *(*newInstanceClapTrap[])(const std::string& name) = {
-        newInstance<ClapTrap>,
-        newInstance<ScavTrap>,
-        newInstance<FragTrap>,
-        newInstance<DiamondTrap>
-    };
-    if (0 <= classNo && classNo <= 3 )
-        return newInstanceClapTrap[classNo](name);
+    if (className == "ClapTrap")
+        return new(std::nothrow) ClapTrap(name);
+    else if (className == "ScavTrap")
+        return new(std::nothrow) ScavTrap(name);
+    else if (className == "FragTrap")
+        return new(std::nothrow) FragTrap(name);
+    else if (className == "DiamondTrap")
+        return new(std::nothrow) DiamondTrap(name);
     return (NULL);
 }
 
@@ -140,8 +135,22 @@ void printClapTrapStatus(const ClapTrap* trap)
     std::cout << "+" << std::setw(lineLength) << std::setfill('-') << "" << "+\n";
 }
 
-template <class T>
-ClapTrap* newInstance(const std::string& name)
+void printUsage(void)
 {
-    return new(std::nothrow) T(name);
+    std::cout << "Usage: prog mode className [name]" << std::endl;
+    std::cout << "   mode       auto / self" << std::endl;
+    std::cout << "   className  ClapTrap etc..." << std::endl;
+    std::cout << "   name       your choice name. opt." << std::endl;
+}
+
+void printHelpCommand(void)
+{
+    std::cout << "ClapTrap commands: " << std::endl;
+    std::cout << "   attack target  attack and print message" << std::endl;
+    std::cout << "   repair amouont repair yourself and gain amount HP" << std::endl;
+    std::cout << "   damage amouont take yourself damage and lose amount HP" << std::endl;
+    std::cout << "   guard          print guardGate message. only ScavTrap and DiamondTrap" << std::endl;
+    std::cout << "   guys           print highFivesGuys message. only FragTrap and DiamondTrap" << std::endl;
+    std::cout << "   who            print whoAmI message. only DiamondTrap" << std::endl;
+    std::cout << "   help           print this message." << std::endl;
 }
