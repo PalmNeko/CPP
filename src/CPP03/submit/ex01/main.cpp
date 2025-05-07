@@ -1,6 +1,5 @@
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
-#include <limits>
 #include <iostream>
 #include <sstream>
 #include <iomanip>

@@ -2,7 +2,6 @@
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 #include "DiamondTrap.hpp"
-#include <limits>
 #include <iostream>
 #include <sstream>
 #include <iomanip>
