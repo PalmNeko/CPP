@@ -10,6 +10,7 @@ class Character : public ICharacter
 {
     private:
         AMateria *slot[SLOT_SIZE];
+        bool hasAlreadyMateria(AMateria* m);
     protected:
         std::string name;
     public:
@@ -20,10 +21,11 @@ class Character : public ICharacter
 
         Character(const std::string& name);
 
-        virtual std::string const & getName() const;
-        virtual void equip(AMateria* m);
-        virtual void unequip(int idx);
-        virtual void use(int idx, ICharacter& target);
+        std::string const & getName() const;
+        void equip(AMateria* m);
+        void unequip(int idx);
+        void use(int idx, ICharacter& target);
+        AMateria *pickMateria(int idx);
 };
 
 #endif

@@ -1,9 +1,8 @@
 #include "Character.hpp"
 
 Character::Character(void)
-{
-    
-}
+    : Character("")
+{}
 
 Character::Character(const Character& character)
 {
@@ -12,20 +11,28 @@ Character::Character(const Character& character)
 
 Character::~Character(void)
 {
-    
+    for (int i = 0; i < SLOT_SIZE; i++)
+        delete this->slot[i];
 }
 
 Character& Character::operator=(const Character& character)
 {
     if (this != &character)
     {
+        for (int i = 0; i < SLOT_SIZE; i++)
+            delete this->slot[i];
+        for (int i = 0; i < SLOT_SIZE; i++)
+            this->slot[i] = character.slot[i]->clone();
     }
     return *this;
 }
 
 Character::Character(const std::string& name)
     : name(name)
-{}
+{
+    for (int i = 0; i < SLOT_SIZE; i++)
+        this->slot[i] = NULL;
+}
 
 std::string const & Character::getName() const
 {
@@ -34,6 +41,8 @@ std::string const & Character::getName() const
 
 void Character::equip(AMateria* m)
 {
+    if (this->hasAlreadyMateria(m))
+        return ;
     for (int i = 0; i < SLOT_SIZE; i++)
     {
         if (this->slot[i] == NULL)
@@ -57,4 +66,20 @@ void Character::use(int idx, ICharacter& target)
     if (!(0 <= idx && idx < SLOT_SIZE))
         return ;
     this->slot[idx]->use(target);
+}
+
+AMateria *Character::pickMateria(int idx)
+{
+    if (!(0 <= idx && idx < SLOT_SIZE))
+        return this->slot[idx];
+}
+
+bool Character::hasAlreadyMateria(AMateria* m)
+{
+    for (int i = 0; i < SLOT_SIZE; i++)
+    {
+        if (this->slot[i] == m)
+            return true;
+    }
+    return false;
 }
