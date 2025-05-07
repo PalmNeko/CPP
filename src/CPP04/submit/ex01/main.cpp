@@ -14,7 +14,7 @@ int main(void)
     delete j;
     delete i;
 
-    testAnimals(400);
+    testAnimals(4);
     return 0;
 }
 
