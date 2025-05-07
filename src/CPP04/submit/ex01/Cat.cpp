@@ -12,7 +12,7 @@ Cat::Cat(void)
 Cat::Cat(const Cat& cat)
     : Animal(cat.type)
 {
-    brain = new Brain();
+    *this = cat;
     std::cout << " @ Copy(Cat)" << std::endl;
 }
 
@@ -32,6 +32,11 @@ Cat& Cat::operator=(const Cat& cat)
     if (this != &cat)
     {
         this->Animal::operator=(cat);
+        delete this->brain;
+        if (cat.brain != NULL)
+            this->brain = new Brain(*cat.brain);
+        else
+            this->brain = NULL;
         std::cout << " = Cat" << std::endl;
     }
     return *this;
