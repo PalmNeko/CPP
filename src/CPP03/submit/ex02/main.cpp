@@ -129,7 +129,7 @@ void printClapTrapStatus(const ClapTrap* trap)
     std::ostringstream ossForParameter;
     const int lineLength = 38;
 
-    ossForParameter << " HP: " << trap->getHitPoints() << " ATK: " << trap->getAttackDamage() << " ENG: " << trap->getEnergyPoints();
+    ossForParameter << " HP: " << trap->getHitPoints() << " ENG: " << trap->getEnergyPoints() << " ATK: " << trap->getAttackDamage();
     std::cout << "+----" << std::setw(30) << std::setiosflags(std::ios::left) << std::setfill('-') << trap->getName() << "----+\n";
     std::cout << "|" << std::setw(lineLength) << std::setfill(' ') << ossForParameter.str() << "|" << std::endl;
     std::cout << "+" << std::setw(lineLength) << std::setfill('-') << "" << "+\n";
