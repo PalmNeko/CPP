@@ -13,7 +13,7 @@ class Brain
         Brain(const Brain& brain);
         ~Brain(void);
         Brain& operator=(const Brain& brain);
-        void setIdea(size_t index, const std::string& idea);
+        void Brain::setRandomIdea(void);
         std::string getIdea(size_t index) const;
 };
 
