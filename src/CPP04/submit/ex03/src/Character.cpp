@@ -1,8 +1,10 @@
 #include "Character.hpp"
 
 Character::Character(void)
-    : Character("")
-{}
+{
+    for (int i = 0; i < SLOT_SIZE; i++)
+        this->slot[i] = NULL;
+}
 
 Character::Character(const Character& character)
 {
@@ -72,6 +74,7 @@ AMateria *Character::pickMateria(int idx)
 {
     if (!(0 <= idx && idx < SLOT_SIZE))
         return this->slot[idx];
+    return (NULL);
 }
 
 bool Character::hasAlreadyMateria(AMateria* m)

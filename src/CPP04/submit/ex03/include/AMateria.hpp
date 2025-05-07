@@ -14,7 +14,7 @@ class AMateria
     public:
         AMateria(void); 
         AMateria(const AMateria& aMateria);
-        ~AMateria(void); 
+        virtual ~AMateria(void); 
         AMateria& operator=(const AMateria& aMateria);
 
         AMateria(std::string const & type);

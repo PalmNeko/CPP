@@ -1,7 +1,6 @@
 #include "AMateria.hpp"
 
 AMateria::AMateria(void)
-    : AMateria("")
 {}
 
 AMateria::AMateria(const AMateria& aMateria)
