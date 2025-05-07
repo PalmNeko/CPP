@@ -36,18 +36,3 @@ Cat& Cat::operator=(const Cat& cat)
     }
     return *this;
 }
-
-Cat *Cat::clone(void) const
-{
-    try {
-        Cat *cat = new Cat();
-
-        cat->brain = this->brain;
-        return cat;
-    }
-    catch (const std::bad_alloc& e)
-    {
-        return (NULL);
-    }
-    return (NULL);
-}

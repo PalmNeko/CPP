@@ -15,7 +15,6 @@ class Cat: public Animal
 
         void makeSound(void) const;
         Cat& operator=(const Cat& cat);
-        Cat *clone(void) const;
 };
 
 #endif

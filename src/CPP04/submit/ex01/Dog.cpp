@@ -35,18 +35,3 @@ Dog& Dog::operator=(const Dog& cat)
     }
     return *this;
 }
-
-Dog *Dog::clone(void) const
-{
-    try {
-        Dog *dog = new Dog();
-
-        dog->brain = this->brain;
-        return dog;
-    }
-    catch (const std::bad_alloc& e)
-    {
-        return (NULL);
-    }
-    return (NULL);
-}

@@ -16,7 +16,6 @@ class Animal
 
         virtual void makeSound(void) const;
         const std::string& getType(void) const;
-        virtual Animal *clone(void) const = 0;
 
         Animal& operator=(const Animal& animal);
     private:
