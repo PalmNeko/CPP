@@ -1,6 +1,7 @@
 #include "AMateria.hpp"
 
 AMateria::AMateria(void)
+    : AMateria("")
 {}
 
 AMateria::AMateria(const AMateria& aMateria)
@@ -15,6 +16,7 @@ AMateria& AMateria::operator=(const AMateria& aMateria)
 {
     if (this != &aMateria)
     {
+        this->type = aMateria.type;
     }
     return *this;
 }
