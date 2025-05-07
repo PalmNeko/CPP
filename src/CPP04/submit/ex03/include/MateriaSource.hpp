@@ -2,14 +2,17 @@
 # define MATERIA_SOURCE_HPP
 
 #include "IMateriaSource.hpp"
+#include "AMateria.hpp"
 
 class MateriaSource : public IMateriaSource
 {
+    private:
+        AMateria *slot[4];
     public:
-        virtual ~MateriaSource(void);
+        ~MateriaSource(void);
 
-        virtual void learnMateria(AMateria*) = 0;
-        virtual AMateria* createMateria(std::string const & type) = 0;
+        virtual void learnMateria(AMateria*);
+        virtual AMateria* createMateria(std::string const & type);
 };
 
 #endif
