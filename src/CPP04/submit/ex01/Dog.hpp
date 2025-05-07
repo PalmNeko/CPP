@@ -2,9 +2,12 @@
 # define DOG_HPP
 
 # include "Animal.hpp"
+# include "Brain.hpp"
 
 class Dog: public Animal
 {
+    private:
+        Brain* brain;
     public:
 
         Dog(void);
@@ -13,6 +16,7 @@ class Dog: public Animal
 
         void makeSound(void) const;
         Dog& operator=(const Dog& cat);
+        Dog *clone(void) const;
 };
 
 #endif

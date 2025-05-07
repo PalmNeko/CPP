@@ -4,17 +4,20 @@
 Dog::Dog(void)
     : Animal("Dog")
 {
+    brain = new Brain();
     std::cout << " + Dog" << std::endl;
 }
 
 Dog::Dog(const Dog& dog)
     : Animal(dog.type)
 {
+    brain = new Brain();
     std::cout << " @ Copy(Dog)" << std::endl;
 }
 
 Dog::~Dog(void)
 {
+    delete brain;
     std::cout << " - Dog(" + this->getType() + ")" << std::endl;
 }
 
@@ -31,4 +34,19 @@ Dog& Dog::operator=(const Dog& cat)
         std::cout << " = Dog" << std::endl;
     }
     return *this;
+}
+
+Dog *Dog::clone(void) const
+{
+    try {
+        Dog *dog = new Dog();
+
+        dog->brain = this->brain;
+        return dog;
+    }
+    catch (const std::bad_alloc& e)
+    {
+        return (NULL);
+    }
+    return (NULL);
 }
