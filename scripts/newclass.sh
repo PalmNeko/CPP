@@ -46,19 +46,13 @@ function make_header() {
 
 class ${PASCAL}
 {
-    // variables
-    public:
     private:
-    // functions
+    protected:
     public:
-        // special member functions
-        ${PASCAL}(void); // default constructor
-        ${PASCAL}(const ${PASCAL}& ${CAML}); // copy constructor
-        ~${PASCAL}(void); // destructor
-        // others
-        // operators
-        ${PASCAL}& operator=(const ${PASCAL}& ${CAML}); // copy assignment operator
-    private:
+        ${PASCAL}(void);
+        ${PASCAL}(const ${PASCAL}& ${CAML});
+        ~${PASCAL}(void);
+        ${PASCAL}& operator=(const ${PASCAL}& ${CAML});
 };
 
 #endif"
@@ -74,9 +68,6 @@ function make_source() {
     echo \
 "#include \"${PASCAL}.hpp\"
 
-/*
- * special member functions
- */
 ${PASCAL}::${PASCAL}(void)
 {}
 
@@ -86,13 +77,6 @@ ${PASCAL}::${PASCAL}(const ${PASCAL}& ${CAML})
 ${PASCAL}::~${PASCAL}(void)
 {}
 
-/*
- * others: public
- */
-
-/*
- * operators
- */
 ${PASCAL}& ${PASCAL}::operator=(const ${PASCAL}& ${CAML})
 {
     if (this != &${CAML})
@@ -100,10 +84,6 @@ ${PASCAL}& ${PASCAL}::operator=(const ${PASCAL}& ${CAML})
     }
     return *this;
 }
-
-/*
- * others: private
- */
 "
 }
 
