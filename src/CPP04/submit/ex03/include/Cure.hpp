@@ -5,8 +5,6 @@
 
 class Cure : public AMateria
 {
-    private:
-    protected:
     public:
         Cure(void);
         Cure(const Cure& cure);
