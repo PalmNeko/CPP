@@ -33,6 +33,7 @@ Cat& Cat::operator=(const Cat& cat)
     {
         this->Animal::operator=(cat);
         delete this->brain;
+        this->brain = NULL;
         if (cat.brain != NULL)
             this->brain = new Brain(*cat.brain);
         else
