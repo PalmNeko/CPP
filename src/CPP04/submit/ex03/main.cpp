@@ -97,7 +97,8 @@ int main()
 			copied.unequip(0);
 			delete tmp; // unequip not delete check
 			Character target("Alice");
-			copied.use(0, target);
+			copied.use(0, target); // deleted materia
+			copied.use(2, target);
 		}
 		catch (const std::exception& e)
 		{}
