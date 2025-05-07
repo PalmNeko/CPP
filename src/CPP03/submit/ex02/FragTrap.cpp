@@ -17,6 +17,7 @@ FragTrap::FragTrap(const FragTrap& fragTrap)
 }
 
 FragTrap::FragTrap(const std::string& name)
+    : ClapTrap(name)
 {
     this->setInitialAttributes(this);
     std::cout << " + FragTrap(" << name << ")" << std::endl;
