@@ -6,6 +6,7 @@ Cure::Cure(void)
 {}
 
 Cure::Cure(const Cure& cure)
+    : AMateria(cure)
 {
     *this = cure;
 }

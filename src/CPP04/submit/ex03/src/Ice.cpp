@@ -6,6 +6,7 @@ Ice::Ice(void)
 {}
 
 Ice::Ice(const Ice& ice)
+    : AMateria(ice)
 {
     *this = ice;
 }

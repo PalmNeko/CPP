@@ -7,6 +7,7 @@ MateriaSource::MateriaSource(void)
 }
 
 MateriaSource::MateriaSource(const MateriaSource& materiaSource)
+    : IMateriaSource(materiaSource)
 {
     *this = materiaSource;
 }

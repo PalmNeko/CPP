@@ -8,6 +8,10 @@ class AMateria;
 
 class ICharacter
 {
+    protected:
+        ICharacter(void);
+        ICharacter(const ICharacter& iCharacter);
+        ICharacter& operator=(const ICharacter& iCharacter);
     public:
         virtual ~ICharacter(void);
         virtual std::string const & getName() const = 0;

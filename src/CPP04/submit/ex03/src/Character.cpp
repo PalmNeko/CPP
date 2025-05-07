@@ -7,6 +7,7 @@ Character::Character(void)
 }
 
 Character::Character(const Character& character)
+    : ICharacter(character)
 {
     *this = character;
 }
