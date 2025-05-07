@@ -5,19 +5,13 @@
 
 class Cat: public Animal
 {
-    // variables
     public:
-    private:
-    // functions
-    public:
-        // special member functions
-        Cat(void); // default constructor
-        Cat(const Cat& cat); // copy constructor
-        ~Cat(void); // destructor
-        // others
+        Cat(void);
+        Cat(const Cat& cat);
+        ~Cat(void);
+
         void makeSound(void) const;
-        // operators
-    private:
+        Cat& operator=(const Cat& cat);
 };
 
 #endif

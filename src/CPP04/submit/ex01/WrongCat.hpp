@@ -5,19 +5,12 @@
 
 class WrongCat: public WrongAnimal
 {
-    // variables
     public:
-    private:
-    // functions
-    public:
-        // special member functions
-        WrongCat(void); // default constructor
-        WrongCat(const WrongCat& WrongCat); // copy constructor
-        ~WrongCat(void); // destructor
-        // others
+        WrongCat(void);
+        WrongCat(const WrongCat& WrongCat);
+        ~WrongCat(void);
         void makeSound(void) const;
-        // operators
-        WrongCat& operator=(const WrongCat& WrongCat); // copy assignment operator
+        WrongCat& operator=(const WrongCat& WrongCat);
     private:
 };
 

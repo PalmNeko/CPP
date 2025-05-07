@@ -1,49 +1,43 @@
 #include "WrongAnimal.hpp"
 #include <iostream>
 
-/*
- * special member functions
- */
+
 WrongAnimal::WrongAnimal(void)
 {
-    std::clog << "WrongAnimal default constructor called" << std::endl;
+    std::cout << " + WrongAnimal" << std::endl;
 }
 
 WrongAnimal::WrongAnimal(const WrongAnimal& WrongAnimal)
     : type(WrongAnimal.type)
 {
-    std::clog << "WrongAnimal copy constructor called" << std::endl;
+    std::cout << " @ Copy(WrongAnimal)" << std::endl;
 }
 WrongAnimal::WrongAnimal(const std::string& type)
     : type(type)
 {
-    std::clog << "WrongAnimal string constructor called" << std::endl;
+    std::cout << " + WrongAnimal(" + type + ")" << std::endl;
 }
 
 WrongAnimal::~WrongAnimal(void)
 {
-    std::clog << "WrongAnimal destructor called" << std::endl;
+    std::cout << " - WrongAnimal(" + this->type + ")" << std::endl;
 }
 
-/*
- * others: public
- */
 void WrongAnimal::makeSound(void) const
 {
     std::cout << "WrongAnimal makeSound." << std::endl;
 }
 
-/*
- * operators
- */
+const std::string& WrongAnimal::getType(void) const
+{
+    return (this->type);
+}
+
 WrongAnimal& WrongAnimal::operator=(const WrongAnimal& WrongAnimal)
 {
     if (this != &WrongAnimal)
     {
+        this->type = WrongAnimal.type;
     }
     return *this;
 }
-
-/*
- * others: private
- */

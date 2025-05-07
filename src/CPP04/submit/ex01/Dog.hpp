@@ -5,16 +5,14 @@
 
 class Dog: public Animal
 {
-    // functions
     public:
-        // special member functions
-        Dog(void); // default constructor
-        Dog(const Dog& dog); // copy constructor
-        ~Dog(void); // destructor
-        // others
+
+        Dog(void);
+        Dog(const Dog& dog);
+        ~Dog(void);
+
         void makeSound(void) const;
-        // operators
-    private:
+        Dog& operator=(const Dog& cat);
 };
 
 #endif
