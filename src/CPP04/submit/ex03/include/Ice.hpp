@@ -5,8 +5,6 @@
 
 class Ice : public AMateria
 {
-    private:
-    protected:
     public:
         Ice(void);
         Ice(const Ice& ice);

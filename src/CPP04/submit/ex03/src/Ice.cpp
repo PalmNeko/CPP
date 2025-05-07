@@ -17,6 +17,7 @@ Ice& Ice::operator=(const Ice& ice)
 {
     if (this != &ice)
     {
+        this->AMateria::operator=(ice);
     }
     return *this;
 }
@@ -28,5 +29,5 @@ void Ice::use(ICharacter& target)
 
 Ice* Ice::clone(void) const
 {
-    return (NULL);
+    return (new Ice(*this));
 }
