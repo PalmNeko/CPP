@@ -29,5 +29,5 @@ void Cure::use(ICharacter& target)
 
 Cure* Cure::clone(void) const
 {
-    return (new Cure(*this));
+    return (new(std::nothrow) Cure(*this));
 }

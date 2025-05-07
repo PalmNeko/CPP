@@ -23,8 +23,13 @@ Character& Character::operator=(const Character& character)
     {
         for (int i = 0; i < SLOT_SIZE; i++)
             delete this->slot[i];
-        for (int i = 0; i < SLOT_SIZE; i++)
+        int i = 0;
+        for (i = 0; i < SLOT_SIZE; i++)
+        {
             this->slot[i] = character.slot[i]->clone();
+            if (this->slot[i] == NULL)
+                return *this;
+        }
     }
     return *this;
 }
@@ -67,12 +72,14 @@ void Character::use(int idx, ICharacter& target)
 {
     if (!(0 <= idx && idx < SLOT_SIZE))
         return ;
+    if (this->slot[idx] == NULL)
+        return ;
     this->slot[idx]->use(target);
 }
 
 AMateria *Character::pickMateria(int idx)
 {
-    if (!(0 <= idx && idx < SLOT_SIZE))
+    if (0 <= idx && idx < SLOT_SIZE)
         return this->slot[idx];
     return (NULL);
 }
