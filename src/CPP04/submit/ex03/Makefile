@@ -1,6 +1,15 @@
 # settings
 NAME     = a.out
-SRC      = $(shell find . -name "*.cpp")
+SRC      = \
+	./main.cpp \
+	./src/AMateria.cpp \
+	./src/Cure.cpp \
+	./src/IMateriaSource.cpp \
+	./src/Character.cpp \
+	./src/Ice.cpp \
+	./src/MateriaSource.cpp \
+	./src/ICharacter.cpp
+
 
 CXX      = c++
 CXXFLAGS = -Wall -Wextra -Werror -I include -MMD -MP -std=c++98
