@@ -24,11 +24,11 @@ void testAnimals(int N)
 {
     Animal **animals;
 
+    if (N % 2 == 1)
+        throw std::runtime_error("You have to set multiple of 2");
     animals = (Animal **)malloc(sizeof(Animal *) * N); // Animal* animals[N] <- ISO C++ forbids variable length array
     if (animals == NULL)
         return ;
-    if (N % 2 == 1)
-        throw std::runtime_error("You have to set multiple of 2");
     int new_cnt;
     new_cnt = 0;
     try {
