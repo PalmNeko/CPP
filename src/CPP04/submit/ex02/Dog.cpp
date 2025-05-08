@@ -18,8 +18,8 @@ Dog::Dog(const Dog& dog)
 
 Dog::~Dog(void)
 {
-    delete brain;
     std::cout << " - Dog(" + this->getType() + ")" << std::endl;
+    delete brain;
 }
 
 void Dog::makeSound(void) const

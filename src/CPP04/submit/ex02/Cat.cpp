@@ -19,8 +19,8 @@ Cat::Cat(const Cat& cat)
 
 Cat::~Cat(void)
 {
-    delete brain;
     std::cout << " - Cat(" + this->getType() + ")" << std::endl;
+    delete brain;
 }
 
 void Cat::makeSound(void) const

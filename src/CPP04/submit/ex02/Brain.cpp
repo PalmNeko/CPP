@@ -1,21 +1,24 @@
 #include "Brain.hpp"
 #include <stdexcept>
 #include <stdlib.h>
-
-const size_t Brain::ideasSize = 100;
+#include <iostream>
 
 Brain::Brain(void)
 {
     this->setRandomIdea();
+    std::cout << " + Brain" << std::endl;
 }
 
 Brain::Brain(const Brain& brain)
 {
     *this = brain;
+    std::cout << " @ Copy(Brain)" << std::endl;
 }
 
 Brain::~Brain(void)
-{}
+{
+    std::cout << " - Brain" << std::endl;
+}
 
 Brain& Brain::operator=(const Brain& brain)
 {
@@ -24,6 +27,7 @@ Brain& Brain::operator=(const Brain& brain)
         for (size_t i = 0; i < Brain::ideasSize; i++)
             this->ideas[i] = brain.ideas[i];
     }
+    std::cout << " = Brain" << std::endl;
     return *this;
 }
 
