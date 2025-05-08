@@ -10,7 +10,7 @@ SRC      = \
 	./main.cpp
 
 CXX      = c++
-CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -pedantic -MMD -MP -std=c++98
 CACHEDIR = cache
 
 # generate from above variable

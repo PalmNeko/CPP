@@ -12,6 +12,7 @@ Cat::Cat(void)
 Cat::Cat(const Cat& cat)
     : Animal(cat.type)
 {
+    brain = new Brain();
     *this = cat;
     std::cout << " @ Copy(Cat)" << std::endl;
 }

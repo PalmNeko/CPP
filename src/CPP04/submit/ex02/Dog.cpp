@@ -11,6 +11,7 @@ Dog::Dog(void)
 Dog::Dog(const Dog& dog)
     : Animal(dog.type)
 {
+    brain = new Brain();
     *this = dog;
     std::cout << " @ Copy(Dog)" << std::endl;
 }

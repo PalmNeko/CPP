@@ -18,7 +18,6 @@ class Animal
         const std::string& getType(void) const;
 
         Animal& operator=(const Animal& animal);
-    private:
 };
 
 #endif
