@@ -4,12 +4,11 @@
 # include "ICharacter.hpp"
 # include "AMateria.hpp"
 
-# define SLOT_SIZE 4
-
 class Character : public ICharacter
 {
     private:
-        AMateria *slot[SLOT_SIZE];
+        static const int slotSize = 4;
+        AMateria *slot[slotSize];
         bool hasAlreadyMateria(AMateria* m);
     protected:
         std::string name;

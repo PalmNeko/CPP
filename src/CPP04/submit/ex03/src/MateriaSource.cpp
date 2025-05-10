@@ -2,7 +2,7 @@
 
 MateriaSource::MateriaSource(void)
 {
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < slotSize; i++)
         this->slot[i] = NULL;
 }
 
@@ -14,7 +14,7 @@ MateriaSource::MateriaSource(const MateriaSource& materiaSource)
 
 MateriaSource::~MateriaSource(void)
 {
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < slotSize; i++)
         delete this->slot[i];
 }
 
@@ -22,9 +22,9 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& materiaSource)
 {
     if (this != &materiaSource)
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < slotSize; i++)
             delete this->slot[i];
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < slotSize; i++)
         {
             this->slot[i] = materiaSource.slot[i]->clone();
             if (this->slot[i] == NULL)
@@ -36,12 +36,12 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& materiaSource)
 
 void MateriaSource::learnMateria(AMateria* materia)
 {
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < slotSize; i++)
     {
         if (this->slot[i] == materia)
             return ;
     }
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < slotSize; i++)
     {
         if (this->slot[i] == materia)
             return ;
@@ -56,7 +56,7 @@ void MateriaSource::learnMateria(AMateria* materia)
 
 AMateria* MateriaSource::createMateria(std::string const & type)
 {
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < slotSize; i++)
     {
         if (this->slot[i] != NULL && this->slot[i]->getType() == type)
         {

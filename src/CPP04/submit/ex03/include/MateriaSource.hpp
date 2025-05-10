@@ -7,7 +7,8 @@
 class MateriaSource : public IMateriaSource
 {
     private:
-        AMateria *slot[4];
+        static const int slotSize = 4;
+        AMateria *slot[slotSize];
     public:
         MateriaSource(void);
         MateriaSource(const MateriaSource& materiaSource);
