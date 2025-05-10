@@ -11,14 +11,15 @@ Dog::Dog(void)
 Dog::Dog(const Dog& dog)
     : Animal(dog.type)
 {
+    brain = NULL;
     *this = dog;
     std::cout << " @ Copy(Dog)" << std::endl;
 }
 
 Dog::~Dog(void)
 {
-    delete brain;
     std::cout << " - Dog(" + this->getType() + ")" << std::endl;
+    delete brain;
 }
 
 void Dog::makeSound(void) const

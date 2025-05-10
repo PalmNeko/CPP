@@ -12,14 +12,15 @@ Cat::Cat(void)
 Cat::Cat(const Cat& cat)
     : Animal(cat.type)
 {
+    brain = NULL;
     *this = cat;
     std::cout << " @ Copy(Cat)" << std::endl;
 }
 
 Cat::~Cat(void)
 {
-    delete brain;
     std::cout << " - Cat(" + this->getType() + ")" << std::endl;
+    delete brain;
 }
 
 void Cat::makeSound(void) const
