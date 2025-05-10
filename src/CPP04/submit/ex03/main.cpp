@@ -31,6 +31,7 @@ int main()
 
 	// test ice
 	{
+		std::cout << "[test ice]" << std::endl;
 		AMateria *ice;
 		ice = new Ice();
 		testMateria(ice);
@@ -38,6 +39,7 @@ int main()
 	}
 	// test cure
 	{
+		std::cout << "[test cure]" << std::endl;
 		AMateria *cure;
 		cure = new Cure();
 		testMateria(cure);
@@ -45,6 +47,7 @@ int main()
 	}
 	// test materia source and character
 	{
+		std::cout << "[test materia source]" << std::endl;
 		IMateriaSource* src = new MateriaSource();
 		try {
 			src->learnMateria(new Ice());
@@ -66,6 +69,7 @@ int main()
 				delete cure;
 			}
 			// test character
+			std::cout << "[test character]" << std::endl;
 			Character* bob = new Character("bob");
 			try {
 				bob->equip(src->createMateria("ice"));
@@ -89,16 +93,17 @@ int main()
 				delete bob;
 				throw ;
 			}
+			std::cout << "[test deep copy]" << std::endl;
 			Character copied;
 			copied = *bob; // deep copy
-			delete bob;
+			delete bob; // Bob's slot has become unavailable.
 			AMateria *tmp;
 			tmp = copied.pickMateria(0);
 			copied.unequip(0);
-			delete tmp; // unequip not delete check
+			delete tmp; // unequip not delete check with double free.
 			Character target("Alice");
-			copied.use(0, target); // deleted materia
-			copied.use(2, target);
+			copied.use(0, target);
+			copied.use(2, target); // If I use shallow copy, this materia is Bob's materia.
 		}
 		catch (const std::exception& e)
 		{}
