@@ -5,7 +5,8 @@
 #include "Dog.hpp"
 #include <iostream>
 
-void testAnimals(void);
+template <int N>
+    void testAnimals(void);
 
 int main(void)
 {
@@ -14,13 +15,13 @@ int main(void)
     delete j;
     delete i;
 
-    testAnimals();
+    testAnimals<4>();
     return 0;
 }
 
-void testAnimals(void)
+template <int N>
+    void testAnimals(void)
 {
-    const int N = 4;
     Animal* animals[N];
 
     int new_cnt;
