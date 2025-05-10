@@ -5,7 +5,7 @@
 #include "Dog.hpp"
 #include <iostream>
 
-void testAnimals(int N);
+void testAnimals(void);
 
 int main(void)
 {
@@ -14,16 +14,15 @@ int main(void)
     delete j;
     delete i;
 
-    testAnimals(4);
+    testAnimals();
     return 0;
 }
 
-void testAnimals(int N)
+void testAnimals(void)
 {
+    const int N = 4;
     Animal* animals[N];
 
-    if (N % 2 == 1)
-        throw std::runtime_error("You have to set multiple of 2");
     int new_cnt;
     new_cnt = 0;
     try {

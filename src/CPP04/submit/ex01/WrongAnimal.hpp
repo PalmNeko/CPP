@@ -18,7 +18,6 @@ class WrongAnimal
         const std::string& getType(void) const;
 
         WrongAnimal& operator=(const WrongAnimal& WrongAnimal);
-    private:
 };
 
 #endif

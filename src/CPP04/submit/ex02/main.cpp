@@ -4,9 +4,8 @@
 #include "Cat.hpp"
 #include "Dog.hpp"
 #include <iostream>
-#include <cstdlib>
 
-void testAnimals(int N);
+void testAnimals(void);
 
 int main(void)
 {
@@ -15,20 +14,15 @@ int main(void)
     delete j;
     delete i;
 
-    // const Animal animal; // <- can't compile
-    testAnimals(4);
+    testAnimals();
     return 0;
 }
 
-void testAnimals(int N)
+void testAnimals(void)
 {
-    Animal **animals;
+    const int N = 4;
+    Animal* animals[N];
 
-    if (N % 2 == 1)
-        throw std::runtime_error("You have to set multiple of 2");
-    animals = (Animal **)malloc(sizeof(Animal *) * N); // Animal* animals[N] <- ISO C++ forbids variable length array
-    if (animals == NULL)
-        return ;
     int new_cnt;
     new_cnt = 0;
     try {
@@ -47,5 +41,4 @@ void testAnimals(int N)
     {}
     while (new_cnt-- > 0)
         delete animals[new_cnt];
-    free(animals);
 }

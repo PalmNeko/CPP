@@ -11,7 +11,6 @@ class WrongCat: public WrongAnimal
         ~WrongCat(void);
         void makeSound(void) const;
         WrongCat& operator=(const WrongCat& WrongCat);
-    private:
 };
 
 #endif
