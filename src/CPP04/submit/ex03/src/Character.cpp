@@ -23,7 +23,10 @@ Character& Character::operator=(const Character& character)
     if (this != &character)
     {
         for (int i = 0; i < slotSize; i++)
+        {
             delete this->slot[i];
+            this->slot[i] = NULL;
+        }
         int i = 0;
         for (i = 0; i < slotSize; i++)
         {

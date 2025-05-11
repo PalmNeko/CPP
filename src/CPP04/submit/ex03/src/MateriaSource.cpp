@@ -23,7 +23,10 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& materiaSource)
     if (this != &materiaSource)
     {
         for (int i = 0; i < slotSize; i++)
+        {
             delete this->slot[i];
+            this->slot[i] = NULL;
+        }
         for (int i = 0; i < slotSize; i++)
         {
             this->slot[i] = materiaSource.slot[i]->clone();
