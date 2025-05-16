@@ -1,0 +1,19 @@
+---
+BasedOnStyle: Microsoft
+AccessModifierOffset: 0
+AllowShortFunctionsOnASingleLine: Empty
+BinPackParameters: OnePerLine
+BraceWrapping:
+  AfterEnum:       false
+  AfterUnion:      true
+  AfterFunction:   true
+  SplitEmptyFunction: false
+BreakAfterReturnType: ExceptShortType
+BreakBeforeBinaryOperators: All
+BreakConstructorInitializers: BeforeComma
+BreakInheritanceList: BeforeComma
+ColumnLimit:     95
+IndentAccessModifiers: true
+IndentCaseLabels: true
+PackConstructorInitializers: Never
+...
