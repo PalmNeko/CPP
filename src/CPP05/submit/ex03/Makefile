@@ -1,6 +1,13 @@
 # settings
 NAME     = a.out
-SRC      = $(shell find . -name "*.cpp")
+SRC      = \
+	./AForm.cpp \
+	./Bureaucrat.cpp \
+	./main.cpp \
+	./PresidentialPardonForm.cpp \
+	./RobotomyRequestForm.cpp \
+	./ShrubberyCreationForm.cpp \
+	./Intern.cpp
 
 CXX      = c++
 CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -std=c++98
