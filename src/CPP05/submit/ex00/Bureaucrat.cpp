@@ -1,5 +1,6 @@
 #include "Bureaucrat.hpp"
 #include <iostream>
+#include <sstream>
 
 Bureaucrat::Bureaucrat()
     : _name("no name")
@@ -48,9 +49,9 @@ int Bureaucrat::getGrade() const
 void Bureaucrat::setGrade(int grade)
 {
     if (grade < 1)
-        throw std::runtime_error("Bureaucrat::GradeTooHighException");
+        throw Bureaucrat::GradeTooHighException();
     else if (grade > 150)
-        throw std::runtime_error("Bureaucrat::GradeTooLowException");
+        throw Bureaucrat::GradeTooLowException();
     _grade = grade;
 }
 
@@ -62,4 +63,14 @@ void Bureaucrat::increment()
 void Bureaucrat::decrement()
 {
     setGrade(_grade + 1);
+}
+
+const char *Bureaucrat::GradeTooHighException::what() const throw()
+{
+    return "Grade is too high";
+}
+
+const char *Bureaucrat::GradeTooLowException::what() const throw()
+{
+    return "Grade is too low";
 }

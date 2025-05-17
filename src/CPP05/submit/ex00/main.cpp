@@ -32,6 +32,7 @@ void testBureaucrat()
         std::cout << std::setw(ALIGN_WIDTH) << " low grade: " << lowestGrader << std::endl;
         std::cout << std::setw(ALIGN_WIDTH) << " high grade: " << highestGrader << std::endl;
     }
+
     std::cout << " === Successful Copy Constructor === " << std::endl;
     {
         Bureaucrat src("src", 150);
@@ -40,6 +41,7 @@ void testBureaucrat()
         Bureaucrat dst(src);
         std::cout << std::setw(ALIGN_WIDTH) << " dst: " << dst << std::endl;
     }
+
     std::cout << " === Successful increment & decrement === " << std::endl;
     {
         Bureaucrat grading("grading", 150);
@@ -49,6 +51,7 @@ void testBureaucrat()
         grading.decrement();
         std::cout << std::setw(ALIGN_WIDTH) << " & decrement: " << grading << std::endl;
     }
+
     std::cout << " === Constructor Exception  - Bureaucrat::GradeTooLowException === "
               << std::endl;
     {
@@ -56,11 +59,12 @@ void testBureaucrat()
         {
             Bureaucrat overLowestGrader("overLowestGrader", 151);
         }
-        catch (const std::exception &e)
+        catch (const Bureaucrat::GradeTooLowException &e)
         {
             std::cout << std::setw(ALIGN_WIDTH) << "Error: " << e.what() << std::endl;
         }
     }
+
     std::cout << " === Constructor Exception  - Bureaucrat::GradeTooHighException === "
               << std::endl;
     {
@@ -68,11 +72,12 @@ void testBureaucrat()
         {
             Bureaucrat overHighestGrader("overHighestGrader", 0);
         }
-        catch (const std::exception &e)
+        catch (const Bureaucrat::GradeTooHighException &e)
         {
             std::cout << std::setw(ALIGN_WIDTH) << "Error: " << e.what() << std::endl;
         }
     }
+
     std::cout << " === Increment Exception === " << std::endl;
     {
         try
@@ -83,11 +88,12 @@ void testBureaucrat()
                       << std::endl;
             highestGrader.increment();
         }
-        catch (const std::exception &e)
+        catch (const Bureaucrat::GradeTooHighException &e)
         {
             std::cout << std::setw(ALIGN_WIDTH) << "Error: " << e.what() << std::endl;
         }
     }
+
     std::cout << " === Decrement Exception === " << std::endl;
     {
         try
@@ -98,7 +104,7 @@ void testBureaucrat()
                       << std::endl;
             lowestGrader.decrement();
         }
-        catch (const std::exception &e)
+        catch (const Bureaucrat::GradeTooLowException &e)
         {
             std::cout << std::setw(ALIGN_WIDTH) << "Error: " << e.what() << std::endl;
         }
