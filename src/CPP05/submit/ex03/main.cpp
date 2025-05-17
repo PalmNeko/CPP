@@ -1,8 +1,6 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
-#include "PresidentialPardonForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "ShrubberyCreationForm.hpp"
+#include "Intern.hpp"
 #include <iomanip>
 #include <iostream>
 #include <cstdlib>
@@ -32,10 +30,12 @@ void testForm()
     targets[5] = new Bureaucrat("Fern", 20);
     targets[6] = new Bureaucrat("Golem", 3);
 
+    Intern abe;
     AForm *forms[3];
-    forms[0] = new PresidentialPardonForm("President Form");
-    forms[1] = new RobotomyRequestForm("Robotomy Form");
-    forms[2] = new ShrubberyCreationForm("Shrubbery Form");
+    forms[0] = abe.makeForm("presidential pardon", "President Form");
+    forms[1] = abe.makeForm("robotomy request", "Robotomy Form");
+    forms[2] = abe.makeForm("shrubbery creation", "Shrubbery Form");
+    abe.makeForm("dont exist form", "Not Form");
 
     for (int form_index = 0; form_index < 3; form_index++)
     {
