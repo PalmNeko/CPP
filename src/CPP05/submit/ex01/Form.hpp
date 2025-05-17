@@ -15,7 +15,7 @@ class Form
         const int _requireGradeToSign;
         const int _requireGradeToExecute;
 
-		Form operator=(const Form &rhs);
+		Form &operator=(const Form &rhs);
 
     public:
         Form();

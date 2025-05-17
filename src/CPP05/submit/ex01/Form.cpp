@@ -18,7 +18,7 @@ Form::Form(const Form &other)
 
 Form::~Form() {}
 
-Form Form::operator=(const Form &rhs)
+Form &Form::operator=(const Form &rhs)
 {
     throw std::runtime_error("Can't use operator =.");
     if (this != &rhs)
