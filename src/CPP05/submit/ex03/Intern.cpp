@@ -49,7 +49,10 @@ AForm *Intern::makeForm(const std::string &form, const std::string &target) cons
 	for (int i = 0; i < Num; i++)
 	{
 		if (names[i] == form)
+        {
+            std::cout << "Intern creates " << form << std::endl;
 			return (this->*makeMethods[i])(target);
+        }
 	}
     std::cout << form << " does not exist." << std::endl;
 	return NULL;
