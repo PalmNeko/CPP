@@ -1,6 +1,8 @@
 # settings
 NAME     = a.out
-SRC      = $(shell find . -name "*.cpp")
+SRC      = \
+	./ScalarConverter.cpp \
+	./main.cpp
 
 CXX      = c++
 CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -std=c++98
