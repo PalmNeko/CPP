@@ -17,3 +17,4 @@ int main(int argc, char *argv[])
     }
 	return (0);
 }
+// ./a.out 0 42 256 f nanf +inff +inf nan a 2147483648 -2147483648

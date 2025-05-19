@@ -63,10 +63,17 @@ void ScalarConverter::convert(const std::string &str)
     }
     { // int
         long value;
+        const int intMax = std::numeric_limits<int>::max();
+        const int intMin = std::numeric_limits<int>::min();
+
         value = atol(str.c_str());
         intValue = static_cast<int>(value);
-        if (isSuccessDouble == false || value > std::numeric_limits<int>::max()
-            || value < std::numeric_limits<int>::min() || std::isnan(floatValue) || std::isinf(floatValue) )
+        if (value > intMax)
+            intValue = intMax;
+        else if (value < intMin)
+            intValue = intMin;
+        if (isSuccessDouble == false || value > intMax
+            || value < intMin || std::isnan(floatValue) || std::isinf(floatValue) )
             isSuccessInt = false;
         else
             isSuccessInt = true;
