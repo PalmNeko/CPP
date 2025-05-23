@@ -34,5 +34,6 @@ template <class T> void testIdentify(void)
     ptr = new T();
     identify(ptr);
     identify(*ptr);
+    delete ptr;
     return;
 }
