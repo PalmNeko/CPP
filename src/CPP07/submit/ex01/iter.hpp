@@ -3,8 +3,8 @@
 
 #include <cstddef>
 
-template <typename T>
-	void iter(T *array, size_t len, void (*callbackFn)(T&))
+template <typename T, typename F>
+	void iter(T *array, size_t len, F callbackFn)
 	{
 		for (size_t i = 0; i < len; i++)
 			callbackFn(array[i]);
