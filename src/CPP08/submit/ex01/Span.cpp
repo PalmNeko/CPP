@@ -71,17 +71,8 @@ unsigned int Span::longestSpan(void) const
     if (_storage.size() < 2)
         throw std::exception();
 
-    std::vector<int>::const_iterator it = _storage.begin();
-    std::vector<int>::const_iterator ite = _storage.end();
+    std::vector<int>::const_iterator min = std::min_element(_storage.begin(), _storage.end());
+    std::vector<int>::const_iterator max = std::max_element(_storage.begin(), _storage.end());
 
-    int min = std::numeric_limits<int>::max();
-    int max = std::numeric_limits<int>::min();
-    while (it != ite)
-    {
-        min = std::min(min, *it);
-        max = std::max(max, *it);
-        it++;
-    }
-    return (unsigned int)(max - min);
-    return (0);
+    return (unsigned int)(*max - *min);
 }
