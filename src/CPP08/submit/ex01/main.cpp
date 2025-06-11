@@ -1,6 +1,7 @@
 #include "Span.hpp"
 #include <algorithm>
 #include <cstdlib>
+#include <limits>
 #include <ctime>
 #include <iostream>
 
@@ -40,6 +41,16 @@ int main()
     {
         std::cout << "Error: " << e.what() << std::endl;
     }
+
+    std::cout << "=== max 0 min ===" << std::endl;
+    Span min_max(3);
+
+    min_max.addNumber(std::numeric_limits<int>::max());
+    min_max.addNumber(0);
+    min_max.addNumber(std::numeric_limits<int>::min());
+
+    std::cout << min_max.shortestSpan() << std::endl;
+    std::cout << min_max.longestSpan() << std::endl;
     return 0;
 }
 

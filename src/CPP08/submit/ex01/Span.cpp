@@ -1,6 +1,8 @@
 #include "Span.hpp"
 #include <algorithm>
 #include <limits>
+#include <limits>
+#include <numeric>
 #include <vector>
 
 Span::Span()
@@ -38,6 +40,10 @@ void Span::addNumber(int value)
     _storage.push_back(value);
 }
 
+// ヒープを使ってデータを保存しておけば早そう std::push_heap
+// データ順序が保存されないのが問題になる可能性があるので不採用
+// 一度計算したらデータが追加されるまで処理しない方が早そう
+// 変更分だけ計算できればなおよい
 unsigned int Span::shortestSpan(void) const
 {
     if (_storage.size() < 2)
@@ -48,22 +54,11 @@ unsigned int Span::shortestSpan(void) const
     std::vector<int> copied = _storage;
     std::sort(copied.begin(), copied.end());
 
-    std::vector<int>::const_iterator it = copied.begin();
-    std::vector<int>::const_iterator ite = copied.end();
-    unsigned int diff_min = std::numeric_limits<unsigned int>::max();
-    unsigned int diff = 0;
-    int a, b;
-    it++;
-    while (it != ite)
-    {
-        a = *(it - 1);
-        b = *it;
-        diff = std::max(a, b) - std::min(a, b);
-        if (diff_min > diff)
-            diff_min = diff;
-        it++;
-    }
-    return diff_min;
+    std::vector<unsigned int> result(copied.size());
+    std::adjacent_difference(copied.begin(), copied.end(), result.begin());
+    result[0] = std::numeric_limits<unsigned int>::max();
+    std::vector<unsigned int>::const_iterator shortestSpan = std::min_element(result.begin(), result.end());
+    return *shortestSpan;
 }
 
 unsigned int Span::longestSpan(void) const
