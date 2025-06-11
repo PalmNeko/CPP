@@ -8,10 +8,6 @@
 #include <vector>
 
 template <typename T> void testEasyFind(int *begin, int *end);
-template <> void testEasyFind<std::stack<int> >(int *begin, int *end);
-template <> void testEasyFind<std::queue<int> >(int *begin, int *end);
-
-template <typename T> void testEasyFindWithContainerAdapter(int *begin, int *end);
 
 int main(void)
 {
@@ -34,5 +30,5 @@ template <typename T> void testEasyFind(int *begin, int *end)
     std::cout << std::boolalpha;
     std::cout << "find value 2: " << easyfind<T>(container, 2) << std::endl;
     std::cout << "find value 11: " << easyfind<T>(container, 11) << std::endl;
-    std::cout << "find value 4: " << easyfind<T>(container, 11) << std::endl;
+    std::cout << "find value 4: " << easyfind<T>(container, 4) << std::endl;
 }
