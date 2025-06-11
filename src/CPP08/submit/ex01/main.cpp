@@ -27,7 +27,7 @@ int main()
     std::generate_n(randomValue, randomValueSize, genRandomNumber);
 
     Span big = Span(randomValueSize);
-    big.addNumber_itr(randomValue, randomValue + randomValueSize);
+    big.addNumber(randomValue, randomValue + randomValueSize);
     std::cout << big.shortestSpan() << std::endl;
     std::cout << big.longestSpan() << std::endl;
 

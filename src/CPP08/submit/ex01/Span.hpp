@@ -21,7 +21,7 @@ class Span
         template <class InputIterator> Span(InputIterator first, InputIterator last);
 
         void addNumber(int value);
-        template <class InputIterator> void addNumber_itr(InputIterator first, InputIterator last);
+        template <class InputIterator> void addNumber(InputIterator first, InputIterator last);
         unsigned int shortestSpan(void) const;
         unsigned int longestSpan(void) const;
 };
@@ -32,11 +32,9 @@ Span::Span(InputIterator first, InputIterator last)
     , _max_size(_storage.size())
 {}
 
-template <class InputIterator> void Span::addNumber_itr(InputIterator first, InputIterator last)
+template <class InputIterator> void Span::addNumber(InputIterator first, InputIterator last)
 {
-    std::for_each(first, last,
-        std::bind1st(std::mem_fun(&Span::addNumber), this)
-    );
+    _storage.assign(first, last);
 }
 
 #endif // SPAN_HPP
