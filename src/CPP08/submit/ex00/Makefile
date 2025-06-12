@@ -1,5 +1,5 @@
 # settings
-NAME     = btc
+NAME     = a.out
 SRC      = \
 	./main.cpp
 
