@@ -5,10 +5,10 @@ Node::Node()
 	: _value(0), _larger(NULL), _smaller(NULL)
 {}
 
-Node::Node(const Node &other)
+Node::Node(const Node &)
 	: _value(0), _larger(NULL), _smaller(NULL)
 {
-	*this = other;
+	throw std::exception();
 }
 
 
@@ -33,32 +33,9 @@ Node::~Node()
 {
 }
 
-Node &Node::operator=(const Node &rhs)
+Node &Node::operator=(const Node &)
 {
-	if (this != &rhs) {
-		Node *larger;
-		Node *smaller;
-
-		larger = NULL;
-		smaller = NULL;
-		if (rhs._larger != NULL)
-			larger = new Node(*rhs._larger);
-		try {
-			if (rhs._smaller != NULL)
-				smaller = new Node(*rhs._smaller);
-		}
-		catch (const std::exception &e)
-		{
-			delete larger;
-			throw ;
-		}
-		delete _larger;
-		delete _smaller;
-		_larger = larger;
-		_smaller = smaller;
-		_value = rhs._value;		
-	}
-	return *this;
+	throw std::exception();
 }
 
 bool Node::operator<(const Node& rhs) const
@@ -75,25 +52,6 @@ int Node::get_larger_value() const
 	return _value;
 }
 
-Node *Node::create(int a, int b)
-{
-	Node *nodeA;
-	Node *nodeB;
-	
-	nodeA = NULL;
-	nodeB = NULL;
-	try {
-		nodeA = new Node(a);
-		nodeB = new Node(b);
-	}
-	catch (const std::exception &e)
-	{
-		delete nodeA;
-		delete nodeB;
-	}
-	return Node::create(*nodeA, *nodeB);
-}
-
 Node *Node::create(Node &a, Node &b)
 {
 	return new Node(a, b);
@@ -104,7 +62,7 @@ Node *Node::create(Node *a, Node *b)
 	return new Node(*a, *b);
 }
 
-std::ostream &operator<<(const std::ostream &o, const Node& node)
+std::ostream &operator<<(std::ostream &o, const Node& node)
 {
 	return o << node.get_larger_value();
 }

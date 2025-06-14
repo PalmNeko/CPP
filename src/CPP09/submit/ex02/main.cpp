@@ -9,9 +9,9 @@ int main(void)
 
     std::vector<Node *> a;
     for (int *it = (int *)values; it != values + size; it++)
-    {
         a.push_back(new Node(*it));
-    }
-    pmergeme<Node *>(a.begin(), a.end());
+    pmergeme(a.begin(), a.end());
+    for (std::vector<Node *>::iterator it = a.begin(); it != a.end(); it++)
+        delete *it;
     return (0);
 }
