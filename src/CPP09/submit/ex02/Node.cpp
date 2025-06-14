@@ -52,6 +52,26 @@ int Node::get_larger_value() const
 	return _value;
 }
 
+Node *Node::getLarger()
+{
+	return _larger;
+}
+
+const Node *Node::getLarger() const
+{
+	return _larger;
+}
+
+Node *Node::getSmaller()
+{
+	return _smaller;
+}
+
+const Node *Node::getSmaller() const
+{
+	return _smaller;
+}
+
 Node *Node::create(Node &a, Node &b)
 {
 	return new Node(a, b);

@@ -5,13 +5,14 @@
 int main(void)
 {
     const int size = 10;
-    int values[size] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int values[size] = {7, 5, 4, 1, 6, 3, 9, 10, 8, 2};
 
     std::vector<Node *> a;
     for (int *it = (int *)values; it != values + size; it++)
         a.push_back(new Node(*it));
-    PmergeMe::pmergeme(a.begin(), a.end());
-    for (std::vector<Node *>::iterator it = a.begin(); it != a.end(); it++)
-        delete *it;
+    PmergeMe::Container res;
+    res = PmergeMe::pmergeme(a.begin(), a.end());
+    PmergeMe::print(res.begin(), res.end());
+    PmergeMe::destroy_pairs(a.begin(), a.end());
     return (0);
 }

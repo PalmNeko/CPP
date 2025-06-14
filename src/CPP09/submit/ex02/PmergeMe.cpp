@@ -29,26 +29,21 @@ PmergeMe::Container PmergeMe::pmergeme(InputIterator first, InputIterator last)
 	if (first == last)
 		return Container();
 
-    // 中身を出力する。
-	print(first, last);
-    // pairを格納したコンテナを作る。
 	Node *leftovers;
+	leftovers = NULL;
+
     Container pairs;
 	pairs = create_pairs(first, last, &leftovers);
-    // イテレータをpmergemeに渡してソートしたものを受け取る。
-	pmergeme(pairs.begin(), pairs.end());
-    // Container sorted = pmergeme(container.begin(), container.end());
-    // main chainを作る。
-    // 最初の要素のfirstを追加。
-    // 残りの要素のsecondを追加。
-    // sub chain ?を作る。
-    // 全てのfirstを追加。(最初の要素は結局使わない)
-    // main chainにsub-chainを2分挿入する。（この際何番目の要素を入れるかはあの数列を使う。）
-    // pairになり切らなかった要素をmainchainに追加。
-	// 終了処理
+
+    Container sorted;
+	sorted = pmergeme(pairs.begin(), pairs.end());
+
+	Container mainchain = create_mainchain(sorted.begin(), sorted.end());
+	Container subchain = create_subchain(sorted.begin(), sorted.end(), &leftovers);
+
+	insertAll(mainchain, subchain);
 	destroy_pairs(pairs.begin(), pairs.end());
-    // 結果を返す。
-	return Container();
+	return mainchain;
 }
 
 void PmergeMe::print(InputIterator first, InputIterator last)
@@ -110,4 +105,87 @@ void PmergeMe::destroy_pairs(InputIterator first, InputIterator end)
 		delete *it;
 		it++;
 	}
+}
+
+PmergeMe::Container PmergeMe::create_mainchain(InputIterator first, InputIterator last)
+{
+	Container mainchain;
+	InputIterator it = first;
+	InputIterator ite = last;
+
+	while (it != ite)
+	{
+		mainchain.push_back((*it)->getLarger());
+		it++;
+	}
+	return mainchain;
+}
+
+PmergeMe::Container PmergeMe::create_subchain(InputIterator first, InputIterator last, Node **leftovers)
+{
+	Container subchain;
+	InputIterator it = first;
+	InputIterator ite = last;
+
+	while (it != ite)
+	{
+		subchain.push_back((*it)->getSmaller());
+		it++;
+	}
+	if (*leftovers)
+		subchain.push_back(*leftovers);
+	return subchain;
+}
+
+void PmergeMe::insertAll(Container &mainchain, Container &subchain)
+{
+	InputIterator it = subchain.begin();
+	InputIterator ite = subchain.end();
+
+	if (it != ite)
+	{
+		mainchain.insert(mainchain.begin(), *it);
+		it++;
+	}
+	// ここをヤコブスタールする。
+	while (it != ite)
+	{
+		insert(mainchain, *it);
+		it++;
+	}
+}
+
+void PmergeMe::insert(Container &mainchain, Node *value)
+{
+	// このインサートを2分探索する
+	InputIterator it = mainchain.begin();
+	InputIterator ite = mainchain.end();
+
+	if (mainchain.size() == 0)
+		mainchain.push_back(value);
+	while (it != ite)
+	{
+		if (*(*it) < *value)
+			it++;
+		else
+		{
+			mainchain.insert(it, value);
+			return ;
+		}
+	}
+	mainchain.push_back(value);
+}
+
+PmergeMe::Container PmergeMe::flatten(InputIterator first, InputIterator last)
+{
+	Container flatten;
+
+	InputIterator it = first;
+	while (it != last)
+	{
+		flatten.push_back((*it)->getSmaller());
+		flatten.push_back((*it)->getLarger());
+		it++;
+	}
+	return flatten;
 }

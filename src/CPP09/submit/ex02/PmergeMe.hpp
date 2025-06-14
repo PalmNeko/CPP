@@ -8,7 +8,7 @@
 
 class PmergeMe
 {
-    private:
+    public:
         typedef std::vector<Node *>::iterator InputIterator;
         typedef std::vector<Node *> Container;
 
@@ -22,6 +22,11 @@ class PmergeMe
         static Container pmergeme(InputIterator first, InputIterator last);
         static void print(InputIterator first, InputIterator last);
         static Container create_pairs(InputIterator first, InputIterator last, Node **leftovers);
+        static Container create_mainchain(InputIterator first, InputIterator last);
+        static Container create_subchain(InputIterator first, InputIterator last, Node **leftovers);
+        static void insertAll(Container &mainchain, Container &subchain);
+        static void insert(Container &mainchain, Node *value);
+        static Container flatten(InputIterator first, InputIterator last);
         static void destroy_pairs(InputIterator first, InputIterator end);
 };
 

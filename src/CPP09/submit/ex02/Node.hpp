@@ -22,6 +22,12 @@ class Node
 		bool operator<(const Node& rhs) const;
 
 		int get_larger_value() const;
+
+		Node *getLarger();
+		const Node *getLarger() const;
+		Node *getSmaller();
+		const Node *getSmaller() const;
+
 		static Node *create(Node &a, Node &b);
 		static Node *create(Node *a, Node *b);
 };
