@@ -24,6 +24,8 @@ class PmergeMe
         static Container create_pairs(InputIterator first, InputIterator last, Node **leftovers);
         static Container create_mainchain(InputIterator first, InputIterator last);
         static Container create_subchain(InputIterator first, InputIterator last, Node **leftovers);
+        static size_t calc_index(size_t no);
+        static InputIterator at(Container &container, int index);
         static void insertAll(Container &mainchain, Container &subchain);
         static void insert(Container &mainchain, Node *value);
         static Container flatten(InputIterator first, InputIterator last);

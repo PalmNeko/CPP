@@ -1,6 +1,8 @@
 #include "PmergeMe.hpp"
 #include <algorithm>
 #include <vector>
+#include <limits>
+#include <cmath>
 #include <list>
 
 PmergeMe::PmergeMe()
@@ -137,21 +139,83 @@ PmergeMe::Container PmergeMe::create_subchain(InputIterator first, InputIterator
 	return subchain;
 }
 
+// ( 2^(no + 1) + (-1)^(no)) / 3
+// https://seriouscomputerist.atariverse.com/media/pdf/book/Art%20of%20Computer%20Programming%20-%20Volume%203%20(Sorting%20&%20Searching).pdf
+// ref: p.185 (13)
+size_t PmergeMe::calc_index(size_t no)
+{
+	if (no >= 32)
+		return std::numeric_limits<int>::max();
+	double value = (std::pow(2, no + 1) + std::pow(-1, no)) / 3;
+	if (value > std::numeric_limits<int>::max())
+	    return std::numeric_limits<int>::max();
+	return static_cast<int>(value);
+}
+
+// vector用とlist用で分けれると良き。
+PmergeMe::InputIterator PmergeMe::at(Container &container, int index)
+{
+	InputIterator it;
+	int times;
+
+	if (container.size() - index > container.size() / 2)
+	{
+		it = container.begin();
+		times = index;
+		while (times > 0)
+		{
+			it++;
+			times--;
+		}
+		return it;
+	}
+	else
+	{
+		it = container.end();
+		times = container.size() - index;
+		while (times > 0)
+		{
+			it--;
+			times--;
+		}
+		return it;
+	}
+}
+
 void PmergeMe::insertAll(Container &mainchain, Container &subchain)
 {
-	InputIterator it = subchain.begin();
-	InputIterator ite = subchain.end();
+	size_t insert_times;
+	size_t inserted_index;
+	size_t max_index;
 
-	if (it != ite)
+	insert_times = 0;
+	max_index = subchain.size() - 1;
+	inserted_index = -1;
+	if (subchain.size() > 0)
 	{
-		mainchain.insert(mainchain.begin(), *it);
-		it++;
+		insert_times++;
+		mainchain.insert(mainchain.begin(), *subchain.begin());
+		inserted_index++;
 	}
-	// ここをヤコブスタールする。
-	while (it != ite)
+
+	while (inserted_index < max_index)
 	{
-		insert(mainchain, *it);
-		it++;
+		size_t index;
+		InputIterator it;
+		InputIterator ite;
+
+		insert_times++;
+		index = calc_index(insert_times);
+		if (index > subchain.size() - 1)
+			index = subchain.size() - 1;
+		it = at(subchain, index);
+		ite = at(subchain, inserted_index);
+		while (it != ite)
+		{
+			insert(mainchain, *it);
+			it--;
+		}
+		inserted_index = index;
 	}
 }
 
