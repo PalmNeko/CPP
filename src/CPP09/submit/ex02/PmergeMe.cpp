@@ -52,7 +52,7 @@ PmergeMe::Container PmergeMe::pmergeme(InputIterator first, InputIterator last)
 	Container mainchain = jacob_merge2(sorted, leftovers);
 
 	destroy_pairs(pairs.begin(), pairs.end());
-	std::cout << "cmpcnt: " << Node::comp_count << " mainchain: ";
+	std::cout << "size: " << std::distance(first, last) << " cmpcnt: " << Node::comp_count << " mainchain: ";
 	print(mainchain.begin(), mainchain.end());
 	return mainchain;
 }
@@ -353,7 +353,7 @@ PmergeMe::Container PmergeMe::jacob_merge2(PmergeMe::Container &sorted_pairs, No
 	InputIterator largechainIt;
 	InputIterator smallchainIt;
 
-	std::cout << "start jacob_merge2 - main" << std::endl;
+	// std::cout << "start jacob_merge2 - main" << std::endl;
 	sortIndex = 0;
 	while (sortIndex != smallchain.size() - 1)
 	{
@@ -384,8 +384,6 @@ PmergeMe::Container PmergeMe::jacob_merge2(PmergeMe::Container &sorted_pairs, No
 				holdStack.push(mainchain.back());
 				mainchain.pop_back();
 			}
-			std::cout << "val: " << **smallchainIt << " b-insert: mainchain: " ;
-			print(mainchain.begin(), mainchain.end());
 			binary_insert(mainchain, *smallchainIt);
 			largechainIt--;
 			smallchainIt--;
@@ -396,6 +394,8 @@ PmergeMe::Container PmergeMe::jacob_merge2(PmergeMe::Container &sorted_pairs, No
 			holdStack.pop();
 		}
 	}
+	if (!leftovers)
+		mainchain.push_back(largechain.back());
 	return mainchain;
 }
 
