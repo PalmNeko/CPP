@@ -4,7 +4,7 @@
 
 int main(void)
 {
-    int values[] = {2, 5, 3, 1, 4};
+    int values[] = {5,4,1,6,2,3};
     const int size = sizeof(values) / sizeof(values[0]);
 
     std::vector<Node *> a;

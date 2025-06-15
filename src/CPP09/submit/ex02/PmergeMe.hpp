@@ -32,6 +32,7 @@ class PmergeMe
         static void insert(Container &mainchain, Node *value);
         static void binary_insert(Container &container, Node *value);
         static Container jacob_merge(Container &sorted_pairs);
+        static Container jacob_merge2(Container &sorted_pairs, Node *leftovers);
         static InputIterator binary_insert_iterator(InputIterator first, InputIterator last, const Node &value);
         static Container flatten(InputIterator first, InputIterator last);
         static void destroy_pairs(InputIterator first, InputIterator end);
