@@ -31,6 +31,7 @@ PmergeMe::Container PmergeMe::pmergeme(InputIterator first, InputIterator last)
 {
 	if (first == last)
 		return Container();
+	print(first, last);
 	Node *leftovers;
 	leftovers = NULL;
 
@@ -40,8 +41,19 @@ PmergeMe::Container PmergeMe::pmergeme(InputIterator first, InputIterator last)
     Container sorted;
 	sorted = pmergeme(pairs.begin(), pairs.end());
 
+	std::cout << "leftovers: ";
+	if (leftovers != NULL)
+		std::cout << *leftovers;
+	else
+		std::cout << leftovers;
+	std::cout << " sorted: " ;
+	print(sorted.begin(), sorted.end());
+
 	Container mainchain = jacob_merge2(sorted, leftovers);
+
 	destroy_pairs(pairs.begin(), pairs.end());
+	std::cout << "cmpcnt: " << Node::comp_count << " mainchain: ";
+	print(mainchain.begin(), mainchain.end());
 	return mainchain;
 }
 
@@ -325,6 +337,10 @@ PmergeMe::Container PmergeMe::jacob_merge2(PmergeMe::Container &sorted_pairs, No
 	}
 	if (leftovers != NULL)
 		smallchain.push_back(leftovers);
+	std::cout << "largechain: ";
+	print(largechain.begin(), largechain.end());
+	std::cout << "smallchain: ";
+	print(smallchain.begin(), smallchain.end());
 	sortIt = sorted_pairs.begin();
 	mainchain.push_back(sorted_pairs.front()->getSmaller());
 	mainchain.push_back(sorted_pairs.front()->getLarger());
@@ -337,6 +353,7 @@ PmergeMe::Container PmergeMe::jacob_merge2(PmergeMe::Container &sorted_pairs, No
 	InputIterator largechainIt;
 	InputIterator smallchainIt;
 
+	std::cout << "start jacob_merge2 - main" << std::endl;
 	sortIndex = 0;
 	while (sortIndex != smallchain.size() - 1)
 	{
@@ -367,6 +384,8 @@ PmergeMe::Container PmergeMe::jacob_merge2(PmergeMe::Container &sorted_pairs, No
 				holdStack.push(mainchain.back());
 				mainchain.pop_back();
 			}
+			std::cout << "val: " << **smallchainIt << " b-insert: mainchain: " ;
+			print(mainchain.begin(), mainchain.end());
 			binary_insert(mainchain, *smallchainIt);
 			largechainIt--;
 			smallchainIt--;
@@ -393,6 +412,8 @@ PmergeMe::InputIterator PmergeMe::binary_insert_iterator(InputIterator first, In
 	while (low != high)
 	{
 		mid = (low + high) / 2;
+		if (mid == low)
+			break ;
 		midIt = first;
 		std::advance(midIt, mid);
 		if (*(*midIt) < value)
@@ -400,6 +421,7 @@ PmergeMe::InputIterator PmergeMe::binary_insert_iterator(InputIterator first, In
 		else
 			high = mid;
 	}
+	mid = (low + high) / 2;
 	midIt = first;
 	std::advance(midIt, mid);
 	if (*(*midIt) < value)
