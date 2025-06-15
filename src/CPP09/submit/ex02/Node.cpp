@@ -22,13 +22,15 @@ Node::Node(Node &a, Node &b)
 	: _value(0), _larger(NULL), _smaller(NULL)
 {
 	if (a < b)
-		_larger = &b;
-	else
-		_larger = &a;
-	if (a < b)
+	{
 		_smaller = &a;
+		_larger = &b;
+	}
 	else
+	{
 		_smaller = &b;
+		_larger = &a;
+	}
 }
 
 Node::~Node()
