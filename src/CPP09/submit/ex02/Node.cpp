@@ -25,11 +25,13 @@ Node::Node(Node &a, Node &b)
 	{
 		_smaller = &a;
 		_larger = &b;
+		_value = b._value;
 	}
 	else
 	{
 		_smaller = &b;
 		_larger = &a;
+		_value = a._value;
 	}
 }
 
@@ -45,15 +47,11 @@ Node &Node::operator=(const Node &)
 bool Node::operator<(const Node& rhs) const
 {
 	comp_count += 1;
-	return get_larger_value() < rhs.get_larger_value();
+	return _value < rhs._value;
 }
 
 int Node::get_larger_value() const
 {
-	if (_larger != NULL)
-		return _larger->get_larger_value();
-	if (_smaller != NULL)
-		return _smaller->get_larger_value();
 	return _value;
 }
 
