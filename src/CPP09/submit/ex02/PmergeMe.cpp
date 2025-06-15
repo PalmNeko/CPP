@@ -1,6 +1,7 @@
 #include "PmergeMe.hpp"
 #include <algorithm>
 #include <vector>
+#include <stack>
 #include <limits>
 #include <cmath>
 #include <list>
@@ -31,6 +32,7 @@ PmergeMe::Container PmergeMe::pmergeme(InputIterator first, InputIterator last)
 	if (first == last)
 		return Container();
 
+    std::cout << "compcnt: " << Node::comp_count << std::endl;
 	Node *leftovers;
 	leftovers = NULL;
 
@@ -40,10 +42,9 @@ PmergeMe::Container PmergeMe::pmergeme(InputIterator first, InputIterator last)
     Container sorted;
 	sorted = pmergeme(pairs.begin(), pairs.end());
 
-	Container mainchain = create_mainchain(sorted.begin(), sorted.end());
-	Container subchain = create_subchain(sorted.begin(), sorted.end(), &leftovers);
-
-	insertAll(mainchain, subchain);
+	Container mainchain = jacob_merge(sorted);
+	if (leftovers != NULL)
+		binary_insert(mainchain, leftovers);
 	destroy_pairs(pairs.begin(), pairs.end());
 	return mainchain;
 }
@@ -240,11 +241,73 @@ void PmergeMe::insert(Container &mainchain, Node *value)
 	mainchain.push_back(value);
 }
 
+PmergeMe::Container PmergeMe::jacob_merge(Container &sorted_pairs)
+{
+	Container mainchain;
+
+	if (sorted_pairs.size() == 0)
+		return mainchain;
+
+	InputIterator it = sorted_pairs.begin();
+	InputIterator ite = sorted_pairs.end();
+
+	// 一旦先頭2つを入れる。
+	InputIterator insertItEnd;
+	int sort_times = 0;
+	mainchain.push_back((*it)->getSmaller());
+	mainchain.push_back((*it)->getLarger());
+	insertItEnd = it;
+	it++;
+	sort_times++;
+
+	while (it != ite)
+	{
+		InputIterator sortItEnd;
+
+		sortItEnd = sorted_pairs.begin();
+		size_t sortIndexEnd = calc_index(sort_times);
+		if (sortIndexEnd > sorted_pairs.size())
+			sortIndexEnd = sorted_pairs.size();
+		std::advance(sortItEnd, sortIndexEnd);
+		InputIterator insertIt;
+
+		insertIt = insertItEnd;
+		while (it != sortItEnd)
+		{
+			mainchain.push_back((*it)->getLarger());
+			insertIt = it; // iterator of previous sortItEnd iterator
+			it++;
+		}
+
+		Stack tmpHolder;
+		while (insertIt != insertItEnd)
+		{
+			Node *insertValue = (*insertIt)->getSmaller();
+			insertIt--;
+			Node *rangeLastValue = (*insertIt)->getLarger();
+			while (mainchain.back() != rangeLastValue)
+			{
+				tmpHolder.push(mainchain.back());
+				mainchain.pop_back();
+			}
+			InputIterator insertPos = binary_insert_iterator(mainchain.begin(), mainchain.end(), *insertValue);
+			mainchain.insert(insertPos, insertValue);
+		}
+		while (tmpHolder.size() != 0)
+		{
+			mainchain.push_back(tmpHolder.top());
+			tmpHolder.pop();
+		}
+		sort_times++;
+	}
+	return mainchain;
+}
+
 PmergeMe::InputIterator PmergeMe::binary_insert_iterator(InputIterator first, InputIterator last, const Node &value)
 {
 	if (std::distance(first, last) == 0)
 		return first;
-
+	std::cout << std::distance(first, last) << std::endl;
 	size_t low = 0;
 	size_t mid;
 	size_t high = std::distance(first, last) - 1;
