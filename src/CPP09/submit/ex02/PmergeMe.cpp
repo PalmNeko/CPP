@@ -240,36 +240,33 @@ void PmergeMe::insert(Container &mainchain, Node *value)
 	mainchain.push_back(value);
 }
 
-void PmergeMe::binary_insert(Container &container, Node *value)
+PmergeMe::InputIterator PmergeMe::binary_insert_iterator(InputIterator first, InputIterator last, const Node &value)
 {
-	if (value == NULL)
-		return ;
-	if (container.size() == 0)
-	{
-		container.push_back(value);
-		return ;
-	}
+	if (std::distance(first, last) == 0)
+		return first;
 
 	size_t low = 0;
 	size_t mid;
-	size_t high = container.size() - 1;
+	size_t high = std::distance(first, last) - 1;
 
 	InputIterator midIt;
 
 	while (low != high)
 	{
 		mid = (low + high) / 2;
-		midIt = at(container, mid);
-		if (*(*midIt) < *value)
+		midIt = first;
+		std::advance(midIt, mid);
+		if (*(*midIt) < value)
 			low = mid + 1;
 		else
 			high = mid;
 	}
-	midIt = at(container, low);
-	if (*(*midIt) < *value)
-		container.insert(++midIt, value);
+	midIt = first;
+	std::advance(midIt, mid);
+	if (*(*midIt) < value)
+		return ++midIt;
 	else
-		container.insert(midIt, value);
+		return midIt;
 }
 
 void PmergeMe::binary_insert(Container &container, Node *value)
