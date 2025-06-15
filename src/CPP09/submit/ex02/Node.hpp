@@ -15,6 +15,7 @@ class Node
 		Node &operator=(const Node &rhs);
 
 	public:
+		static int comp_count;
 		Node(int a);
 		Node(Node &a, Node &b);
 

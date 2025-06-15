@@ -28,6 +28,7 @@ class PmergeMe
         static InputIterator at(Container &container, int index);
         static void insertAll(Container &mainchain, Container &subchain);
         static void insert(Container &mainchain, Node *value);
+        static void binary_insert(Container &container, Node *value);
         static Container flatten(InputIterator first, InputIterator last);
         static void destroy_pairs(InputIterator first, InputIterator end);
 };

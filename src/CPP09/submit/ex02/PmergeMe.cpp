@@ -212,7 +212,7 @@ void PmergeMe::insertAll(Container &mainchain, Container &subchain)
 		ite = at(subchain, inserted_index);
 		while (it != ite)
 		{
-			insert(mainchain, *it);
+			binary_insert(mainchain, *it);
 			it--;
 		}
 		inserted_index = index;
@@ -238,6 +238,70 @@ void PmergeMe::insert(Container &mainchain, Node *value)
 		}
 	}
 	mainchain.push_back(value);
+}
+
+void PmergeMe::binary_insert(Container &container, Node *value)
+{
+	if (value == NULL)
+		return ;
+	if (container.size() == 0)
+	{
+		container.push_back(value);
+		return ;
+	}
+
+	size_t low = 0;
+	size_t mid;
+	size_t high = container.size() - 1;
+
+	InputIterator midIt;
+
+	while (low != high)
+	{
+		mid = (low + high) / 2;
+		midIt = at(container, mid);
+		if (*(*midIt) < *value)
+			low = mid + 1;
+		else
+			high = mid;
+	}
+	midIt = at(container, low);
+	if (*(*midIt) < *value)
+		container.insert(++midIt, value);
+	else
+		container.insert(midIt, value);
+}
+
+void PmergeMe::binary_insert(Container &container, Node *value)
+{
+	if (value == NULL)
+		return ;
+	if (container.size() == 0)
+	{
+		container.push_back(value);
+		return ;
+	}
+
+	size_t low = 0;
+	size_t mid;
+	size_t high = container.size() - 1;
+
+	InputIterator midIt;
+
+	while (low != high)
+	{
+		mid = (low + high) / 2;
+		midIt = at(container, mid);
+		if (*(*midIt) < *value)
+			low = mid + 1;
+		else
+			high = mid;
+	}
+	midIt = at(container, low);
+	if (*(*midIt) < *value)
+		container.insert(++midIt, value);
+	else
+		container.insert(midIt, value);
 }
 
 PmergeMe::Container PmergeMe::flatten(InputIterator first, InputIterator last)

@@ -1,6 +1,8 @@
 #include "Node.hpp"
 #include <algorithm>
 
+int Node::comp_count = 0;
+
 Node::Node()
 	: _value(0), _larger(NULL), _smaller(NULL)
 {}
@@ -40,6 +42,7 @@ Node &Node::operator=(const Node &)
 
 bool Node::operator<(const Node& rhs) const
 {
+	comp_count += 1;
 	return get_larger_value() < rhs.get_larger_value();
 }
 
