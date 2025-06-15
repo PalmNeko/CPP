@@ -329,8 +329,10 @@ PmergeMe::Container PmergeMe::jacob_merge2(PmergeMe::Container &sorted_pairs, No
 	sortIt = sorted_pairs.begin();
 	sortIte = sorted_pairs.end();
 
+	mainchain.push_back(sorted_pairs.front()->getSmaller());
 	while (sortIt != sortIte)
 	{
+		mainchain.push_back((*sortIt)->getLarger());
 		largechain.push_back((*sortIt)->getLarger());
 		smallchain.push_back((*sortIt)->getSmaller());
 		sortIt++;
@@ -341,10 +343,6 @@ PmergeMe::Container PmergeMe::jacob_merge2(PmergeMe::Container &sorted_pairs, No
 	print(largechain.begin(), largechain.end());
 	std::cout << "smallchain: ";
 	print(smallchain.begin(), smallchain.end());
-	sortIt = sorted_pairs.begin();
-	mainchain.push_back(sorted_pairs.front()->getSmaller());
-	mainchain.push_back(sorted_pairs.front()->getLarger());
-	sortIt++;
 
 	Stack holdStack;
 	int sort_times = 1;
@@ -367,10 +365,18 @@ PmergeMe::Container PmergeMe::jacob_merge2(PmergeMe::Container &sorted_pairs, No
 		std::advance(largechainIt, sortIndex - 1);
 		std::advance(smallchainIt, sortIndex);
 
+		if (holdStack.size() != 0)
+		{
+			while (mainchain.back() != (*largechainIt))
+			{
+				mainchain.push_back(holdStack.top());
+				holdStack.pop();
+			}
+		}
 		while (mainchain.back() != (*largechainIt))
 		{
-			mainchain.push_back((*sortIt)->getLarger());
-			sortIt++;
+			holdStack.push(mainchain.back());
+			mainchain.pop_back();
 		}
 		InputIterator smallchainIte;
 		smallchainIte = smallchain.begin();
@@ -387,11 +393,6 @@ PmergeMe::Container PmergeMe::jacob_merge2(PmergeMe::Container &sorted_pairs, No
 			binary_insert(mainchain, *smallchainIt);
 			largechainIt--;
 			smallchainIt--;
-		}
-		while (holdStack.size() != 0)
-		{
-			mainchain.push_back(holdStack.top());
-			holdStack.pop();
 		}
 	}
 	if (!leftovers)
