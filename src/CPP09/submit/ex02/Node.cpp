@@ -85,6 +85,11 @@ Node *Node::create(Node *a, Node *b)
 	return new Node(*a, *b);
 }
 
+Node *Node::create(int value)
+{
+	return new Node(value);
+}
+
 std::ostream &operator<<(std::ostream &o, const Node& node)
 {
 	return o << node.get_larger_value();

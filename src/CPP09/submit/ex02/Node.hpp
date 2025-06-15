@@ -31,6 +31,7 @@ class Node
 
 		static Node *create(Node &a, Node &b);
 		static Node *create(Node *a, Node *b);
+		static Node *create(int value);
 };
 
 std::ostream &operator<<(std::ostream &o, const Node& node);
