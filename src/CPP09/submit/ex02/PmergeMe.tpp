@@ -143,9 +143,9 @@ void PmergeMe::insert(Container &mainchain, Container &smallchain, Container &la
             mainchain.pop_back();
             largechainSequence.pop_back();
         }
-        Node &value = *smallchainSequence.back();
-        InputIterator insertPos = ft::bsearch_for_insert(mainchain.begin(), mainchain.end(), value); // lowbound?
-        mainchain.insert(insertPos, &value);
+        Node *ptr = smallchainSequence.back();
+        InputIterator insertPos = std::lower_bound(mainchain.begin(), mainchain.end(), ptr, Node::ptr_comp);
+        mainchain.insert(insertPos, ptr);
         smallchainSequence.pop_back();
     }
     while (holdMainchain.size() != 0)

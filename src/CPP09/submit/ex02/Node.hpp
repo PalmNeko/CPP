@@ -33,6 +33,7 @@ class Node
 		static Node *create(Node &a, Node &b);
 		static Node *create(Node *a, Node *b);
 		static Node *create(int value);
+		static bool ptr_comp(const Node *a, const Node * b);
 };
 
 std::ostream &operator<<(std::ostream &o, const Node& node);

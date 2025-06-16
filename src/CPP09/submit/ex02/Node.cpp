@@ -95,6 +95,11 @@ Node *Node::create(int value)
 	return new Node(value);
 }
 
+bool Node::ptr_comp(const Node *a, const Node * b)
+{
+	return *a < *b;
+}
+
 std::ostream &operator<<(std::ostream &o, const Node& node)
 {
 	return o << node.getValue();
