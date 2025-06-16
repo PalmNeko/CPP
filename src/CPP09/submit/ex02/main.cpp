@@ -48,7 +48,6 @@ int _main(int argc, char *argv[])
     std::cout << std::fixed;
     std::cout << "Time to process a range of " << values.size()
               << " elements with std::vector : " << clock2us(spent_vector) << " us" << std::endl;
-    std::cout << "compcnt: " << Node::comp_count << std::endl;
     PmergeMe::destroy_pairs(nodes.begin(), nodes.end());
 
     return (0);
