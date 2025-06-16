@@ -112,5 +112,6 @@ void printResult(const char *containerName, PmergeMeResult &res)
     std::cout << std::fixed;
     std::cout << "Time to process a range of " << res.getValues().size() << " elements with "
               << containerName << " : " << clock2us(res.getSpent()) << " us" << std::endl;
-    std::cout << "comparision count: " << res.getCompcnt() << std::endl;
+    std::cout << "comparison count: " << res.getCompcnt() << std::endl;
+    std::cout << "required max comparison: " << ft::max_required_times(res.getValues().size()) << std::endl;
 }

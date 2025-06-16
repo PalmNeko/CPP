@@ -12,6 +12,7 @@ namespace ft
     template <typename InputIterator> InputIterator next(InputIterator it, size_t index);
     template <typename InputIterator> InputIterator prev(InputIterator it, size_t index);
     size_t gen_sort_numbers(size_t no);
+    int max_required_times(int n);
 } // namespace ft
 
 #include "utils.tpp"
