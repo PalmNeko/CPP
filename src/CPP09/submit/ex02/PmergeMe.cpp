@@ -31,7 +31,6 @@ PmergeMe::Container PmergeMe::pmergeme(InputIterator first, InputIterator last)
 {
 	if (first == last)
 		return Container();
-	print(first, last);
 	Node *leftovers;
 	leftovers = NULL;
 
@@ -41,23 +40,13 @@ PmergeMe::Container PmergeMe::pmergeme(InputIterator first, InputIterator last)
     Container sorted;
 	sorted = pmergeme(pairs.begin(), pairs.end());
 
-	std::cout << "leftovers: ";
-	if (leftovers != NULL)
-		std::cout << *leftovers;
-	else
-		std::cout << leftovers;
-	std::cout << " sorted: " ;
-	print(sorted.begin(), sorted.end());
-
 	Container mainchain = jacob_merge2(sorted, leftovers);
 
 	destroy_pairs(pairs.begin(), pairs.end());
-	std::cout << "size: " << std::distance(first, last) << " cmpcnt: " << Node::comp_count << " mainchain: ";
-	print(mainchain.begin(), mainchain.end());
 	return mainchain;
 }
 
-void PmergeMe::print(InputIterator first, InputIterator last)
+void PmergeMe::print(InputIterator first, InputIterator last, bool colored)
 {
 	InputIterator it;
 	InputIterator ite;
@@ -66,7 +55,7 @@ void PmergeMe::print(InputIterator first, InputIterator last)
 	int i = 0;
     while (it != ite)
     {
-		if (i % 2 == 0)
+		if (i % 2 == 0 && colored)
 		{
 			if (i % 4 == 0)
 				std::cout << "\e[32m";
@@ -77,7 +66,8 @@ void PmergeMe::print(InputIterator first, InputIterator last)
         std::cout << (*it)->get_larger_value() << " ";
         it++;
     }
-	std::cout << "\e[m";
+	if (colored)
+		std::cout << "\e[m";
 
     std::cout << std::endl;
 }
@@ -171,10 +161,10 @@ PmergeMe::Container PmergeMe::jacob_merge2(PmergeMe::Container &sorted_pairs, No
 	}
 	if (leftovers != NULL)
 		smallchain.push_back(leftovers);
-	std::cout << "largechain: ";
-	print(largechain.begin(), largechain.end());
-	std::cout << "smallchain: ";
-	print(smallchain.begin(), smallchain.end());
+	// std::cout << "largechain: ";
+	// print(largechain.begin(), largechain.end());
+	// std::cout << "smallchain: ";
+	// print(smallchain.begin(), smallchain.end());
 
 	Stack holdStack;
 	int sort_times = 1;
@@ -239,8 +229,8 @@ PmergeMe::InputIterator PmergeMe::binary_insert_iterator(InputIterator first, In
 {
 	if (std::distance(first, last) == 0)
 		return first;
-	std::cout << "val: " << value << " ary: ";
-	print(first, last);
+	// std::cout << "val: " << value << " ary: ";
+	// print(first, last);
 	size_t low = 0;
 	size_t mid;
 	size_t high = std::distance(first, last);

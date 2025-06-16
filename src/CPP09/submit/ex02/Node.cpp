@@ -47,7 +47,6 @@ Node &Node::operator=(const Node &)
 bool Node::operator<(const Node& rhs) const
 {
 	comp_count += 1;
-	std::cout << _value << " < " << rhs._value << std::endl;
 	return _value < rhs._value;
 }
 

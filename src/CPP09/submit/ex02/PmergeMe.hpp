@@ -22,7 +22,7 @@ class PmergeMe
 
     public:
         static Container pmergeme(InputIterator first, InputIterator last);
-        static void print(InputIterator first, InputIterator last);
+        static void print(InputIterator first, InputIterator last, bool colored = false);
         static Container create_pairs(InputIterator first, InputIterator last, Node **leftovers);
         static size_t calc_index(size_t no);
         static InputIterator at(InputIterator it, size_t now, size_t at);
