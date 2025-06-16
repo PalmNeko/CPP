@@ -1,4 +1,5 @@
 #include "utils.hpp"
+#include <iostream>
 
 template <typename InputIterator>
 void ft::delete_range(InputIterator first, InputIterator last)

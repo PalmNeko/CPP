@@ -4,7 +4,8 @@ SRC      = \
 	./main.cpp \
 	./PmergeMe.cpp \
 	./Node.cpp \
-	./PmergeMeResult.cpp
+	./PmergeMeResult.cpp \
+	./utils.cpp
 
 CXX      = c++
 CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -std=c++98

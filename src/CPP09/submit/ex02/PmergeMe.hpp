@@ -97,19 +97,6 @@ template <typename ContainerClass> class PmergeMe
             return pairs;
         }
 
-        // ( 2^(no + 1) + (-1)^(no)) / 3
-        // https://seriouscomputerist.atariverse.com/media/pdf/book/Art%20of%20Computer%20Programming%20-%20Volume%203%20(Sorting%20&%20Searching).pdf
-        // ref: p.185 (13)
-        size_t gen_sort_numbers(size_t no)
-        {
-            if (no >= 32)
-                return std::numeric_limits<int>::max();
-            double value = (std::pow(2, no + 1) + std::pow(-1, no)) / 3;
-            if (value > std::numeric_limits<int>::max())
-                return std::numeric_limits<int>::max();
-            return static_cast<int>(value);
-        }
-
         Container jacob_merge(Container &sorted_pairs,
                                                   Node *leftovers)
         {
@@ -154,13 +141,13 @@ template <typename ContainerClass> class PmergeMe
                 size_t largeIndex;
 
                 sort_times++;
-                sortIndex = std::min(gen_sort_numbers(sort_times) - 1,
+                sortIndex = std::min(ft::gen_sort_numbers(sort_times) - 1,
                                      smallchain.size() - 1); // 2 -> 3
                 smallIndex = sortIndex;
 
                 InputIterator smallchainIte;
                 smallchainIt = ft::next(smallchain.begin(), smallIndex);
-                smallchainIte = ft::next(smallchain.begin(), gen_sort_numbers(sort_times - 1) - 1);
+                smallchainIte = ft::next(smallchain.begin(), ft::gen_sort_numbers(sort_times - 1) - 1);
                 largeIndex = std::min(smallIndex, largechain.size() - 1);
                 largechainIt = ft::next(largechain.begin(), largeIndex);
                 if (holdStack.size() != 0)

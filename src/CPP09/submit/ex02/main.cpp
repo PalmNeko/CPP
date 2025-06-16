@@ -78,11 +78,11 @@ template <class Container> PmergeMeResult measurement_pmergeme(std::vector<int> 
     clock_t start;
     clock_t end;
     PmergeMe<Container> pm;
-    typename PmergeMe<Container>::Container nodes(values.size());
+    Container nodes(values.size());
 
     std::transform(values.begin(), values.end(), nodes.begin(),
                    static_cast<Node *(*)(int)>(Node::create));
-    typename PmergeMe<Container>::Container res;
+    Container res;
 
     Node::comp_count = 0;
     start = clock();
