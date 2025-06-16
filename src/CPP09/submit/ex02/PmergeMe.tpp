@@ -102,7 +102,6 @@ template <typename Container>
 void PmergeMe::insert(Container &mainchain, Container &smallchain, Container &largechain, int sort_times)
 {
     typedef typename Container::iterator InputIterator;
-    typedef std::reverse_iterator<InputIterator> ReverseIterator;
 
     size_t targetIndexBegin = ft::gen_sort_numbers(sort_times - 1);
     size_t targetIndexEnd = ft::gen_sort_numbers(sort_times);
@@ -139,8 +138,19 @@ void PmergeMe::insert(Container &mainchain, Container &smallchain, Container &la
             largechainSequence.pop_back();
         }
         Node *ptr = smallchainSequence.back();
+        // std::cout << "\x1b[2J\x1b[H";
+        // std::cout << "small-chain:  "; ft::print(smallchain.begin(), smallchain.end(), true);
+        // std::cout << "large-chain:  "; ft::print(largechain.begin(), largechain.end(), true);
+        // std::cout << "mainchain:    "; ft::print(mainchain.begin(), mainchain.end());
+        // std::cout << "small-queue:  "; ft::print(smallchainSequence.begin(), smallchainSequence.end(), true);
+        // std::cout << "large-queue:  "; ft::print(largechainSequence.begin(), largechainSequence.end(), true);
+        // std::cout << "insert-value: " << *ptr << std::endl;
         InputIterator insertPos = std::lower_bound(mainchain.begin(), mainchain.end(), ptr, Node::ptr_comp);
         mainchain.insert(insertPos, ptr);
+        // std::cout << "inserted:     "; ft::print(mainchain.begin(), mainchain.end());
+        // std::cout << "compcnt:      " << Node::comp_count << std::endl;
+        // std::string line;
+        // std::getline(std::cin, line);
         smallchainSequence.pop_back();
     }
     while (holdMainchain.size() != 0)
