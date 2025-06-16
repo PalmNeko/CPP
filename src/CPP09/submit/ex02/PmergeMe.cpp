@@ -131,6 +131,18 @@ size_t PmergeMe::calc_index(size_t no)
 	return static_cast<int>(value);
 }
 
+PmergeMe::InputIterator PmergeMe::at(InputIterator it, size_t now, size_t at)
+{
+	std::advance(it, at - now);
+	return it;
+}
+
+PmergeMe::InputIterator PmergeMe::next(InputIterator it, size_t index)
+{
+	std::advance(it, index);
+	return it;
+}
+
 PmergeMe::Container PmergeMe::jacob_merge2(PmergeMe::Container &sorted_pairs, Node *leftovers)
 {
 	Container mainchain;
@@ -175,16 +187,18 @@ PmergeMe::Container PmergeMe::jacob_merge2(PmergeMe::Container &sorted_pairs, No
 	sortIndex = 0;
 	while (sortIndex != smallchain.size() - 1)
 	{
+		size_t smallIndex;
+		size_t largeIndex;
+
 		sort_times++;
-		sortIndex = calc_index(sort_times) - 1; // 2 -> 3
-		if (sortIndex > smallchain.size() - 1)
-			sortIndex = smallchain.size() - 1;
-		largechainIt = largechain.begin();
-		smallchainIt = smallchain.begin();
+		sortIndex = std::min(calc_index(sort_times) - 1, smallchain.size() - 1); // 2 -> 3
+		smallIndex = sortIndex;
 
-		std::advance(largechainIt, sortIndex - 1);
-		std::advance(smallchainIt, sortIndex);
-
+		InputIterator smallchainIte;
+		smallchainIt = next(smallchain.begin(), smallIndex);
+		smallchainIte = next(smallchain.begin(), calc_index(sort_times - 1) - 1);
+		largeIndex = std::min(smallIndex, largechain.size() - 1);
+		largechainIt = PmergeMe::next(largechain.begin(), largeIndex);
 		if (holdStack.size() != 0)
 		{
 			while (mainchain.back() != (*largechainIt))
@@ -193,30 +207,31 @@ PmergeMe::Container PmergeMe::jacob_merge2(PmergeMe::Container &sorted_pairs, No
 				holdStack.pop();
 			}
 		}
-		while (mainchain.back() != (*largechainIt))
-		{
-			holdStack.push(mainchain.back());
-			mainchain.pop_back();
-		}
-		InputIterator smallchainIte;
-		smallchainIte = smallchain.begin();
-		std::advance(smallchainIte, calc_index(sort_times - 1) - 1);
 		while (smallchainIt != smallchainIte)
 		{
-			InputIterator insertPos;
 
-			while (mainchain.back() != *largechainIt)
+			while (mainchain.back() != (*largechainIt))
+			{
+				holdStack.push(mainchain.back());
+				mainchain.pop_back();
+			}
+			if (smallIndex == largeIndex)
 			{
 				holdStack.push(mainchain.back());
 				mainchain.pop_back();
 			}
 			binary_insert(mainchain, *smallchainIt);
-			largechainIt--;
 			smallchainIt--;
+			smallIndex--;
+			largeIndex = std::min(smallIndex, largechain.size() - 1);
+			largechainIt = PmergeMe::next(largechain.begin(), largeIndex);
 		}
 	}
-	if (!leftovers)
-		mainchain.push_back(largechain.back());
+	while (holdStack.size() != 0)
+	{
+		mainchain.push_back(holdStack.top());
+		holdStack.pop();
+	}
 	return mainchain;
 }
 
@@ -224,31 +239,27 @@ PmergeMe::InputIterator PmergeMe::binary_insert_iterator(InputIterator first, In
 {
 	if (std::distance(first, last) == 0)
 		return first;
+	std::cout << "val: " << value << " ary: ";
+	print(first, last);
 	size_t low = 0;
 	size_t mid;
-	size_t high = std::distance(first, last) - 1;
+	size_t high = std::distance(first, last);
 
 	InputIterator midIt;
 
-	while (low != high)
+	while (low < high)
 	{
 		mid = (low + high) / 2;
-		if (mid == low)
-			break ;
 		midIt = first;
 		std::advance(midIt, mid);
-		if (*(*midIt) < value)
-			low = mid + 1;
-		else
+		if (value < *(*midIt))
 			high = mid;
+		else
+			low = mid + 1;
 	}
-	mid = (low + high) / 2;
 	midIt = first;
-	std::advance(midIt, mid);
-	if (*(*midIt) < value)
-		return ++midIt;
-	else
-		return midIt;
+	std::advance(midIt, low);
+	return midIt;
 }
 
 void PmergeMe::binary_insert(Container &container, Node *value)
