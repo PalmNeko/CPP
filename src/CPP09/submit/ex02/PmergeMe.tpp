@@ -112,13 +112,9 @@ void PmergeMe::insert(Container &mainchain, Container &smallchain, Container &la
 
     InputIterator smallBegin = ft::next(smallchain.begin(), targetIndexBegin);
     InputIterator smallEnd = ft::next(smallchain.begin(), std::min(targetIndexEnd, smallchain.size()));
-    ReverseIterator rSmallBegin(smallEnd);
-    ReverseIterator rSmallEnd(smallBegin);
 
     InputIterator largeBegin = ft::next(largechain.begin(), targetIndexBegin);
     InputIterator largeEnd = ft::next(largechain.begin(), std::min(targetIndexEnd, largechain.size()));
-    ReverseIterator rLargeBegin(largeEnd);
-    ReverseIterator rLargeEnd(largeBegin);
 
     Container holdMainchain;
     Container largechainSequence;
