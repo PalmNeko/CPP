@@ -56,32 +56,6 @@ template <typename ContainerClass> class PmergeMe
             return mainchain;
         }
 
-        void print(InputIterator first, InputIterator last, bool colored = false)
-        {
-            InputIterator it;
-            InputIterator ite;
-            it = first;
-            ite = last;
-            int i = 0;
-            while (it != ite)
-            {
-                if (i % 2 == 0 && colored)
-                {
-                    if (i % 4 == 0)
-                        std::cout << "\e[32m";
-                    else
-                        std::cout << "\e[34m";
-                }
-                i++;
-                std::cout << (*it)->get_larger_value() << " ";
-                it++;
-            }
-            if (colored)
-                std::cout << "\e[m";
-
-            std::cout << std::endl;
-        }
-
         Container create_pairs(InputIterator first,
                                                    InputIterator last,
                                                    Node **leftovers)
@@ -136,18 +110,6 @@ template <typename ContainerClass> class PmergeMe
             return static_cast<int>(value);
         }
 
-        InputIterator at(InputIterator it, size_t now, size_t at)
-        {
-            std::advance(it, at - now);
-            return it;
-        }
-
-        InputIterator next(InputIterator it, size_t index)
-        {
-            std::advance(it, index);
-            return it;
-        }
-
         Container jacob_merge(Container &sorted_pairs,
                                                   Node *leftovers)
         {
@@ -197,10 +159,10 @@ template <typename ContainerClass> class PmergeMe
                 smallIndex = sortIndex;
 
                 InputIterator smallchainIte;
-                smallchainIt = next(smallchain.begin(), smallIndex);
-                smallchainIte = next(smallchain.begin(), gen_sort_numbers(sort_times - 1) - 1);
+                smallchainIt = ft::next(smallchain.begin(), smallIndex);
+                smallchainIte = ft::next(smallchain.begin(), gen_sort_numbers(sort_times - 1) - 1);
                 largeIndex = std::min(smallIndex, largechain.size() - 1);
-                largechainIt = next(largechain.begin(), largeIndex);
+                largechainIt = ft::next(largechain.begin(), largeIndex);
                 if (holdStack.size() != 0)
                 {
                     while (mainchain.back() != (*largechainIt))
@@ -222,11 +184,12 @@ template <typename ContainerClass> class PmergeMe
                         holdStack.push(mainchain.back());
                         mainchain.pop_back();
                     }
-                    binary_insert(mainchain, *smallchainIt);
+                    InputIterator pos = ft::bsearch_for_insert(mainchain.begin(), mainchain.end(), **smallchainIt);
+                    mainchain.insert(pos, *smallchainIt);
                     smallchainIt--;
                     smallIndex--;
                     largeIndex = std::min(smallIndex, largechain.size() - 1);
-                    largechainIt = next(largechain.begin(), largeIndex);
+                    largechainIt = ft::next(largechain.begin(), largeIndex);
                 }
             }
             while (holdStack.size() != 0)
@@ -235,42 +198,6 @@ template <typename ContainerClass> class PmergeMe
                 holdStack.pop();
             }
             return mainchain;
-        }
-
-        InputIterator binary_insert_iterator(InputIterator first,
-                                                                 InputIterator last,
-                                                                 const Node &value)
-        {
-            if (std::distance(first, last) == 0)
-                return first;
-            size_t low = 0;
-            size_t mid;
-            size_t high = std::distance(first, last);
-
-            InputIterator midIt;
-
-            while (low < high)
-            {
-                mid = (low + high) / 2;
-                midIt = first;
-                std::advance(midIt, mid);
-                if (value < *(*midIt))
-                    high = mid;
-                else
-                    low = mid + 1;
-            }
-            midIt = first;
-            std::advance(midIt, low);
-            return midIt;
-        }
-
-        void binary_insert(Container &container, Node *value)
-        {
-            if (value == NULL)
-                return;
-            InputIterator pos
-                = binary_insert_iterator(container.begin(), container.end(), *value);
-            container.insert(pos, value);
         }
 };
 

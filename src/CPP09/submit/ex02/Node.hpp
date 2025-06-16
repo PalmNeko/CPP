@@ -21,6 +21,7 @@ class Node
 
 		virtual ~Node();
 		bool operator<(const Node& rhs) const;
+		bool operator<(const Node* rhs) const;
 
 		int getValue() const;
 

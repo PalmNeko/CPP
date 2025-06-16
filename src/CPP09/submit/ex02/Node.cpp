@@ -50,6 +50,11 @@ bool Node::operator<(const Node& rhs) const
 	return _value < rhs._value;
 }
 
+bool Node::operator<(const Node* rhs) const
+{
+	return *this < *rhs;
+}
+
 int Node::getValue() const
 {
 	return _value;
