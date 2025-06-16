@@ -14,34 +14,19 @@
 class PmergeMe
 {
     public:
-        // typedef typename ContainerClass::iterator InputIterator;
-        // typedef ContainerClass Container;
-        // typedef std::stack<Node *, ContainerClass> Stack;
+        PmergeMe();
+        PmergeMe(const PmergeMe &other);
+        ~PmergeMe();
+        PmergeMe &operator=(const PmergeMe &rhs);
 
-    protected:
-    public:
-        PmergeMe() {}
-
-        PmergeMe(const PmergeMe &other)
-        {
-            *this = other;
-        }
-
-        ~PmergeMe() {}
-
-        PmergeMe &operator=(const PmergeMe &rhs)
-        {
-            if (this != &rhs)
-            {
-            }
-            return *this;
-        }
         template <typename Container, typename InputIterator>
         Container pmergeme(InputIterator first, InputIterator last);
+
         template <typename Container, typename InputIterator>
         Container create_pairs(InputIterator first, InputIterator last, Node **leftovers);
+
         template <typename Container, typename InputIterator>
-        Container jacob_merge(Container &sorted_pairs, Node *leftovers);
+        Container jacob_merge(InputIterator first, InputIterator last, Node *leftovers);
 };
 
 #include "PmergeMe.tpp"

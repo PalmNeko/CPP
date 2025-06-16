@@ -14,7 +14,7 @@ Container PmergeMe::pmergeme(InputIterator first, InputIterator last)
     Container sorted;
     sorted = pmergeme<Container, InputIterator>(pairs.begin(), pairs.end());
 
-    Container mainchain = jacob_merge<Container, InputIterator>(sorted, leftovers);
+    Container mainchain = jacob_merge<Container, InputIterator>(sorted.begin(), sorted.end(), leftovers);
 
     ft::delete_range(pairs.begin(), pairs.end());
     return mainchain;
@@ -61,7 +61,7 @@ Container PmergeMe::create_pairs(InputIterator first, InputIterator last, Node *
 }
 
 template <typename Container, typename InputIterator>
-Container PmergeMe::jacob_merge(Container &sorted_pairs, Node *leftovers)
+Container PmergeMe::jacob_merge(InputIterator first, InputIterator last, Node *leftovers)
 {
     Container mainchain;
     Container largechain;
@@ -70,16 +70,16 @@ Container PmergeMe::jacob_merge(Container &sorted_pairs, Node *leftovers)
     InputIterator sortIt;
     InputIterator sortIte;
 
-    if (sorted_pairs.size() == 0)
+    if (std::distance(first, last) == 0)
     {
         if (leftovers)
             mainchain.push_back(leftovers);
         return mainchain;
     }
-    sortIt = sorted_pairs.begin();
-    sortIte = sorted_pairs.end();
+    sortIt = first;
+    sortIte = last;
 
-    mainchain.push_back(sorted_pairs.front()->getSmaller());
+    mainchain.push_back((*first)->getSmaller());
     while (sortIt != sortIte)
     {
         mainchain.push_back((*sortIt)->getLarger());
