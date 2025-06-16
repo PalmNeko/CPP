@@ -50,7 +50,7 @@ bool Node::operator<(const Node& rhs) const
 	return _value < rhs._value;
 }
 
-int Node::get_larger_value() const
+int Node::getValue() const
 {
 	return _value;
 }
@@ -92,5 +92,5 @@ Node *Node::create(int value)
 
 std::ostream &operator<<(std::ostream &o, const Node& node)
 {
-	return o << node.get_larger_value();
+	return o << node.getValue();
 }

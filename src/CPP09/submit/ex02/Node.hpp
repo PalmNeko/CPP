@@ -22,7 +22,7 @@ class Node
 		virtual ~Node();
 		bool operator<(const Node& rhs) const;
 
-		int get_larger_value() const;
+		int getValue() const;
 
 		Node *getLarger();
 		const Node *getLarger() const;

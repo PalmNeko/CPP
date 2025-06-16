@@ -33,7 +33,7 @@ PmergeMeResult::PmergeMeResult(InputIterator first,
 {
     while (first != last)
     {
-        _values.push_back((*first)->get_larger_value());
+        _values.push_back((*first)->getValue());
         first++;
     }
 }
