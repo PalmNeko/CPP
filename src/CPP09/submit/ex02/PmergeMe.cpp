@@ -174,10 +174,6 @@ PmergeMe::Container PmergeMe::jacob_merge(PmergeMe::Container &sorted_pairs, Nod
 	}
 	if (leftovers != NULL)
 		smallchain.push_back(leftovers);
-	// std::cout << "largechain: ";
-	// print(largechain.begin(), largechain.end());
-	// std::cout << "smallchain: ";
-	// print(smallchain.begin(), smallchain.end());
 
 	Stack holdStack;
 	int sort_times = 1;
@@ -186,7 +182,6 @@ PmergeMe::Container PmergeMe::jacob_merge(PmergeMe::Container &sorted_pairs, Nod
 	InputIterator largechainIt;
 	InputIterator smallchainIt;
 
-	// std::cout << "start jacob_merge2 - main" << std::endl;
 	sortIndex = 0;
 	while (sortIndex != smallchain.size() - 1)
 	{
@@ -242,8 +237,6 @@ PmergeMe::InputIterator PmergeMe::binary_insert_iterator(InputIterator first, In
 {
 	if (std::distance(first, last) == 0)
 		return first;
-	// std::cout << "val: " << value << " ary: ";
-	// print(first, last);
 	size_t low = 0;
 	size_t mid;
 	size_t high = std::distance(first, last);
