@@ -41,14 +41,15 @@ int _main(int argc, char *argv[])
     PmergeMe::Container res;
     spent_vector = measurement_pmergeme(nodes, res);
 
+    PmergeMe pm;
     std::cout << "Before:  ";
     print(values.begin(), values.end());
     std::cout << "After:   ";
-    PmergeMe::print(res.begin(), res.end());
+    pm.print(res.begin(), res.end());
     std::cout << std::fixed;
     std::cout << "Time to process a range of " << values.size()
               << " elements with std::vector : " << clock2us(spent_vector) << " us" << std::endl;
-    PmergeMe::destroy_pairs(nodes.begin(), nodes.end());
+    pm.destroy_pairs(nodes.begin(), nodes.end());
 
     return (0);
 }
@@ -77,9 +78,10 @@ clock_t measurement_pmergeme(std::vector<Node *> &nodes, PmergeMe::Container &re
 {
     clock_t start;
     clock_t end;
+    PmergeMe pm;
 
     start = clock();
-    res = PmergeMe::pmergeme(nodes.begin(), nodes.end());
+    res = pm.pmergeme(nodes.begin(), nodes.end());
     end = clock();
 
     return end - start;
