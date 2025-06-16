@@ -77,24 +77,37 @@ PmergeMe::Container PmergeMe::create_pairs(InputIterator first, InputIterator la
 	Container pairs;
 	InputIterator it;
 	InputIterator ite;
+	size_t index;
+	Node *a;
+	Node *b;
 
 	*leftovers = NULL;
     it = first;
     ite = last;
+	index = 0;
     while (it != ite)
     {
+		if (index % 2 == 0)
+			a = *it;
+		else
+		{
+			b = *it;
+			try
+			{
+				Node *newNode = Node::create(a, b);
+            	pairs.push_back(newNode);
+			}
+			catch (const std::exception &e)
+			{
+				destroy_pairs(pairs.begin(), pairs.end());
+				throw ;
+			}
+		}
         it++;
-        if (it != ite)
-        {
-            InputIterator first = --it;
-            InputIterator second = ++it;
-            Node *newNode = Node::create(*first, *second);
-            pairs.push_back(newNode);
-        }
-        else
-            *leftovers = *(--it);
-        it++;
+		index++;
     }
+	if (index % 2 == 1)
+		*leftovers = a;
 	return pairs;
 }
 
