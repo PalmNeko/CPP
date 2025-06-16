@@ -124,7 +124,7 @@ void PmergeMe::destroy_pairs(InputIterator first, InputIterator end)
 // ( 2^(no + 1) + (-1)^(no)) / 3
 // https://seriouscomputerist.atariverse.com/media/pdf/book/Art%20of%20Computer%20Programming%20-%20Volume%203%20(Sorting%20&%20Searching).pdf
 // ref: p.185 (13)
-size_t PmergeMe::calc_index(size_t no)
+size_t PmergeMe::gen_sort_numbers(size_t no)
 {
 	if (no >= 32)
 		return std::numeric_limits<int>::max();
@@ -194,12 +194,12 @@ PmergeMe::Container PmergeMe::jacob_merge2(PmergeMe::Container &sorted_pairs, No
 		size_t largeIndex;
 
 		sort_times++;
-		sortIndex = std::min(calc_index(sort_times) - 1, smallchain.size() - 1); // 2 -> 3
+		sortIndex = std::min(gen_sort_numbers(sort_times) - 1, smallchain.size() - 1); // 2 -> 3
 		smallIndex = sortIndex;
 
 		InputIterator smallchainIte;
 		smallchainIt = next(smallchain.begin(), smallIndex);
-		smallchainIte = next(smallchain.begin(), calc_index(sort_times - 1) - 1);
+		smallchainIte = next(smallchain.begin(), gen_sort_numbers(sort_times - 1) - 1);
 		largeIndex = std::min(smallIndex, largechain.size() - 1);
 		largechainIt = PmergeMe::next(largechain.begin(), largeIndex);
 		if (holdStack.size() != 0)
