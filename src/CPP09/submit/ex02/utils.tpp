@@ -23,6 +23,12 @@ template <typename InputIterator> InputIterator ft::next(InputIterator it, size_
     return it;
 }
 
+template <typename InputIterator> InputIterator ft::prev(InputIterator it, size_t index)
+{
+    std::advance(it, -index);
+    return it;
+}
+
 template <typename InputIterator, typename T>
 InputIterator ft::bsearch_for_insert(InputIterator first,
                                      InputIterator last,

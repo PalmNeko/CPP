@@ -27,6 +27,9 @@ class PmergeMe
 
         template <typename Container, typename InputIterator>
         Container jacob_merge(InputIterator first, InputIterator last, Node *leftovers);
+
+        template <typename Container>
+        void insert(Container &mainchain, Container &smallchain, Container &largechain, int sort_times);
 };
 
 #include "PmergeMe.tpp"

@@ -36,6 +36,7 @@ class Node
 };
 
 std::ostream &operator<<(std::ostream &o, const Node& node);
+std::ostream &operator<<(std::ostream &o, const Node* node);
 
 
 

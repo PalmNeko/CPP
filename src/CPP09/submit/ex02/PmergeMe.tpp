@@ -80,9 +80,9 @@ Container PmergeMe::jacob_merge(InputIterator first, InputIterator last, Node *l
     sortIte = last;
 
     mainchain.push_back((*first)->getSmaller());
+    mainchain.push_back((*first)->getLarger());
     while (sortIt != sortIte)
     {
-        mainchain.push_back((*sortIt)->getLarger());
         largechain.push_back((*sortIt)->getLarger());
         smallchain.push_back((*sortIt)->getSmaller());
         sortIt++;
@@ -90,63 +90,67 @@ Container PmergeMe::jacob_merge(InputIterator first, InputIterator last, Node *l
     if (leftovers != NULL)
         smallchain.push_back(leftovers);
 
-    std::stack<Node *, Container> holdStack;
     int sort_times = 1;
-
-    size_t sortIndex;
-    InputIterator largechainIt;
-    InputIterator smallchainIt;
-
-    sortIndex = 0;
-    while (sortIndex != smallchain.size() - 1)
+    while (mainchain.size() != smallchain.size() + largechain.size())
     {
-        size_t smallIndex;
-        size_t largeIndex;
-
-        sort_times++;
-        sortIndex = std::min(ft::gen_sort_numbers(sort_times) - 1,
-                             smallchain.size() - 1); // 2 -> 3
-        smallIndex = sortIndex;
-
-        InputIterator smallchainIte;
-        smallchainIt = ft::next(smallchain.begin(), smallIndex);
-        smallchainIte = ft::next(smallchain.begin(), ft::gen_sort_numbers(sort_times - 1) - 1);
-        largeIndex = std::min(smallIndex, largechain.size() - 1);
-        largechainIt = ft::next(largechain.begin(), largeIndex);
-        if (holdStack.size() != 0)
-        {
-            while (mainchain.back() != (*largechainIt))
-            {
-                mainchain.push_back(holdStack.top());
-                holdStack.pop();
-            }
-        }
-        while (smallchainIt != smallchainIte)
-        {
-
-            while (mainchain.back() != (*largechainIt))
-            {
-                holdStack.push(mainchain.back());
-                mainchain.pop_back();
-            }
-            if (smallIndex == largeIndex)
-            {
-                holdStack.push(mainchain.back());
-                mainchain.pop_back();
-            }
-            InputIterator pos
-                = ft::bsearch_for_insert(mainchain.begin(), mainchain.end(), **smallchainIt);
-            mainchain.insert(pos, *smallchainIt);
-            smallchainIt--;
-            smallIndex--;
-            largeIndex = std::min(smallIndex, largechain.size() - 1);
-            largechainIt = ft::next(largechain.begin(), largeIndex);
-        }
-    }
-    while (holdStack.size() != 0)
-    {
-        mainchain.push_back(holdStack.top());
-        holdStack.pop();
+        ++sort_times;
+        insert<Container>(mainchain, smallchain, largechain, sort_times);
     }
     return mainchain;
+}
+
+template <typename Container>
+void PmergeMe::insert(Container &mainchain, Container &smallchain, Container &largechain, int sort_times)
+{
+    typedef typename Container::iterator InputIterator;
+    typedef std::reverse_iterator<InputIterator> ReverseIterator;
+
+    size_t targetIndexBegin = ft::gen_sort_numbers(sort_times - 1);
+    size_t targetIndexEnd = ft::gen_sort_numbers(sort_times);
+
+    if (targetIndexBegin > smallchain.size() - 1)
+        throw std::runtime_error("can't begin") ;
+
+    InputIterator smallBegin = ft::next(smallchain.begin(), targetIndexBegin);
+    InputIterator smallEnd = ft::next(smallchain.begin(), std::min(targetIndexEnd, smallchain.size()));
+    ReverseIterator rSmallBegin(smallEnd);
+    ReverseIterator rSmallEnd(smallBegin);
+
+    InputIterator largeBegin = ft::next(largechain.begin(), targetIndexBegin);
+    InputIterator largeEnd = ft::next(largechain.begin(), std::min(targetIndexEnd, largechain.size()));
+    ReverseIterator rLargeBegin(largeEnd);
+    ReverseIterator rLargeEnd(largeBegin);
+
+    Container holdMainchain;
+    Container largechainSequence;
+    Container smallchainSequence;
+
+    std::copy(largeBegin, largeEnd, std::back_insert_iterator<Container>(mainchain));
+    largeBegin = ft::prev(largeBegin, 1);
+    std::copy(largeBegin, largeEnd, std::back_insert_iterator<Container>(largechainSequence));
+    std::copy(smallBegin, smallEnd, std::back_insert_iterator<Container>(smallchainSequence));
+
+    while (smallchainSequence.size() != 0)
+    {
+        while (largechainSequence.size() != 0 && mainchain.back() != largechainSequence.back())
+        {
+            holdMainchain.push_back(mainchain.back());
+            mainchain.pop_back();
+        }
+        if (largechainSequence.size() == smallchainSequence.size() + 1)
+        {
+            holdMainchain.push_back(mainchain.back());
+            mainchain.pop_back();
+            largechainSequence.pop_back();
+        }
+        Node &value = *smallchainSequence.back();
+        InputIterator insertPos = ft::bsearch_for_insert(mainchain.begin(), mainchain.end(), value); // lowbound?
+        mainchain.insert(insertPos, &value);
+        smallchainSequence.pop_back();
+    }
+    while (holdMainchain.size() != 0)
+    {
+        mainchain.push_back(holdMainchain.back());
+        holdMainchain.pop_back();
+    }
 }

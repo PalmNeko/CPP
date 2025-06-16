@@ -99,3 +99,8 @@ std::ostream &operator<<(std::ostream &o, const Node& node)
 {
 	return o << node.getValue();
 }
+
+std::ostream &operator<<(std::ostream &o, const Node* node)
+{
+	return o << *node;
+}
