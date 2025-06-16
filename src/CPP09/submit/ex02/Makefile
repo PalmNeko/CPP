@@ -3,7 +3,8 @@ NAME     = PmergeMe
 SRC      = \
 	./main.cpp \
 	./PmergeMe.cpp \
-	./Node.cpp
+	./Node.cpp \
+	./PmergeMeResult.cpp
 
 CXX      = c++
 CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -std=c++98

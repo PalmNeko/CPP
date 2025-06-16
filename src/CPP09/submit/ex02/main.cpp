@@ -1,41 +1,11 @@
 #include "Node.hpp"
 #include "PmergeMe.hpp"
+#include "PmergeMeResult.hpp"
 #include <algorithm>
 #include <cstdlib>
 #include <list>
 #include <sstream>
 #include <vector>
-
-struct PmergeMeResult
-{
-    public:
-        std::vector<int> values;
-        clock_t spent_time;
-        int compcnt;
-
-        template <typename InputIterator>
-        PmergeMeResult(InputIterator first, InputIterator last)
-            : spent_time(0), compcnt(0)
-        {
-            while (first != last)
-            {
-                values.push_back((*first)->get_larger_value());
-                first++;
-            }
-        }
-        ~PmergeMeResult() {}
-        PmergeMeResult() {}
-        PmergeMeResult &operator=(const PmergeMeResult &rhs)
-        {
-            if (this != &rhs)
-            {
-                values = rhs.values;
-                spent_time = rhs.spent_time;
-                compcnt = rhs.compcnt;
-            }
-            return *this;
-        }
-};
 
 int _main(int argc, char *argv[]);
 int arg2number(const char *arg);
@@ -76,7 +46,7 @@ int _main(int argc, char *argv[])
     std::cout << "Before:  ";
     print(values.begin(), values.end());
     std::cout << "After:   ";
-    print(result_vector.values.begin(), result_vector.values.end());
+    print(result_vector.getValues().begin(), result_vector.getValues().end());
     printResult("std::vector", result_vector);
     printResult("std::list", result_list);
 
@@ -119,10 +89,7 @@ template <class Container> PmergeMeResult measurement_pmergeme(std::vector<int> 
     res = pm.pmergeme(nodes.begin(), nodes.end());
     end = clock();
 
-    PmergeMeResult result(res.begin(), res.end());
-    result.spent_time = end - start;
-    result.compcnt = Node::comp_count;
-    std::cout << Node::comp_count << std::endl;
+    PmergeMeResult result(res.begin(), res.end(), end - start, Node::comp_count);
     pm.destroy_pairs(nodes.begin(), nodes.end());
 
     return result;
@@ -151,7 +118,7 @@ template <typename InputIterator> void print(InputIterator first, InputIterator 
 void printResult(const char *containerName, PmergeMeResult &res)
 {
     std::cout << std::fixed;
-    std::cout << "Time to process a range of " << res.values.size() << " elements with "
-              << containerName << " : " << clock2us(res.spent_time) << " us" << std::endl;
-    std::cout << "comparision count: " << res.compcnt << std::endl;
+    std::cout << "Time to process a range of " << res.getValues().size() << " elements with "
+              << containerName << " : " << clock2us(res.getSpent()) << " us" << std::endl;
+    std::cout << "comparision count: " << res.getCompcnt() << std::endl;
 }
