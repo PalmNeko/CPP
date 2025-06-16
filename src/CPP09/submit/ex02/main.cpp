@@ -1,6 +1,7 @@
 #include "Node.hpp"
 #include "PmergeMe.hpp"
 #include "PmergeMeResult.hpp"
+#include "utils.hpp"
 #include <algorithm>
 #include <cstdlib>
 #include <list>
@@ -90,7 +91,7 @@ template <class Container> PmergeMeResult measurement_pmergeme(std::vector<int> 
     end = clock();
 
     PmergeMeResult result(res.begin(), res.end(), end - start, Node::comp_count);
-    pm.destroy_pairs(nodes.begin(), nodes.end());
+    ft::delete_range(nodes.begin(), nodes.end());
 
     return result;
 }

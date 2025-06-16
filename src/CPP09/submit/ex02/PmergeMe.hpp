@@ -2,6 +2,7 @@
 #define PMERGE_ME_HPP
 
 #include "Node.hpp"
+#include "utils.hpp"
 
 #include <iostream>
 #include <algorithm>
@@ -51,7 +52,7 @@ template <typename ContainerClass> class PmergeMe
 
             Container mainchain = jacob_merge(sorted, leftovers);
 
-            destroy_pairs(pairs.begin(), pairs.end());
+            ft::delete_range(pairs.begin(), pairs.end());
             return mainchain;
         }
 
@@ -110,7 +111,7 @@ template <typename ContainerClass> class PmergeMe
                     }
                     catch (const std::exception &e)
                     {
-                        destroy_pairs(pairs.begin(), pairs.end());
+                        ft::delete_range(pairs.begin(), pairs.end());
                         throw;
                     }
                 }
@@ -120,16 +121,6 @@ template <typename ContainerClass> class PmergeMe
             if (index % 2 == 1)
                 *leftovers = a;
             return pairs;
-        }
-
-        void destroy_pairs(InputIterator first, InputIterator end)
-        {
-            InputIterator it = first;
-            while (it != end)
-            {
-                delete *it;
-                it++;
-            }
         }
 
         // ( 2^(no + 1) + (-1)^(no)) / 3
