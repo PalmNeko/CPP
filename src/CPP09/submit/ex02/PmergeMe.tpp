@@ -1,4 +1,5 @@
 #include "PmergeMe.hpp"
+#include <functional>
 
 template <typename Container, typename InputIterator>
 Container PmergeMe::pmergeme(InputIterator first, InputIterator last)
@@ -67,26 +68,17 @@ Container PmergeMe::jacob_merge(InputIterator first, InputIterator last, Node *l
     Container largechain;
     Container smallchain;
 
-    InputIterator sortIt;
-    InputIterator sortIte;
-
     if (std::distance(first, last) == 0)
     {
         if (leftovers)
             mainchain.push_back(leftovers);
         return mainchain;
     }
-    sortIt = first;
-    sortIte = last;
 
     mainchain.push_back((*first)->getSmaller());
     mainchain.push_back((*first)->getLarger());
-    while (sortIt != sortIte)
-    {
-        largechain.push_back((*sortIt)->getLarger());
-        smallchain.push_back((*sortIt)->getSmaller());
-        sortIt++;
-    }
+    std::transform(first, last, std::back_inserter(largechain), std::mem_fun(static_cast<Node* (Node::*)()>(&Node::getLarger)));
+    std::transform(first, last, std::back_inserter(smallchain), std::mem_fun(static_cast<Node* (Node::*)()>(&Node::getSmaller)));
     if (leftovers != NULL)
         smallchain.push_back(leftovers);
 
