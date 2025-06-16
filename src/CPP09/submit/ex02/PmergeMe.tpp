@@ -6,17 +6,24 @@ Container PmergeMe::pmergeme(InputIterator first, InputIterator last)
 {
     if (first == last)
         return Container();
-    Node *leftovers;
-    leftovers = NULL;
 
     Container pairs;
-    pairs = create_pairs<Container, InputIterator>(first, last, &leftovers);
-
     Container sorted;
-    sorted = pmergeme<Container, InputIterator>(pairs.begin(), pairs.end());
+    Container mainchain;
+    Node *leftovers;
 
-    Container mainchain = jacob_merge<Container, InputIterator>(sorted.begin(), sorted.end(), leftovers);
-
+    leftovers = NULL;
+    pairs = create_pairs<Container, InputIterator>(first, last, &leftovers);
+    try
+    {
+        sorted = pmergeme<Container, InputIterator>(pairs.begin(), pairs.end());
+        mainchain = jacob_merge<Container, InputIterator>(sorted.begin(), sorted.end(), leftovers);
+    }
+    catch (const std::exception &e)
+    {
+        ft::delete_range(pairs.begin(), pairs.end());
+        throw ;
+    }
     ft::delete_range(pairs.begin(), pairs.end());
     return mainchain;
 }
