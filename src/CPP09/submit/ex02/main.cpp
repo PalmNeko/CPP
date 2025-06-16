@@ -80,19 +80,26 @@ template <class Container> PmergeMeResult measurement_pmergeme(std::vector<int> 
     PmergeMe pm;
     Container nodes(values.size());
 
-    std::transform(values.begin(), values.end(), nodes.begin(),
-                   static_cast<Node *(*)(int)>(Node::create));
-    Container res;
+    try {
+        std::transform(values.begin(), values.end(), nodes.begin(),
+        static_cast<Node *(*)(int)>(Node::create));
 
-    Node::comp_count = 0;
-    start = clock();
-    res = pm.pmergeme<Container>(nodes.begin(), nodes.end());
-    end = clock();
+        Container res;
 
-    PmergeMeResult result(res.begin(), res.end(), end - start, Node::comp_count);
-    ft::delete_range(nodes.begin(), nodes.end());
+        Node::comp_count = 0;
+        start = clock();
+        res = pm.pmergeme<Container>(nodes.begin(), nodes.end());
+        end = clock();
 
-    return result;
+        PmergeMeResult result(res.begin(), res.end(), end - start, Node::comp_count);
+        ft::delete_range(nodes.begin(), nodes.end());
+        return result;
+    }
+    catch (std::exception &e)
+    {
+        ft::delete_range(nodes.begin(), nodes.end());
+        throw ;
+    }
 }
 
 double clock2us(clock_t clock)
