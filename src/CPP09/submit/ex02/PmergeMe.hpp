@@ -28,7 +28,7 @@ class PmergeMe
         static InputIterator at(InputIterator it, size_t now, size_t at);
         static InputIterator next(InputIterator it, size_t index);
         static void binary_insert(Container &container, Node *value);
-        static Container jacob_merge2(Container &sorted_pairs, Node *leftovers);
+        static Container jacob_merge(Container &sorted_pairs, Node *leftovers);
         static InputIterator binary_insert_iterator(InputIterator first, InputIterator last, const Node &value);
         static void destroy_pairs(InputIterator first, InputIterator end);
 };

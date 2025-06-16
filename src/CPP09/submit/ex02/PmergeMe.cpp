@@ -40,7 +40,7 @@ PmergeMe::Container PmergeMe::pmergeme(InputIterator first, InputIterator last)
     Container sorted;
 	sorted = pmergeme(pairs.begin(), pairs.end());
 
-	Container mainchain = jacob_merge2(sorted, leftovers);
+	Container mainchain = jacob_merge(sorted, leftovers);
 
 	destroy_pairs(pairs.begin(), pairs.end());
 	return mainchain;
@@ -146,7 +146,7 @@ PmergeMe::InputIterator PmergeMe::next(InputIterator it, size_t index)
 	return it;
 }
 
-PmergeMe::Container PmergeMe::jacob_merge2(PmergeMe::Container &sorted_pairs, Node *leftovers)
+PmergeMe::Container PmergeMe::jacob_merge(PmergeMe::Container &sorted_pairs, Node *leftovers)
 {
 	Container mainchain;
 	Container largechain;
