@@ -11,11 +11,11 @@ class RPN
 		virtual ~RPN();
 		RPN &operator=(const RPN &rhs);
 	public:
-		static int rpn(const std::string &str);
-		static int plus(const int x, const int y);
-		static int minus(const int x, const int y);
-		static int multiplies(const int x, const int y);
-		static int divides(const int x, const int y);
+		static double rpn(const std::string &str);
+		static double plus(const double x, const double y);
+		static double minus(const double x, const double y);
+		static double multiplies(const double x, const double y);
+		static double divides(const double x, const double y);
 };
 
 #endif // RPN_HPP

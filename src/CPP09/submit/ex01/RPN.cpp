@@ -23,10 +23,10 @@ RPN &RPN::operator=(const RPN &rhs)
     return *this;
 }
 
-int RPN::rpn(const std::string &str)
+double RPN::rpn(const std::string &str)
 {
 	std::deque<char> instructions;
-	std::stack<int> calc_space;
+	std::stack<double> calc_space;
 
 	std::string input;
 	std::istringstream iss(str);
@@ -42,11 +42,11 @@ int RPN::rpn(const std::string &str)
         {
             if (calc_space.size() < 2)
                 throw std::runtime_error("Too many sign");
-            int right = calc_space.top();
+            double right = calc_space.top();
             calc_space.pop();
-            int left = calc_space.top();
+            double left = calc_space.top();
             calc_space.pop();
-                int value = 0;
+                double value = 0;
                 if (input[0] == '+')
                     value = plus(left, right);
                 else if (input[0] == '-')
@@ -65,44 +65,44 @@ int RPN::rpn(const std::string &str)
     return (calc_space.top());
 }
 
-int RPN::plus(const int x, const int y)
+double RPN::plus(const double x, const double y)
 {
-    int intMax = std::numeric_limits<int>::max();
-    int intMin = std::numeric_limits<int>::min();
-    if ((y > 0) && (x > (intMax - y)))
+    double doubleMax = std::numeric_limits<double>::max();
+    double doubleMin = std::numeric_limits<double>::min();
+    if ((y > 0) && (x > (doubleMax - y)))
         throw std::runtime_error("Overflow");
-    if ((y < 0) && (x < (intMin - y)))
+    if ((y < 0) && (x < (doubleMin - y)))
         throw std::runtime_error("Underflow");
     return x + y;
 }
 
-int RPN::minus(const int x, const int y)
+double RPN::minus(const double x, const double y)
 {
-    int intMax = std::numeric_limits<int>::max();
-    int intMin = std::numeric_limits<int>::min();
-    if ((y > 0) && (x < (intMin + y)))
+    double doubleMax = std::numeric_limits<double>::max();
+    double doubleMin = std::numeric_limits<double>::min();
+    if ((y > 0) && (x < (doubleMin + y)))
 	{
 		throw std::runtime_error("Underflow");
 	}
-    if ((y < 0) && (x > (intMax + y)))
+    if ((y < 0) && (x > (doubleMax + y)))
 		throw std::runtime_error("Overflow");
     return x - y;
 }
 
-int RPN::multiplies(const int x, const int y)
+double RPN::multiplies(const double x, const double y)
 {
-	int intMax = std::numeric_limits<int>::max();
-    int intMin = std::numeric_limits<int>::min();
+	double doubleMax = std::numeric_limits<double>::max();
+    double doubleMin = std::numeric_limits<double>::min();
     if (x > 0)
     {
         if (y > 0)
         {
-            if (x > (intMax / y))
+            if (x > (doubleMax / y))
         		throw std::runtime_error("Overflow");
         }
         else
         {
-            if (y < (intMin / x))
+            if (y < (doubleMin / x))
         		throw std::runtime_error("Underflow");
         }
     }
@@ -110,23 +110,23 @@ int RPN::multiplies(const int x, const int y)
     {
         if (y > 0)
         {
-            if (x < (intMin / y))
+            if (x < (doubleMin / y))
         		throw std::runtime_error("Underflow");
         }
         else
         {
-            if ((x != 0) && (y < (intMax / x)))
+            if ((x != 0) && (y < (doubleMax / x)))
         		throw std::runtime_error("Overflow");
         }
     }
 	return x * y;
 }
 
-int RPN::divides(const int x, const int y) {
-    int intMin = std::numeric_limits<int>::min();
+double RPN::divides(const double x, const double y) {
+    double doubleMin = std::numeric_limits<double>::min();
 	if (y == 0)
 		throw std::runtime_error("Division by zero");
-	if ((y == 0) || ((x == intMin) && (y == -1)))
+	if ((y == 0) || ((x == doubleMin) && (y == -1)))
 		throw std::runtime_error("Overflow");
 	return x / y;
 }
