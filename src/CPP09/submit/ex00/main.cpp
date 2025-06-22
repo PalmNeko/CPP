@@ -93,6 +93,8 @@ BitcoinMap createBitcoinMap(std::ifstream &dataFile)
         }
         map.insert(std::pair<BitcoinExchange::Date, double>(date, value));
     }
+    if (map.size() == 0)
+        throw std::runtime_error("No input line");
     return map;
 }
 
@@ -140,26 +142,12 @@ void proccessExchangeRate(const BitcoinMap &coinMap, const std::string &line)
 
 void printHaveExchangeRate(const BitcoinMap &coinMap, const BitcoinExchange &exchange)
 {
-
-    BitcoinMap::const_iterator it = coinMap.begin();
-    BitcoinMap::const_iterator ite = coinMap.end();
     BitcoinMap::const_iterator nowRate;
 
-	nowRate = coinMap.end();
-    while (it != ite)
-    {
-        if (it->first < exchange.getDate() == false)
-        {
-            break;
-        }
-		nowRate = it;
-        it++;
-    }
-
-	if (it != coinMap.end() && it->first == exchange.getDate())
-		nowRate = it;
-	if (nowRate == coinMap.end())
-		throw std::runtime_error("exchange rate is not exists");
+    if (coinMap.size() == 0 || exchange.getDate() < coinMap.begin()->first)
+        throw std::runtime_error("exchange rate is not exists");
+    nowRate = coinMap.upper_bound(exchange.getDate());
+    nowRate--;
 		
     double nowValue;
     nowValue = nowRate->second * exchange.getValue();
