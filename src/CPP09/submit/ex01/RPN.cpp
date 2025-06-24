@@ -68,7 +68,7 @@ double RPN::rpn(const std::string &str)
 double RPN::plus(const double x, const double y)
 {
     double doubleMax = std::numeric_limits<double>::max();
-    double doubleMin = std::numeric_limits<double>::min();
+    double doubleMin = - std::numeric_limits<double>::max();
     if ((y > 0) && (x > (doubleMax - y)))
         throw std::runtime_error("Overflow");
     if ((y < 0) && (x < (doubleMin - y)))
@@ -79,7 +79,7 @@ double RPN::plus(const double x, const double y)
 double RPN::minus(const double x, const double y)
 {
     double doubleMax = std::numeric_limits<double>::max();
-    double doubleMin = std::numeric_limits<double>::min();
+    double doubleMin = - std::numeric_limits<double>::max();
     if ((y > 0) && (x < (doubleMin + y)))
 	{
 		throw std::runtime_error("Underflow");
@@ -92,7 +92,7 @@ double RPN::minus(const double x, const double y)
 double RPN::multiplies(const double x, const double y)
 {
 	double doubleMax = std::numeric_limits<double>::max();
-    double doubleMin = std::numeric_limits<double>::min();
+    double doubleMin = - std::numeric_limits<double>::max();
     if (x > 0)
     {
         if (y > 0)
@@ -123,7 +123,7 @@ double RPN::multiplies(const double x, const double y)
 }
 
 double RPN::divides(const double x, const double y) {
-    double doubleMin = std::numeric_limits<double>::min();
+    double doubleMin = - std::numeric_limits<double>::max();
 	if (y == 0)
 		throw std::runtime_error("Division by zero");
 	if ((y == 0) || ((x == doubleMin) && (y == -1)))
